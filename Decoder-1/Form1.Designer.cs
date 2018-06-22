@@ -35,7 +35,6 @@ namespace Decoder_1
             this.btn_ChangeCamera = new System.Windows.Forms.Button();
             this.btnChangeView = new System.Windows.Forms.Button();
             this.cbxCameras = new System.Windows.Forms.ComboBox();
-            this.btn_Page_ChangeView = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // GetParas
@@ -89,22 +88,11 @@ namespace Decoder_1
             this.cbxCameras.TabIndex = 3;
             this.cbxCameras.SelectedIndexChanged += new System.EventHandler(this.cbxCameras_SelectedIndexChanged);
             // 
-            // btn_Page_ChangeView
-            // 
-            this.btn_Page_ChangeView.Location = new System.Drawing.Point(529, 61);
-            this.btn_Page_ChangeView.Name = "btn_Page_ChangeView";
-            this.btn_Page_ChangeView.Size = new System.Drawing.Size(196, 23);
-            this.btn_Page_ChangeView.TabIndex = 4;
-            this.btn_Page_ChangeView.Text = "Page-ChangeView";
-            this.btn_Page_ChangeView.UseVisualStyleBackColor = true;
-            this.btn_Page_ChangeView.Click += new System.EventHandler(this.btn_Page_ChangeView_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 530);
-            this.Controls.Add(this.btn_Page_ChangeView);
             this.Controls.Add(this.cbxCameras);
             this.Controls.Add(this.btnChangeView);
             this.Controls.Add(this.btn_ChangeCamera);
@@ -122,7 +110,6 @@ namespace Decoder_1
         private System.Windows.Forms.Button btn_ChangeCamera;
         private System.Windows.Forms.Button btnChangeView;
         private System.Windows.Forms.ComboBox cbxCameras;
-        private System.Windows.Forms.Button btn_Page_ChangeView;
     }
 }
 
