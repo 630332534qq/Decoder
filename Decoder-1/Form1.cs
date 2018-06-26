@@ -57,7 +57,8 @@ namespace Decoder_1
         {
             rtxReturn.Text = "";
             Camera c = new Camera("Test", "192.168.77.208");
-            rtxReturn.Text=c.getStreams(Resolution.LOW);
+ 
+            rtxReturn.Text = c.GetJson();
         }
 
         private string DecodeVideo(Decoder d, List<Camera> clist)
@@ -104,14 +105,15 @@ namespace Decoder_1
 
         private void btnChangeView_Click(object sender, EventArgs e)
         {
-            List<panes> list = panes.GeneratePanels(1);
-            StringBuilder sb = new StringBuilder();
-            foreach (panes px in list)
-            {
-                sb.Append(px.paneId + "--LEFT：" + px.left + " --TOP:" + px.top + "    --RIGHT:" + px.right + " --:BOTTOM:" + px.bottom);
-                sb.Append("\n");
-            }
-            rtxReturn.Text = sb.ToString();
+            List<panes> list = BasicOperation.GeneratePanels(4);
+            rtxReturn.Text = JsonConvert.SerializeObject(list);
+            //StringBuilder sb = new StringBuilder();
+            //foreach (panes px in list)
+            //{
+            //    sb.Append(px.paneId + "--LEFT：" + px.left + " --TOP:" + px.top + "    --RIGHT:" + px.right + " --:BOTTOM:" + px.bottom);
+            //    sb.Append("\n");
+            //}
+            //rtxReturn.Text = sb.ToString();
         }
     }
 }

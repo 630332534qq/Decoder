@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+
 
 namespace Decoder_1
 {
-
-
     public static class GetID
     {
         private static int globalID = 0;
@@ -17,25 +17,6 @@ namespace Decoder_1
             {
                 return globalID++;
             }
-        }
-    }
-
-    public class streams
-    {
-        public int streamId;
-        public Uri url = null;
-        public string videoCodec = null;
-        public string audioCodec = null;
-        public string username = "root";
-        public string password = "pass";
-
-        public streams(Camera c)
-        {
-            streamId = GetID.ID;
-            url = new Uri(c.LowRTSP());
-            videoCodec = "H264";
-            username = c.username;
-            password = c.password;
         }
     }
 
@@ -56,23 +37,7 @@ namespace Decoder_1
             bottom = b;
         }
 
-        public static List<panes> GeneratePanels(int N)
-        {
-            List<panes> list = new List<panes>();
-            int ID = 1;
-            //步进为1/N
-            float K = (float)Math.Round((float)1 / N, 3);
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = 0; j < N; j++)
-                {
-                    panes padd = new panes(ID, (float)Math.Round((float)j / N, 3), (float)Math.Round((float)j / N, 3) + K, (float)Math.Round((float)i / N, 3), (float)Math.Round((float)i / N, 3) + K);
-                    ++ID;
-                    list.Add(padd);
-                }
-            }
-            return list;
-        }
+     
     }
 
     public class segments
@@ -80,9 +45,9 @@ namespace Decoder_1
         public int stream;
         public int pane;
 
-        public segments(panes p, streams s)
+        public segments(panes p, Camera c)
         {
-            stream = s.streamId;
+            stream = BasicOperation.GetStreamID(c.ipaddr);
             pane = p.paneId;
         }
     }
@@ -109,29 +74,32 @@ namespace Decoder_1
         public string username;
         public string password;
         public string serialNo;
+        public string configuration;
     }
 
-
-    public class buildJson
-    {
-        public List<panes> panes = new List<panes>();
-        public List<streams> streams = new List<streams>();
-        public List<views> views = new List<views>();
-
-        public buildJson()
-        {
-            panes.Add(new panes(0, 0, 1.0f, 0, 1.0f));
-            streams.Add(new streams(Camera.c.First()));
-            views.Add(new views(10, new segments(panes.First(), streams.First())));
-        }
-    }
-
-    public  enum Resolution
+    public enum Resolution
     {
         LOW = 0,
         MIDDLE = 1,
         HIGH = 2
     }
+
+    public enum Duration
+    {
+        Multiview = 0,
+        SeqQuick = 10,
+        SeqMiddle = 30,
+        SeqSlow = 60
+    }
+
+    public enum VideoCodec
+    {
+        H264 = 0,
+        MJPEG = 1,
+        MPEG = 2,
+        MP4 = 3
+    }
+
     public static class BasicOperation
     {
         public static int GetStreamID(string ip)
@@ -140,37 +108,65 @@ namespace Decoder_1
             string s = ips[0].ToString() + ips[1].ToString() + ips[2].ToString() + ips[3].ToString();
             return s.Length < 9 ? int.Parse(s) : int.Parse(s.Substring(s.Length - 9, 9));
         }
+
+        public static List<panes> GeneratePanels(int N)
+        {
+            List<panes> list = new List<panes>();
+            int ID = 1;
+            //步进为1/N
+            float K = (float)Math.Round((float)1 / N, 3);
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    panes padd = new panes(ID, (float)Math.Round((float)j / N, 3), (float)Math.Round((float)j / N, 3) + K, (float)Math.Round((float)i / N, 3), (float)Math.Round((float)i / N, 3) + K);
+                    ++ID;
+                    list.Add(padd);
+                }
+            }
+            return list;
+        }
     }
 
-
+ 
     public class Camera
     {
+        [JsonIgnore]
         public string name;
+        [JsonIgnore]
         public string ipaddr;
+        public int streamId;
+        public string url;
+        public string videoCodec = VideoCodec.H264.ToString();
+        public string audioCodec = "";
         public string username = "root";
         public string password = "pass";
-        public string videoCodec = "H264";
+        [JsonIgnore]
         public string fps = "15";
-        public Camera(string name, string ipaddr)
+
+        public Camera(string cname, string cipaddr, string cusername = "root", string cpassword = "pass", string crtsp = "", string cfps = "15", Resolution cres = Resolution.LOW)
         {
-            this.name = name;
-            this.ipaddr = ipaddr;
+            name = cname;
+            ipaddr = cipaddr;
+            username = cusername;
+            password = cpassword;
+            if (crtsp == "") url = GetRTSPUrlFromCameraParameter(cres);
+            else url = crtsp;
+            streamId = BasicOperation.GetStreamID(ipaddr);
         }
-        public Camera(string name, string ipaddr, string username, string password)
+
+        public string GetJson()
         {
-            this.name = name;
-            this.ipaddr = ipaddr;
-            this.username = username;
-            this.password = password;
+            return JsonConvert.SerializeObject(this);
         }
-      
+
         public static List<Camera> c = new List<Camera>
             {
                 new Camera("M3045-V","192.168.0.109"),
                 new Camera("P5635-E","192.168.0.88"),
                 new Camera("P1365-MKII","192.168.0.6")
             };
-        public string getStreams(Resolution res)
+        public string GetRTSPUrlFromCameraParameter(Resolution res)
         {
             string url = "rtsp://" + ipaddr + "/axis-media/media.amp?resolution=";
             switch (res)
@@ -189,9 +185,11 @@ namespace Decoder_1
                     break;
             }
             url = url + "&fps=" + fps;
-            return "{\"streamId\":" + BasicOperation.GetStreamID(this.ipaddr) + ",\"url\":\"" + url + "\",\"videoCodec\":\"" + videoCodec + "\",\"audioCodec\":" + "\"\"" + ",\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
+            return url;
+            //  return "{\"streamId\":" + BasicOperation.GetStreamID(this.ipaddr) + ",\"url\":\"" + url + "\",\"videoCodec\":\"" + videoCodec + "\",\"audioCodec\":" + "\"\"" + ",\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
         }
     }
+
 
 }
 

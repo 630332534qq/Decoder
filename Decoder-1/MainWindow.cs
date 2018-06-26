@@ -14,6 +14,12 @@ namespace Decoder_1
         public MainWindow()
         {
             InitializeComponent();
-        } 
+        }
+
+        private void 摄像机配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CameraConfig ccfg = new CameraConfig();
+            ccfg.ShowDialog(this);
+        }
     }
 }
