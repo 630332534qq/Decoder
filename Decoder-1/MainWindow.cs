@@ -21,5 +21,11 @@ namespace Decoder_1
             CameraConfig ccfg = new CameraConfig();
             ccfg.ShowDialog(this);
         }
+
+        private void 解码器配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DecoderConfig dcfg = new Decoder_1.DecoderConfig();
+            dcfg.ShowDialog(this);
+        }
     }
 }

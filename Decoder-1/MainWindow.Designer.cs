@@ -85,19 +85,19 @@
             // 登录ToolStripMenuItem
             // 
             this.登录ToolStripMenuItem.Name = "登录ToolStripMenuItem";
-            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.登录ToolStripMenuItem.Text = "登录";
             // 
             // 注销ToolStripMenuItem
             // 
             this.注销ToolStripMenuItem.Name = "注销ToolStripMenuItem";
-            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.注销ToolStripMenuItem.Text = "注销";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // 配置ToolStripMenuItem
@@ -114,7 +114,7 @@
             // 用户配置ToolStripMenuItem
             // 
             this.用户配置ToolStripMenuItem.Name = "用户配置ToolStripMenuItem";
-            this.用户配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.用户配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.用户配置ToolStripMenuItem.Text = "用户配置";
             // 
             // 摄像机配置ToolStripMenuItem
@@ -127,13 +127,14 @@
             // 解码器配置ToolStripMenuItem
             // 
             this.解码器配置ToolStripMenuItem.Name = "解码器配置ToolStripMenuItem";
-            this.解码器配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.解码器配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.解码器配置ToolStripMenuItem.Text = "解码器配置";
+            this.解码器配置ToolStripMenuItem.Click += new System.EventHandler(this.解码器配置ToolStripMenuItem_Click);
             // 
             // 许可证配置ToolStripMenuItem
             // 
             this.许可证配置ToolStripMenuItem.Name = "许可证配置ToolStripMenuItem";
-            this.许可证配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.许可证配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.许可证配置ToolStripMenuItem.Text = "许可证配置";
             // 
             // 布局ToolStripMenuItem

@@ -37,7 +37,7 @@ namespace Decoder_1
             bottom = b;
         }
 
-     
+
     }
 
     public class segments
@@ -128,7 +128,7 @@ namespace Decoder_1
         }
     }
 
- 
+
     public class Camera
     {
         [JsonIgnore]
@@ -160,8 +160,41 @@ namespace Decoder_1
             return JsonConvert.SerializeObject(this);
         }
 
-        public static List<Camera> c = new List<Camera>
+        public static List<Camera> cList = new List<Camera>
             {
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
+                new Camera("M3045-V","192.168.0.109"),
+                new Camera("P5635-E","192.168.0.88"),
+                new Camera("P1365-MKII","192.168.0.6"),
                 new Camera("M3045-V","192.168.0.109"),
                 new Camera("P5635-E","192.168.0.88"),
                 new Camera("P1365-MKII","192.168.0.6")

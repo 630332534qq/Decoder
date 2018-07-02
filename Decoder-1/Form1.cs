@@ -94,7 +94,7 @@ namespace Decoder_1
 
         private void cbxCameras_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Camera finder = Camera.c.Find(x => x.name == cbxCameras.SelectedItem.ToString());
+            Camera finder = Camera.cList.Find(x => x.name == cbxCameras.SelectedItem.ToString());
             if (finder == null)
             {
                 MessageBox.Show("没有发现此摄像机");
