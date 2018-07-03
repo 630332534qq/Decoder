@@ -35,13 +35,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSave = new System.Windows.Forms.Button();
             this.decoderView = new System.Windows.Forms.DataGridView();
-            this.btnResume = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.clmID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnResume = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.decoderView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,6 +53,7 @@
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "保存";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // decoderView
             // 
@@ -68,34 +69,13 @@
             this.decoderView.RowTemplate.Height = 23;
             this.decoderView.Size = new System.Drawing.Size(613, 419);
             this.decoderView.TabIndex = 4;
-            this.decoderView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.decoderView_CellValidating);
             this.decoderView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.decoderView_RowsAdded);
             this.decoderView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.decoderView_RowsRemoved);
+            this.decoderView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.decoderView_RowValidating);
             this.decoderView.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.decoderView_UserDeletingRow);
-            // 
-            // btnResume
-            // 
-            this.btnResume.Location = new System.Drawing.Point(533, 2);
-            this.btnResume.Name = "btnResume";
-            this.btnResume.Size = new System.Drawing.Size(43, 23);
-            this.btnResume.TabIndex = 5;
-            this.btnResume.Text = "恢复";
-            this.btnResume.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(33, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(304, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "注：两次单击单元格进行编辑；DEL键删除";
             // 
             // clmID
             // 
-            this.clmID.DataPropertyName = "int";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.clmID.DefaultCellStyle = dataGridViewCellStyle6;
             this.clmID.HeaderText = "ID";
@@ -134,6 +114,26 @@
             this.clmPassword.HeaderText = "密码";
             this.clmPassword.Name = "clmPassword";
             this.clmPassword.Width = 120;
+            // 
+            // btnResume
+            // 
+            this.btnResume.Location = new System.Drawing.Point(533, 2);
+            this.btnResume.Name = "btnResume";
+            this.btnResume.Size = new System.Drawing.Size(43, 23);
+            this.btnResume.TabIndex = 5;
+            this.btnResume.Text = "恢复";
+            this.btnResume.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(33, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(304, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "注：两次单击单元格进行编辑；DEL键删除";
             // 
             // DecoderConfig
             // 
