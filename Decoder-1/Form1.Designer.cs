@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Decoder_1
+namespace Decoder
 {
     partial class Form1
     {

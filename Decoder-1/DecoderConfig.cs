@@ -7,15 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Decoder_1
+namespace Decoder
 {
     public partial class DecoderConfig : Form
     {
         public DecoderConfig()
         {
             InitializeComponent();
+            LoadDecoders();
         }
 
+        private void LoadDecoders()
+        {
+            List<Decoder> list = FileOperation<Decoder>.ReadFile();
+
+        }
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+            LoadDecoders();
+        }
         private void decoderView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             e.Cancel = !WindowOperation.ConfirmDiag("确认要删除该行数据吗？", "删除确认");
@@ -40,7 +50,18 @@ namespace Decoder_1
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            List<Decoder> list = new List<Decoder>();
+            foreach (DataGridViewRow dr in decoderView.Rows)
+            {
+                if (dr.IsNewRow) break;
+                Decoder d = new Decoder();
+                d.name = dr.Cells[1].Value.ToString();
+                d.ipaddr = dr.Cells[2].Value.ToString();
+                d.username= dr.Cells[3].Value.ToString();
+                d.password= dr.Cells[4].Value.ToString();
+                list.Add(d);
+            }
+            FileOperation<Decoder>.WriteFile(list);
         }
 
         /// <summary>
@@ -87,5 +108,7 @@ namespace Decoder_1
                 }
             }
         }
+
+       
     }
 }

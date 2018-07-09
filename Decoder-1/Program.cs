@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Decoder_1
+namespace Decoder
 {
     static class Program
     {
@@ -13,6 +13,7 @@ namespace Decoder_1
         [STAThread]
         static void Main()
         {
+            log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(("App.config")));
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());

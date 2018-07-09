@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Net;
+using log4net;
+using System.Reflection;
 
-namespace Decoder_1
+namespace Decoder
 {
     public partial class CameraConfig : Form
     {
+        static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public CameraConfig()
         {
             InitializeComponent();
@@ -21,17 +24,23 @@ namespace Decoder_1
 
         private void InitializeCameraTree()
         {
-            tvCameras.Nodes.Add(new TreeNode("摄像机树"));
-            foreach (Camera c in Camera.cList)
+            TreeNode tn = new TreeNode();
+            tn.ToolTipText = "右键增加分组";
+            tn.Text = "摄像机树";
+            tn.ContextMenuStrip = FNodeStrip;
+            tvCameras.Nodes.Add(tn); 
+            foreach (Camera c in FileOperation<Camera>.ReadFile())
             {
-                AddNodes(c.name, c.ipaddr);
+                AddNodes(c);
             }
+             log.Info("摄像机树初始化完成");
         }
 
-        private void AddNodes(string name, string tooltips)
+        private void AddNodes(Camera c)
         {
-            TreeNode tn = new TreeNode(name);
-            tn.ToolTipText = tooltips;
+            TreeNode tn = new TreeNode(c.name);
+            tn.ToolTipText = c.name+"—"+c.ipaddr;
+            tn.Tag = c;
             tn.ContextMenuStrip = CMS;
             tvCameras.Nodes[0].Nodes.Add(tn);
         }
@@ -47,10 +56,10 @@ namespace Decoder_1
         {
             foreach (TreeNode tn in tvCameras.Nodes[0].Nodes)
             {
-                if (tn.ToolTipText == tooltips) return true;
+                if (tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("—")+1) == tooltips) return true;
             }
             return false;
-        } 
+        }
 
         private bool CheckCameraInfo()
         {
@@ -86,16 +95,35 @@ namespace Decoder_1
             {
                 IPAddress ip;
                 IPAddress.TryParse(txtIPAddress.Text, out ip);
-                AddNodes(txtCameraName.Text, ip.ToString());
+                Camera c = new Camera(txtCameraName.Text, ip.ToString (), txtUsername.Text.Trim() == "" ? "root" : txtUsername.Text.Trim(), txtPasssword.Text.Trim() == "" ? "pass" : txtPasssword.Text.Trim());
+                AddNodes(c);
             }
         }
 
-       
+
 
         private void tvCameras_MouseDown(object sender, MouseEventArgs e)
         {
             //if (e.Button == MouseButtons.Right)
             //{ CMS.Show(e.X,e.Y); }
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            List<Camera> clist = new List<Camera>();
+            foreach (TreeNode tn in tvCameras.Nodes[0].Nodes)
+            {
+                Camera c = tn.Tag as Camera;
+                if (c != null) clist.Add(c);
+            }
+            FileOperation<Camera>.WriteFile(clist);
+            log.Info("摄像机树写入到文件");
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            InitializeCameraTree();
+            log.Info("摄像机重新读取并恢复");
+        } 
     }
 }

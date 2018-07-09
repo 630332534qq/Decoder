@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using log4net;
+using System.Reflection;
 
-
-namespace Decoder_1
+namespace Decoder
 {
     public static class GetID
     {
@@ -68,7 +69,6 @@ namespace Decoder_1
 
     public class Decoder
     {
-        public List<Decoder> deocders = new List<Decoder>();
         public string ipaddr;
         public string name;
         public string username;
@@ -131,19 +131,34 @@ namespace Decoder_1
 
     public class Camera
     {
-        [JsonIgnore]
+       
+        static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        /// <summary>
+        /// Camera's name
+        /// </summary> 
+        [JsonProperty]
         public string name;
-        [JsonIgnore]
+        /// <summary>
+        /// Camera's ipAddress
+        /// </summary> 
+        [JsonProperty]
         public string ipaddr;
+        [JsonProperty]
         public int streamId;
+        [JsonProperty]
         public string url;
+        [JsonProperty]
         public string videoCodec = VideoCodec.H264.ToString();
         public string audioCodec = "";
+        [JsonProperty]
         public string username = "root";
+        [JsonProperty]
         public string password = "pass";
-        [JsonIgnore]
+       
         public string fps = "15";
 
+        public Camera()
+        { }
         public Camera(string cname, string cipaddr, string cusername = "root", string cpassword = "pass", string crtsp = "", string cfps = "15", Resolution cres = Resolution.LOW)
         {
             name = cname;
@@ -151,7 +166,7 @@ namespace Decoder_1
             username = cusername;
             password = cpassword;
             if (crtsp == "") url = GetRTSPUrlFromCameraParameter(cres);
-            else url = crtsp;
+            else url = crtsp; 
             streamId = BasicOperation.GetStreamID(ipaddr);
         }
 

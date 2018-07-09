@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using System.Xml;
 using System.Collections;
 
-namespace Decoder_1
+namespace Decoder
 {
     public partial class Form1 : Form
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Decoder_1
+namespace Decoder
 {
    public static class WindowOperation
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Decoder_1
+namespace Decoder
 {
     public partial class MainWindow : Form
     {
@@ -24,7 +24,7 @@ namespace Decoder_1
 
         private void 解码器配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DecoderConfig dcfg = new Decoder_1.DecoderConfig();
+            DecoderConfig dcfg = new DecoderConfig();
             dcfg.ShowDialog(this);
         }
     }
