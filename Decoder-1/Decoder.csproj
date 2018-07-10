@@ -60,18 +60,31 @@
     <Compile Include="CameraConfig.Designer.cs">
       <DependentUpon>CameraConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="CameraGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CameraGroup.Designer.cs">
+      <DependentUpon>CameraGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="DecoderConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DecoderConfig.Designer.cs">
       <DependentUpon>DecoderConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="DecoderOperation.cs" />
     <Compile Include="FileOperation.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LicenseConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LicenseConfig.Designer.cs">
+      <DependentUpon>LicenseConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -85,11 +98,17 @@
     <EmbeddedResource Include="CameraConfig.resx">
       <DependentUpon>CameraConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CameraGroup.resx">
+      <DependentUpon>CameraGroup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DecoderConfig.resx">
       <DependentUpon>DecoderConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LicenseConfig.resx">
+      <DependentUpon>LicenseConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

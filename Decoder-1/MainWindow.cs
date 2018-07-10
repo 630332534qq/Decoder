@@ -27,5 +27,11 @@ namespace Decoder
             DecoderConfig dcfg = new DecoderConfig();
             dcfg.ShowDialog(this);
         }
+
+        private void 许可证配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LicenseConfig lcc = new LicenseConfig();
+            lcc.ShowDialog(this);
+        }
     }
 }

@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.TVCamera = new System.Windows.Forms.TreeView();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.注销ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,30 +45,9 @@
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mST = new System.Windows.Forms.MenuStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.TVCamera = new System.Windows.Forms.TreeView();
             this.mST.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Location = new System.Drawing.Point(12, 29);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.TVCamera);
-            this.splitContainer1.Size = new System.Drawing.Size(760, 510);
-            this.splitContainer1.SplitterDistance = 253;
-            this.splitContainer1.TabIndex = 1;
-            // 
-            // TVCamera
-            // 
-            this.TVCamera.Location = new System.Drawing.Point(16, 13);
-            this.TVCamera.Name = "TVCamera";
-            this.TVCamera.Size = new System.Drawing.Size(211, 480);
-            this.TVCamera.TabIndex = 0;
             // 
             // 文件ToolStripMenuItem
             // 
@@ -85,19 +62,19 @@
             // 登录ToolStripMenuItem
             // 
             this.登录ToolStripMenuItem.Name = "登录ToolStripMenuItem";
-            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.登录ToolStripMenuItem.Text = "登录";
             // 
             // 注销ToolStripMenuItem
             // 
             this.注销ToolStripMenuItem.Name = "注销ToolStripMenuItem";
-            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.注销ToolStripMenuItem.Text = "注销";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // 配置ToolStripMenuItem
@@ -136,6 +113,7 @@
             this.许可证配置ToolStripMenuItem.Name = "许可证配置ToolStripMenuItem";
             this.许可证配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.许可证配置ToolStripMenuItem.Text = "许可证配置";
+            this.许可证配置ToolStripMenuItem.Click += new System.EventHandler(this.许可证配置ToolStripMenuItem_Click);
             // 
             // 布局ToolStripMenuItem
             // 
@@ -199,19 +177,25 @@
             this.mST.TabIndex = 3;
             this.mST.Text = "主菜单";
             // 
+            // TVCamera
+            // 
+            this.TVCamera.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.TVCamera.Location = new System.Drawing.Point(12, 28);
+            this.TVCamera.Name = "TVCamera";
+            this.TVCamera.Size = new System.Drawing.Size(211, 642);
+            this.TVCamera.TabIndex = 4;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 682);
+            this.Controls.Add(this.TVCamera);
             this.Controls.Add(this.mST);
-            this.Controls.Add(this.splitContainer1);
             this.MainMenuStrip = this.mST;
             this.Name = "MainWindow";
             this.Text = "解码器控制";
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.mST.ResumeLayout(false);
             this.mST.PerformLayout();
             this.ResumeLayout(false);
@@ -220,8 +204,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView TVCamera;
         private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 登录ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 注销ToolStripMenuItem;
@@ -239,5 +221,6 @@
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.MenuStrip mST;
+        private System.Windows.Forms.TreeView TVCamera;
     }
 }

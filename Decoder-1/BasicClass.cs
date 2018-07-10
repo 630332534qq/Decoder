@@ -36,9 +36,7 @@ namespace Decoder
             right = r;
             top = t;
             bottom = b;
-        }
-
-
+        } 
     }
 
     public class segments
@@ -238,6 +236,19 @@ namespace Decoder
         }
     }
 
+    public class CameraGroups
+    {
+        public List<Camera> list = new List<Camera>();
+        public string groupName = "";
+        public string groupID = "";
+    }
 
+    public enum NodeType
+    {
+        Root = 0,
+        Group = 1,
+        Camera = 2,
+        CameraAtGroup = 3
+    }
 }
 

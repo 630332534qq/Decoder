@@ -11,10 +11,14 @@ namespace Decoder
 {
     public static class FileOperation<T>
     {
-        public static bool WriteFile(List<T> list)
+        public static bool WriteFile(List<T> list,string fileNameOption="")
         {
-            bool success = true; 
+            bool success = true;
             string filename = typeof(T).ToString().Substring(typeof(T).ToString().IndexOf(".") + 1) + ".json";
+            if (fileNameOption == "")
+            {
+                filename = fileNameOption;
+            }
             if (!File.Exists(filename))
             {
                 File.Create(filename);                
@@ -22,8 +26,7 @@ namespace Decoder
             using (StreamWriter sw = new StreamWriter(filename,false))
             {
                 try
-                {
-                    
+                {                    
                     JsonSerializer serializer = new JsonSerializer();
                     //serializer.Converters.Add(new JavaScriptDateTimeConverter());
                     serializer.NullValueHandling = NullValueHandling.Include; 
@@ -61,6 +64,6 @@ namespace Decoder
                 }
             }
             return tlist;
-        }
+        }         
     }
 }

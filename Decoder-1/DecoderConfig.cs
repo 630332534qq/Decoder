@@ -19,8 +19,25 @@ namespace Decoder
 
         private void LoadDecoders()
         {
+            decoderView.Rows.Clear();
             List<Decoder> list = FileOperation<Decoder>.ReadFile();
-
+             foreach (Decoder d in list)
+            {
+                DataGridViewRow r = new DataGridViewRow();
+                r.CreateCells(decoderView);
+                r.Cells[0].Value = "";
+                r.Cells[1].Value = d.name;
+                r.Cells[2].Value = d.ipaddr;
+                r.Cells[3].Value = d.username;
+                r.Cells[4].Value = d.password;
+                r.Cells[5].Value = d.serialNo;
+                decoderView.Rows.Add(r);
+            }
+            decoderView.Refresh();
+            foreach (DataGridViewRow dr in decoderView.Rows)
+            {
+                dr.Cells[0].Value = dr.Index + 1;
+            }
         }
         private void btnResume_Click(object sender, EventArgs e)
         {
@@ -57,8 +74,9 @@ namespace Decoder
                 Decoder d = new Decoder();
                 d.name = dr.Cells[1].Value.ToString();
                 d.ipaddr = dr.Cells[2].Value.ToString();
-                d.username= dr.Cells[3].Value.ToString();
-                d.password= dr.Cells[4].Value.ToString();
+                d.username = dr.Cells[3].Value.ToString();
+                d.password = dr.Cells[4].Value.ToString();
+                d.serialNo = dr.Cells[5].Value.ToString();
                 list.Add(d);
             }
             FileOperation<Decoder>.WriteFile(list);
@@ -109,6 +127,6 @@ namespace Decoder
             }
         }
 
-       
+
     }
 }
