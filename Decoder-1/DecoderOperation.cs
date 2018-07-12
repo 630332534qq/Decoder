@@ -50,7 +50,8 @@ namespace Decoder
                 slist.Add(d.serialNo);
             }
             FileOperation<Decoder>.WriteFile(dlist);
-            FileOperation<string>.WriteFile(slist,"Register.reg");
+            slist.Sort();
+            FileOperation<string>.WriteFile(slist,"DecoderInfo.ini");
         } 
     }
 }
