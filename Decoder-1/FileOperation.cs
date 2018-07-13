@@ -73,26 +73,37 @@ namespace Decoder
 
         public static string ReadLicense()
         {
-            return "";
+            using (StreamReader sr = new StreamReader("License.lic2", false))
+            {
+                return sr.ReadToEnd();
+            }              
         }
 
         public static string ReadRegFile()
         {
             List<string> tlist = new List<string>();
-            using (StreamReader sr = new StreamReader("DecoderInfo.ini"))
+            try
             {
-                try
+                using (StreamReader sr = new StreamReader("DecoderInfo.ini"))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.NullValueHandling = NullValueHandling.Include;
-                    JsonReader reader = new JsonTextReader(sr);
-                    tlist.AddRange(serializer.Deserialize<List<string>>(reader));
+                    try
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.NullValueHandling = NullValueHandling.Include;
+                        JsonReader reader = new JsonTextReader(sr);
+                        tlist.AddRange(serializer.Deserialize<List<string>>(reader));
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("读取注册文件失败" + ex.Message.ToString());
+                        return "";
+                    }
                 }
-                catch (Exception ex)
-                {
-                    log.Error("读取注册文件失败" + ex.Message.ToString());
-                    return "";
-                }
+            }
+            catch (Exception e)
+            {
+                log.Error("读取注册文件失败" + e.Message.ToString());
+                return "";
             }
             StringBuilder sb = new StringBuilder();
             foreach (string s in tlist)
