@@ -32,6 +32,11 @@ namespace Decoder
         {
             LicenseConfig lcc = new LicenseConfig();
             lcc.ShowDialog(this);
+        } 
+
+        private void 电视墙配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

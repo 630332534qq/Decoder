@@ -46,6 +46,7 @@
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mST = new System.Windows.Forms.MenuStrip();
             this.TVCamera = new System.Windows.Forms.TreeView();
+            this.电视墙配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mST.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,7 +84,8 @@
             this.用户配置ToolStripMenuItem,
             this.摄像机配置ToolStripMenuItem,
             this.解码器配置ToolStripMenuItem,
-            this.许可证配置ToolStripMenuItem});
+            this.许可证配置ToolStripMenuItem,
+            this.电视墙配置ToolStripMenuItem});
             this.配置ToolStripMenuItem.Name = "配置ToolStripMenuItem";
             this.配置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.配置ToolStripMenuItem.Text = "配置";
@@ -118,9 +120,9 @@
             // 布局ToolStripMenuItem
             // 
             this.布局ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.创建新布局ToolStripMenuItem,
             this.加载布局ToolStripMenuItem,
-            this.删除布局ToolStripMenuItem,
-            this.创建新布局ToolStripMenuItem});
+            this.删除布局ToolStripMenuItem});
             this.布局ToolStripMenuItem.Name = "布局ToolStripMenuItem";
             this.布局ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.布局ToolStripMenuItem.Text = "布局";
@@ -128,20 +130,20 @@
             // 加载布局ToolStripMenuItem
             // 
             this.加载布局ToolStripMenuItem.Name = "加载布局ToolStripMenuItem";
-            this.加载布局ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.加载布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.加载布局ToolStripMenuItem.Text = "加载布局";
             // 
             // 删除布局ToolStripMenuItem
             // 
             this.删除布局ToolStripMenuItem.Name = "删除布局ToolStripMenuItem";
-            this.删除布局ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.删除布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.删除布局ToolStripMenuItem.Text = "删除布局";
             // 
             // 创建新布局ToolStripMenuItem
             // 
             this.创建新布局ToolStripMenuItem.Name = "创建新布局ToolStripMenuItem";
-            this.创建新布局ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.创建新布局ToolStripMenuItem.Text = "创建新布局";
+            this.创建新布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.创建新布局ToolStripMenuItem.Text = "保存布局"; 
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -186,6 +188,13 @@
             this.TVCamera.Size = new System.Drawing.Size(211, 642);
             this.TVCamera.TabIndex = 4;
             // 
+            // 电视墙配置ToolStripMenuItem
+            // 
+            this.电视墙配置ToolStripMenuItem.Name = "电视墙配置ToolStripMenuItem";
+            this.电视墙配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.电视墙配置ToolStripMenuItem.Text = "电视墙配置";
+            this.电视墙配置ToolStripMenuItem.Click += new System.EventHandler(this.电视墙配置ToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -222,5 +231,6 @@
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.MenuStrip mST;
         private System.Windows.Forms.TreeView TVCamera;
+        private System.Windows.Forms.ToolStripMenuItem 电视墙配置ToolStripMenuItem;
     }
 }

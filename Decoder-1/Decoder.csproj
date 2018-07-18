@@ -114,6 +114,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VideoWallConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VideoWallConfig.Designer.cs">
+      <DependentUpon>VideoWallConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowOperation.cs" />
     <EmbeddedResource Include="CameraConfig.resx">
       <DependentUpon>CameraConfig.cs</DependentUpon>
@@ -143,6 +149,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="VideoWallConfig.resx">
+      <DependentUpon>VideoWallConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
