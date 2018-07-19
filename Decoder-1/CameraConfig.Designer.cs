@@ -46,13 +46,13 @@
             this.deleteCamera = new System.Windows.Forms.ToolStripMenuItem();
             this.上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
+            this.btnSave = new MetroFramework.Controls.MetroButton();
             this.FNodeStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsMUAddGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.GroupNodeStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteGroupNode = new System.Windows.Forms.ToolStripMenuItem();
             this.AddCameraToGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnReset = new MetroFramework.Controls.MetroButton(); 
             this.panel1.SuspendLayout();
             this.gpBHelp.SuspendLayout();
             this.CameraNodeStrip.SuspendLayout();
@@ -78,7 +78,7 @@
             this.panel1.Controls.Add(this.tvCameras);
             this.panel1.Location = new System.Drawing.Point(13, 48);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(729, 375);
+            this.panel1.Size = new System.Drawing.Size(729, 401);
             this.panel1.TabIndex = 0;
             // 
             // gpBHelp
@@ -195,7 +195,7 @@
             this.tvCameras.Location = new System.Drawing.Point(4, 4);
             this.tvCameras.Name = "tvCameras";
             this.tvCameras.ShowNodeToolTips = true;
-            this.tvCameras.Size = new System.Drawing.Size(242, 371);
+            this.tvCameras.Size = new System.Drawing.Size(242, 397);
             this.tvCameras.TabIndex = 1;
             // 
             // CameraNodeStrip
@@ -205,46 +205,36 @@
             this.上移ToolStripMenuItem,
             this.下移ToolStripMenuItem});
             this.CameraNodeStrip.Name = "CMS";
-            this.CameraNodeStrip.Size = new System.Drawing.Size(153, 92);
+            this.CameraNodeStrip.Size = new System.Drawing.Size(101, 70);
             // 
             // deleteCamera
             // 
             this.deleteCamera.Name = "deleteCamera";
-            this.deleteCamera.Size = new System.Drawing.Size(152, 22);
+            this.deleteCamera.Size = new System.Drawing.Size(100, 22);
             this.deleteCamera.Text = "删除";
             this.deleteCamera.Click += new System.EventHandler(this.deleteCamera_Click);
             // 
             // 上移ToolStripMenuItem
             // 
             this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.上移ToolStripMenuItem.Text = "上移";
             // 
             // 下移ToolStripMenuItem
             // 
             this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.下移ToolStripMenuItem.Text = "下移";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(531, 13);
+            this.btnSave.Location = new System.Drawing.Point(622, 14);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "保存更改";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.Location = new System.Drawing.Point(450, 14);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 23);
-            this.btnReset.TabIndex = 9;
-            this.btnReset.Text = "恢复";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // FNodeStrip
             // 
@@ -282,12 +272,22 @@
             this.AddCameraToGroup.Text = "添加摄像机";
             this.AddCameraToGroup.Click += new System.EventHandler(this.AddCameraToGroup_Click);
             // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(531, 14);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 9;
+            this.btnReset.Text = "恢复";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+ 
+            // 
             // CameraConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(754, 462);
+            this.ClientSize = new System.Drawing.Size(754, 462); 
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.panel1);
@@ -317,8 +317,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteCamera;
         private System.Windows.Forms.ToolStripMenuItem 上移ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 下移ToolStripMenuItem;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnReset;
+        private MetroFramework.Controls.MetroButton btnSave;
         private System.Windows.Forms.TextBox txtPasssword;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblPassword;
@@ -330,5 +329,6 @@
         private System.Windows.Forms.ContextMenuStrip GroupNodeStrip;
         private System.Windows.Forms.ToolStripMenuItem deleteGroupNode;
         private System.Windows.Forms.ToolStripMenuItem AddCameraToGroup;
+        private MetroFramework.Controls.MetroButton btnReset; 
     }
 }

@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using MetroFramework.Forms;
 namespace Decoder
 {
-    public partial class CameraGroup : Form
+    public partial class CameraGroup : MetroForm
     {
         TreeNode tnGroup = null;
         TreeView tvAll = null;

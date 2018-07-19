@@ -9,10 +9,10 @@ using System.Windows.Forms;
 using System.Net;
 using log4net; 
 using System.Collections;
-
+using MetroFramework.Forms;
 namespace Decoder
 {
-    public partial class CameraConfig : Form
+    public partial class CameraConfig : MetroForm
     {
         static ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public CameraConfig()
@@ -213,6 +213,12 @@ namespace Decoder
             cg.Show();
         }
 
+
+        /// <summary>
+        /// 删除分组中的摄像机会报错
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteCamera_Click(object sender, EventArgs e)
         {
             TreeNode tn = tvCameras.SelectedNode;

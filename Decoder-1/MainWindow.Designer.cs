@@ -37,16 +37,16 @@
             this.摄像机配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.解码器配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.许可证配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.电视墙配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.创建新布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.加载布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.创建新布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mST = new System.Windows.Forms.MenuStrip();
             this.TVCamera = new System.Windows.Forms.TreeView();
-            this.电视墙配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mST.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,19 +63,19 @@
             // 登录ToolStripMenuItem
             // 
             this.登录ToolStripMenuItem.Name = "登录ToolStripMenuItem";
-            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.登录ToolStripMenuItem.Text = "登录";
             // 
             // 注销ToolStripMenuItem
             // 
             this.注销ToolStripMenuItem.Name = "注销ToolStripMenuItem";
-            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.注销ToolStripMenuItem.Text = "注销";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // 配置ToolStripMenuItem
@@ -117,6 +117,13 @@
             this.许可证配置ToolStripMenuItem.Text = "许可证配置";
             this.许可证配置ToolStripMenuItem.Click += new System.EventHandler(this.许可证配置ToolStripMenuItem_Click);
             // 
+            // 电视墙配置ToolStripMenuItem
+            // 
+            this.电视墙配置ToolStripMenuItem.Name = "电视墙配置ToolStripMenuItem";
+            this.电视墙配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.电视墙配置ToolStripMenuItem.Text = "电视墙配置";
+            this.电视墙配置ToolStripMenuItem.Click += new System.EventHandler(this.电视墙配置ToolStripMenuItem_Click);
+            // 
             // 布局ToolStripMenuItem
             // 
             this.布局ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -126,6 +133,12 @@
             this.布局ToolStripMenuItem.Name = "布局ToolStripMenuItem";
             this.布局ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.布局ToolStripMenuItem.Text = "布局";
+            // 
+            // 创建新布局ToolStripMenuItem
+            // 
+            this.创建新布局ToolStripMenuItem.Name = "创建新布局ToolStripMenuItem";
+            this.创建新布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.创建新布局ToolStripMenuItem.Text = "保存布局";
             // 
             // 加载布局ToolStripMenuItem
             // 
@@ -139,12 +152,6 @@
             this.删除布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.删除布局ToolStripMenuItem.Text = "删除布局";
             // 
-            // 创建新布局ToolStripMenuItem
-            // 
-            this.创建新布局ToolStripMenuItem.Name = "创建新布局ToolStripMenuItem";
-            this.创建新布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.创建新布局ToolStripMenuItem.Text = "保存布局"; 
-            // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -157,13 +164,13 @@
             // 帮助ToolStripMenuItem1
             // 
             this.帮助ToolStripMenuItem1.Name = "帮助ToolStripMenuItem1";
-            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.帮助ToolStripMenuItem1.Text = "帮助";
             // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
             // mST
@@ -173,9 +180,9 @@
             this.配置ToolStripMenuItem,
             this.布局ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
-            this.mST.Location = new System.Drawing.Point(0, 0);
+            this.mST.Location = new System.Drawing.Point(20, 60);
             this.mST.Name = "mST";
-            this.mST.Size = new System.Drawing.Size(784, 25);
+            this.mST.Size = new System.Drawing.Size(744, 25);
             this.mST.TabIndex = 3;
             this.mST.Text = "主菜单";
             // 
@@ -183,17 +190,10 @@
             // 
             this.TVCamera.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.TVCamera.Location = new System.Drawing.Point(12, 28);
+            this.TVCamera.Location = new System.Drawing.Point(12, 88);
             this.TVCamera.Name = "TVCamera";
-            this.TVCamera.Size = new System.Drawing.Size(211, 642);
+            this.TVCamera.Size = new System.Drawing.Size(211, 582);
             this.TVCamera.TabIndex = 4;
-            // 
-            // 电视墙配置ToolStripMenuItem
-            // 
-            this.电视墙配置ToolStripMenuItem.Name = "电视墙配置ToolStripMenuItem";
-            this.电视墙配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.电视墙配置ToolStripMenuItem.Text = "电视墙配置";
-            this.电视墙配置ToolStripMenuItem.Click += new System.EventHandler(this.电视墙配置ToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -204,7 +204,7 @@
             this.Controls.Add(this.mST);
             this.MainMenuStrip = this.mST;
             this.Name = "MainWindow";
-            this.Text = "解码器控制";
+            this.Text = "电视墙管理程序";
             this.mST.ResumeLayout(false);
             this.mST.PerformLayout();
             this.ResumeLayout(false);

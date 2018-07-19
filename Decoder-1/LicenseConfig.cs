@@ -8,10 +8,10 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-
+using MetroFramework.Forms;
 namespace Decoder
 {
-    public partial class LicenseConfig : Form
+    public partial class LicenseConfig : MetroForm
     {
         static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

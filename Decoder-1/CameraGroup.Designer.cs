@@ -30,9 +30,9 @@
         {
             this.ltbAll = new System.Windows.Forms.ListBox();
             this.ltbSelected = new System.Windows.Forms.ListBox();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnAdd = new MetroFramework.Controls.MetroButton();
+            this.btnRemove = new MetroFramework.Controls.MetroButton();
+            this.btnSave = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // ltbAll
@@ -41,10 +41,10 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ltbAll.FormattingEnabled = true;
             this.ltbAll.ItemHeight = 12;
-            this.ltbAll.Location = new System.Drawing.Point(13, 14);
+            this.ltbAll.Location = new System.Drawing.Point(13, 74);
             this.ltbAll.Name = "ltbAll";
             this.ltbAll.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.ltbAll.Size = new System.Drawing.Size(120, 508);
+            this.ltbAll.Size = new System.Drawing.Size(158, 520);
             this.ltbAll.TabIndex = 0;
             // 
             // ltbSelected
@@ -53,15 +53,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ltbSelected.FormattingEnabled = true;
             this.ltbSelected.ItemHeight = 12;
-            this.ltbSelected.Location = new System.Drawing.Point(435, 14);
+            this.ltbSelected.Location = new System.Drawing.Point(368, 74);
             this.ltbSelected.Name = "ltbSelected";
             this.ltbSelected.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.ltbSelected.Size = new System.Drawing.Size(120, 508);
+            this.ltbSelected.Size = new System.Drawing.Size(187, 520);
             this.ltbSelected.TabIndex = 0;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(253, 94);
+            this.btnAdd.Location = new System.Drawing.Point(233, 94);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 1;
@@ -71,7 +71,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(253, 123);
+            this.btnRemove.Location = new System.Drawing.Point(233, 123);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 1;
@@ -81,7 +81,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(253, 319);
+            this.btnSave.Location = new System.Drawing.Point(233, 319);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 2;
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 539);
+            this.ClientSize = new System.Drawing.Size(592, 611);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
@@ -109,8 +109,8 @@
 
         private System.Windows.Forms.ListBox ltbAll;
         private System.Windows.Forms.ListBox ltbSelected;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.Button btnSave;
+        private MetroFramework.Controls.MetroButton btnAdd;
+        private MetroFramework.Controls.MetroButton btnRemove;
+        private MetroFramework.Controls.MetroButton btnSave;
     }
 }

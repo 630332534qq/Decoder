@@ -9,9 +9,9 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 namespace Decoder
 {
-    public partial class VideoWallConfig : MetroForm
+    public partial class Form2 : MetroForm
     {
-        public VideoWallConfig()
+        public Form2()
         {
             InitializeComponent();
         }
