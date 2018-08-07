@@ -33,8 +33,8 @@ namespace Decoder
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString(), "\nError Message");
-                log.Error("读取解码器序列号出错:"+ex.ToString());
+                MessageBox.Show("读取解码器序列号出错:" + d.name +":"+d.ipaddr+"___"+ ex.Message.ToString(), "\n");
+                log.Error("读取解码器序列号出错:" + d.name + ":" + d.ipaddr + "___" + ex.Message.ToString()+"\n");
                 flag = false;
             }
             return flag;

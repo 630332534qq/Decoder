@@ -28,42 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnImport = new System.Windows.Forms.Button();
-            this.lblLicense = new System.Windows.Forms.Label();
+            this.btnExport = new MetroFramework.Controls.MetroButton();
+            this.btnImport = new MetroFramework.Controls.MetroButton();
+            this.lblLicense = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(98, 79);
+            this.btnExport.Location = new System.Drawing.Point(58, 121);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(85, 23);
             this.btnExport.TabIndex = 1;
             this.btnExport.Text = "生成注册文件";
-            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.UseSelectable = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(200, 79);
+            this.btnImport.Location = new System.Drawing.Point(187, 121);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(106, 23);
             this.btnImport.TabIndex = 2;
             this.btnImport.Text = "导入许可证";
-            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.UseSelectable = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // lblLicense
             // 
             this.lblLicense.AutoSize = true;
-            this.lblLicense.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblLicense.Location = new System.Drawing.Point(98, 44);
+            this.lblLicense.Location = new System.Drawing.Point(106, 83);
             this.lblLicense.Name = "lblLicense";
-            this.lblLicense.Size = new System.Drawing.Size(144, 16);
+            this.lblLicense.Size = new System.Drawing.Size(121, 19);
             this.lblLicense.TabIndex = 3;
             this.lblLicense.Text = "当前许可证数量：";
             // 
-            // License
+            // LicenseConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,8 +70,8 @@
             this.Controls.Add(this.lblLicense);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnExport);
-            this.Name = "License";
-            this.Text = "License";
+            this.Name = "LicenseConfig";
+            this.Text = "许可证配置";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,8 +79,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.Label lblLicense;
+        private MetroFramework.Controls.MetroButton btnExport;
+        private MetroFramework.Controls.MetroButton btnImport;
+        private MetroFramework.Controls.MetroLabel lblLicense;
     }
 }

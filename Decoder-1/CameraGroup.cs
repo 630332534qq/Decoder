@@ -11,6 +11,9 @@ namespace Decoder
 {
     public partial class CameraGroup : MetroForm
     {
+        //子窗口以委托形式调用父窗口，实现刷新
+        public delegate void ReturnValue();
+        public event ReturnValue returnParent;
         TreeNode tnGroup = null;
         TreeView tvAll = null;
         public CameraGroup(TreeView tv, TreeNode _tnGroup)
@@ -23,6 +26,11 @@ namespace Decoder
                 if (tn.Name == NodeType.Camera.ToString())
                     ltbAll.Items.Add(item: tn.Text);
             }
+
+            foreach (TreeNode tnn in tnGroup.Nodes)
+            {
+                ltbSelected.Items.Add(item: tnn.Text);
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -34,13 +42,14 @@ namespace Decoder
                     foreach (string sc in ltbSelected.Items)
                     {
                         if (sc == tn.Text)
-                        { 
+                        {
                             tnGroup.Nodes.Add((TreeNode)tn.Clone());
                         }
                     }
                 }
             }
             this.Close();
+            returnParent();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

@@ -30,10 +30,10 @@ namespace Decoder
         /// </summary>
         private void InitializeComponent()
         {
-            this.GetParas = new System.Windows.Forms.Button();
+            this.GetParas = new MetroFramework.Controls.MetroButton();
             this.rtxReturn = new System.Windows.Forms.RichTextBox();
-            this.btn_ChangeCamera = new System.Windows.Forms.Button();
-            this.btnChangeView = new System.Windows.Forms.Button();
+            this.btn_ChangeCamera = new MetroFramework.Controls.MetroButton();
+            this.btnChangeView = new MetroFramework.Controls.MetroButton();
             this.cbxCameras = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -105,10 +105,10 @@ namespace Decoder
         } 
         #endregion
 
-        private System.Windows.Forms.Button GetParas;
+        private MetroFramework.Controls.MetroButton GetParas;
         private System.Windows.Forms.RichTextBox rtxReturn;
-        private System.Windows.Forms.Button btn_ChangeCamera;
-        private System.Windows.Forms.Button btnChangeView;
+        private MetroFramework.Controls.MetroButton btn_ChangeCamera;
+        private MetroFramework.Controls.MetroButton btnChangeView;
         private System.Windows.Forms.ComboBox cbxCameras;
     }
 }

@@ -42,7 +42,7 @@ namespace Decoder
 
         private void AddCamerasNodes()
         {
-            foreach (Camera c in FileOperation<Camera>.ReadFile())
+            foreach (Camera c in Camera.cList)
             {
                 AddOneCameraNode(c);
             }
@@ -80,17 +80,17 @@ namespace Decoder
             tn.Name = NodeType.Camera.ToString();
             tn.ContextMenuStrip = CameraNodeStrip;
             tvCameras.Nodes[0].Nodes.Add(tn);
+            log.Info("增加一个摄像机," + c.ToString());
         }
 
         private void DeleteOneCameraNode(TreeNode tnDest, TreeNode tndelete)
         {
-
+            log.Info("即将删除一个摄像机," + tndelete.Text.ToString());
             foreach (TreeNode tn in tnDest.Nodes)
             {
                 if (tn == null) return;
                 DeleteOneCameraNode(tn, tndelete);
-
-            }
+            } 
         }
 
         private void ReArrangeTree()
@@ -202,6 +202,7 @@ namespace Decoder
         private void deleteGroupNode_Click(object sender, EventArgs e)
         {
             TreeNode tn = tvCameras.SelectedNode;
+            ///这个地方有个bug，删除分组的时候
             tn.Remove();
         }
         #endregion
@@ -210,12 +211,19 @@ namespace Decoder
         {
             TreeNode tn = tvCameras.SelectedNode;
             CameraGroup cg = new CameraGroup(tvCameras, tn);
+            cg.returnParent += Cg_returnParent;
             cg.Show();
+            log.Info("增加摄像机到分组内");
+        }
+
+        private void Cg_returnParent()
+        {
+            tvCameras.Refresh();
         }
 
 
         /// <summary>
-        /// 删除分组中的摄像机会报错
+        /// 删除摄像机会报错
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -248,7 +256,7 @@ namespace Decoder
                     }
                 }
             } 
-        }
+        } 
     }
 
 
