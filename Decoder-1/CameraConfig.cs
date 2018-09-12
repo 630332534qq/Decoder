@@ -155,7 +155,7 @@ namespace Decoder
             {
                 foreach (TreeNode tn in tvCameras.Nodes[0].Nodes)
                 {
-                    if ( tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("——") + 2) == newIPAddress && tn.Name == NodeType.Camera.ToString() && newIPAddress != beUpdatingCamera.ipaddr) return true;
+                    if (tn.Name == NodeType.Camera.ToString() && tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("——") + 2) == newIPAddress &&  newIPAddress != beUpdatingCamera.ipaddr) return true;
                 }
             }
             else
@@ -164,7 +164,7 @@ namespace Decoder
                 {
                     //string s = NodeType.Camera.ToString();
                     //string sub = tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("——") + 1);
-                    if ( tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("——") + 2) == newIPAddress&& tn.Name == NodeType.Camera.ToString()) return true;
+                    if (tn.Name == NodeType.Camera.ToString() && tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("——") + 2) == newIPAddress) return true;
                 }
             }
             return false;
