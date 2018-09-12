@@ -104,6 +104,12 @@ namespace Decoder
                 drg.ErrorText = "解码器IP地址不得为空";
                 return;
             }
+            if (drg.Cells[5].FormattedValue.ToString() == "")
+            {
+                e.Cancel = true;
+                drg.ErrorText = "解码器的序列号不得不为空，可通过在浏览器地址栏输入如下命令查询：\n http://DecoderIP/axis-cgi/admin/param.cgi?action=list&group=root.Properties.System.SerialNumber ";
+                return;
+            }
             if (!WindowOperation.IPCheck(drg.Cells[2].FormattedValue.ToString()))
             {
                 e.Cancel = true;
@@ -122,6 +128,12 @@ namespace Decoder
                 {
                     e.Cancel = true;
                     drg.ErrorText = "IP地址重复";
+                    return;
+                }
+                if (e.RowIndex != dr.Index && drg.Cells[5].FormattedValue.ToString() == dr.Cells[5].FormattedValue.ToString())
+                {
+                    e.Cancel = true;
+                    drg.ErrorText = "解码器序列号重复";
                     return;
                 }
             }

@@ -35,6 +35,7 @@ namespace Decoder
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            tnGroup.Nodes.Clear();
             foreach (TreeNode tn in tvAll.Nodes[0].Nodes)
             {
                 if (tn.Name == NodeType.Camera.ToString())

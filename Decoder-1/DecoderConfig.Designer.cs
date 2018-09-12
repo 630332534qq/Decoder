@@ -47,7 +47,7 @@
             this.clmSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnResume = new MetroFramework.Controls.MetroButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new MetroFramework.Controls.MetroLabel();
+            this.txtNote = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.decoderView)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -99,7 +99,7 @@
             this.decoderView.EnableHeadersVisualStyles = false;
             this.decoderView.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.decoderView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.decoderView.Location = new System.Drawing.Point(12, 161);
+            this.decoderView.Location = new System.Drawing.Point(12, 244);
             this.decoderView.Name = "decoderView";
             this.decoderView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -115,7 +115,7 @@
             this.decoderView.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.decoderView.RowTemplate.Height = 23;
             this.decoderView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.decoderView.Size = new System.Drawing.Size(907, 405);
+            this.decoderView.Size = new System.Drawing.Size(907, 322);
             this.decoderView.TabIndex = 4;
             this.decoderView.Theme = MetroFramework.MetroThemeStyle.Light;
             this.decoderView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.decoderView_RowsAdded);
@@ -183,23 +183,54 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtNote);
             this.groupBox1.Location = new System.Drawing.Point(23, 63);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(567, 92);
+            this.groupBox1.Size = new System.Drawing.Size(636, 153);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "注：";
             // 
-            // label1
+            // txtNote
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(19, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(324, 57);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "1、两次单击单元格进行编辑；\r\n2、选中该行，按DEL键删除；\r\n3、序列号选填，在生成注册文件时系统自动获取；";
+            // 
+            // 
+            // 
+            this.txtNote.CustomButton.Image = null;
+            this.txtNote.CustomButton.Location = new System.Drawing.Point(504, 1);
+            this.txtNote.CustomButton.Name = "";
+            this.txtNote.CustomButton.Size = new System.Drawing.Size(125, 125);
+            this.txtNote.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtNote.CustomButton.TabIndex = 1;
+            this.txtNote.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtNote.CustomButton.UseSelectable = true;
+            this.txtNote.CustomButton.Visible = false;
+            this.txtNote.Lines = new string[] {
+        "1、两次单击单元格进行编辑；",
+        "2、选中该行，按DEL键删除；",
+        "3、序列号选填，在生成注册文件时系统自动获取；",
+        "4、解码器的序列号不得不为空，可通过在浏览器地址栏输入如下命令查询：",
+        " http://cameraIP/axis-cgi/admin/param.cgi?action=list&group=root.Properties.Syste" +
+            "m.SerialNumber "};
+            this.txtNote.Location = new System.Drawing.Point(0, 20);
+            this.txtNote.MaxLength = 32767;
+            this.txtNote.Multiline = true;
+            this.txtNote.Name = "txtNote";
+            this.txtNote.PasswordChar = '\0';
+            this.txtNote.ReadOnly = true;
+            this.txtNote.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtNote.SelectedText = "";
+            this.txtNote.SelectionLength = 0;
+            this.txtNote.SelectionStart = 0;
+            this.txtNote.ShortcutsEnabled = true;
+            this.txtNote.Size = new System.Drawing.Size(630, 127);
+            this.txtNote.TabIndex = 27;
+            this.txtNote.Text = "1、两次单击单元格进行编辑；\r\n2、选中该行，按DEL键删除；\r\n3、序列号选填，在生成注册文件时系统自动获取；\r\n4、解码器的序列号不得不为空，可通过在浏览器地" +
+    "址栏输入如下命令查询：\r\n http://DecoderIP/axis-cgi/admin/param.cgi?action=list&group=root.Pr" +
+    "operties.System.SerialNumber ";
+            this.txtNote.UseSelectable = true;
+            this.txtNote.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtNote.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // DecoderConfig
             // 
@@ -214,7 +245,6 @@
             this.Text = "解码器配置";
             ((System.ComponentModel.ISupportInitialize)(this.decoderView)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -230,6 +260,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmPassword;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmSerialNo;
         private System.Windows.Forms.GroupBox groupBox1;
-        private MetroFramework.Controls.MetroLabel label1;
+        private MetroFramework.Controls.MetroTextBox txtNote;
     }
 }

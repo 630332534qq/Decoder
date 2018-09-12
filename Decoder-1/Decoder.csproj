@@ -98,6 +98,12 @@
     <Compile Include="CameraGroup.Designer.cs">
       <DependentUpon>CameraGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="CameraUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CameraUpdate.Designer.cs">
+      <DependentUpon>CameraUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="DecoderConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CameraGroup.resx">
       <DependentUpon>CameraGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CameraUpdate.resx">
+      <DependentUpon>CameraUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DecoderConfig.resx">
       <DependentUpon>DecoderConfig.cs</DependentUpon>

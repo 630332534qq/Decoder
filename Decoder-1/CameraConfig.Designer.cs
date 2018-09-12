@@ -53,6 +53,7 @@
             this.txtHelp = new MetroFramework.Controls.MetroTextBox();
             this.gpBHelp = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CameraNodeStrip.SuspendLayout();
             this.FNodeStrip.SuspendLayout();
             this.GroupNodeStrip.SuspendLayout();
@@ -65,27 +66,28 @@
             this.CameraNodeStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteCamera,
             this.上移ToolStripMenuItem,
-            this.下移ToolStripMenuItem});
+            this.下移ToolStripMenuItem,
+            this.修改ToolStripMenuItem});
             this.CameraNodeStrip.Name = "CMS";
-            this.CameraNodeStrip.Size = new System.Drawing.Size(101, 70);
+            this.CameraNodeStrip.Size = new System.Drawing.Size(153, 114);
             // 
             // deleteCamera
             // 
             this.deleteCamera.Name = "deleteCamera";
-            this.deleteCamera.Size = new System.Drawing.Size(100, 22);
+            this.deleteCamera.Size = new System.Drawing.Size(152, 22);
             this.deleteCamera.Text = "删除";
             this.deleteCamera.Click += new System.EventHandler(this.deleteCamera_Click);
             // 
             // 上移ToolStripMenuItem
             // 
             this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.上移ToolStripMenuItem.Text = "上移";
             // 
             // 下移ToolStripMenuItem
             // 
             this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.下移ToolStripMenuItem.Text = "下移";
             // 
             // btnSave
@@ -338,7 +340,7 @@
             // 
             // 
             this.txtHelp.CustomButton.Image = null;
-            this.txtHelp.CustomButton.Location = new System.Drawing.Point(165, 2);
+            this.txtHelp.CustomButton.Location = new System.Drawing.Point(322, 2);
             this.txtHelp.CustomButton.Name = "";
             this.txtHelp.CustomButton.Size = new System.Drawing.Size(69, 69);
             this.txtHelp.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -423,6 +425,13 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(714, 382);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
+            // 修改ToolStripMenuItem
+            // 
+            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.UpdateCameraToolStripMenuItem_Click);
+            // 
             // CameraConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -466,5 +475,6 @@
         private MetroFramework.Controls.MetroLabel lblCIP;
         private System.Windows.Forms.GroupBox gpBHelp;
         private MetroFramework.Controls.MetroTextBox txtHelp;
+        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
     }
 }
