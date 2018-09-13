@@ -129,7 +129,8 @@ namespace Decoder
 
     public class Camera
     {
-        public Guid cameraID;
+        [JsonProperty]
+        public Guid cameraID=Guid.NewGuid();
         static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// Camera's name
@@ -159,7 +160,6 @@ namespace Decoder
         { }
         public Camera(string cname, string cipaddr, string cusername = "root", string cpassword = "pass", string crtsp = "", string cfps = "15", Resolution cres = Resolution.LOW)
         {
-            cameraID = new Guid();
             name = cname;
             ipaddr = cipaddr;
             username = cusername;
@@ -247,6 +247,10 @@ namespace Decoder
         public List<Camera> list = new List<Camera>();
         public string groupName = "";
         public string groupID = "";
+        public override string ToString()
+        {
+            return "分组名称 "+groupName+"分组ID:"+groupID;
+        }
     }
 
     public enum NodeType

@@ -11,6 +11,7 @@
     <AssemblyName>Decoder</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -66,6 +66,7 @@
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
@@ -92,11 +93,11 @@
     <Compile Include="CameraConfig.Designer.cs">
       <DependentUpon>CameraConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="CameraGroup.cs">
+    <Compile Include="CameraGroupUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CameraGroup.Designer.cs">
-      <DependentUpon>CameraGroup.cs</DependentUpon>
+    <Compile Include="CameraGroupUI.Designer.cs">
+      <DependentUpon>CameraGroupUI.cs</DependentUpon>
     </Compile>
     <Compile Include="CameraUpdate.cs">
       <SubType>Form</SubType>
@@ -160,8 +161,8 @@
     <EmbeddedResource Include="CameraConfig.resx">
       <DependentUpon>CameraConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CameraGroup.resx">
-      <DependentUpon>CameraGroup.cs</DependentUpon>
+    <EmbeddedResource Include="CameraGroupUI.resx">
+      <DependentUpon>CameraGroupUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CameraUpdate.resx">
       <DependentUpon>CameraUpdate.cs</DependentUpon>
@@ -215,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\CameraGroup.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

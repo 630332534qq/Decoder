@@ -13,11 +13,11 @@ namespace Decoder
     public static class FileOperation<T>
     {
         static ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        static string dataPath = System.IO.Directory.GetCurrentDirectory()+"//data//";
         public static bool WriteFile(List<T> list, string fileNameOption = "")
         {
             bool success = true;
-            string filename = typeof(T).ToString().Substring(typeof(T).ToString().IndexOf(".") + 1) + ".json";
+            string filename = dataPath+ typeof(T).ToString().Substring(typeof(T).ToString().IndexOf(".") + 1) + ".json";
             if (fileNameOption != "")
             {
                 filename = fileNameOption;
@@ -46,7 +46,7 @@ namespace Decoder
         public static List<T> ReadFile()
         {
             List<T> tlist = new List<T>();
-            string filename = typeof(T).ToString().Substring(typeof(T).ToString().IndexOf(".") + 1) + ".json";
+            string filename = dataPath + typeof(T).ToString().Substring(typeof(T).ToString().IndexOf(".") + 1) + ".json";
             using (StreamReader sr = new StreamReader(filename))
             {
                 try
@@ -70,10 +70,10 @@ namespace Decoder
     public static class LicenseFile
     {
         static ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        static string licensePath = System.IO.Directory.GetCurrentDirectory() + "//license//";
         public static string ReadLicense()
         {
-            using (StreamReader sr = new StreamReader("License.lic2", false))
+            using (StreamReader sr = new StreamReader(licensePath + "License.lic2", false))
             {
                 return sr.ReadToEnd();
             }              
@@ -84,7 +84,7 @@ namespace Decoder
             List<string> tlist = new List<string>();
             try
             {
-                using (StreamReader sr = new StreamReader("DecoderInfo.ini"))
+                using (StreamReader sr = new StreamReader(licensePath+"DecoderInfo.ini"))
                 {
                     try
                     {

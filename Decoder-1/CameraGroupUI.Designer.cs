@@ -1,6 +1,6 @@
 ﻿namespace Decoder
 {
-    partial class CameraGroup
+    partial class CameraGroupUI
     {
         /// <summary>
         /// Required designer variable.

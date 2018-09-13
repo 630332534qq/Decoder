@@ -9,14 +9,14 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 namespace Decoder
 {
-    public partial class CameraGroup : MetroForm
+    public partial class CameraGroupUI : MetroForm
     {
         //子窗口以委托形式调用父窗口，实现刷新
         public delegate void ReturnValue();
         public event ReturnValue returnParent;
         TreeNode tnGroup = null;
         TreeView tvAll = null;
-        public CameraGroup(TreeView tv, TreeNode _tnGroup)
+        public CameraGroupUI(TreeView tv, TreeNode _tnGroup)
         {
             InitializeComponent();
             tnGroup = _tnGroup;
@@ -35,6 +35,7 @@ namespace Decoder
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            TreeNode toBeAddtoGroup;
             tnGroup.Nodes.Clear();
             foreach (TreeNode tn in tvAll.Nodes[0].Nodes)
             {
@@ -42,9 +43,12 @@ namespace Decoder
                 {
                     foreach (string sc in ltbSelected.Items)
                     {
-                        if (sc == tn.Text)
+                        if (sc == tn.Text&&tn.Name==NodeType.Camera.ToString())
                         {
-                            tnGroup.Nodes.Add((TreeNode)tn.Clone());
+                            //将摄像机增加到分组，此时该摄像机类型为CameraAtGroup
+                            toBeAddtoGroup = tn.Clone() as TreeNode;
+                            toBeAddtoGroup.Name = NodeType.CameraAtGroup.ToString(); 
+                            tnGroup.Nodes.Add(toBeAddtoGroup);
                         }
                     }
                 }

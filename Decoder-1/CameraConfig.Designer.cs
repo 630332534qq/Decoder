@@ -33,6 +33,7 @@
             this.deleteCamera = new System.Windows.Forms.ToolStripMenuItem();
             this.上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSave = new MetroFramework.Controls.MetroButton();
             this.FNodeStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsMUAddGroup = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,7 @@
             this.txtHelp = new MetroFramework.Controls.MetroTextBox();
             this.gpBHelp = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CameraNodeStrip.SuspendLayout();
             this.FNodeStrip.SuspendLayout();
             this.GroupNodeStrip.SuspendLayout();
@@ -69,26 +70,33 @@
             this.下移ToolStripMenuItem,
             this.修改ToolStripMenuItem});
             this.CameraNodeStrip.Name = "CMS";
-            this.CameraNodeStrip.Size = new System.Drawing.Size(153, 114);
+            this.CameraNodeStrip.Size = new System.Drawing.Size(101, 92);
             // 
             // deleteCamera
             // 
             this.deleteCamera.Name = "deleteCamera";
-            this.deleteCamera.Size = new System.Drawing.Size(152, 22);
+            this.deleteCamera.Size = new System.Drawing.Size(100, 22);
             this.deleteCamera.Text = "删除";
             this.deleteCamera.Click += new System.EventHandler(this.deleteCamera_Click);
             // 
             // 上移ToolStripMenuItem
             // 
             this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.上移ToolStripMenuItem.Text = "上移";
             // 
             // 下移ToolStripMenuItem
             // 
             this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.下移ToolStripMenuItem.Text = "下移";
+            // 
+            // 修改ToolStripMenuItem
+            // 
+            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.UpdateCameraToolStripMenuItem_Click);
             // 
             // btnSave
             // 
@@ -118,22 +126,23 @@
             // 
             this.GroupNodeStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteGroupNode,
-            this.AddCameraToGroup});
+            this.AddCameraToGroup,
+            this.修改名称ToolStripMenuItem});
             this.GroupNodeStrip.Name = "GroupNodeStrip";
-            this.GroupNodeStrip.Size = new System.Drawing.Size(137, 48);
+            this.GroupNodeStrip.Size = new System.Drawing.Size(137, 70);
             // 
             // deleteGroupNode
             // 
             this.deleteGroupNode.Name = "deleteGroupNode";
-            this.deleteGroupNode.Size = new System.Drawing.Size(136, 22);
-            this.deleteGroupNode.Text = "删除该分组";
+            this.deleteGroupNode.Size = new System.Drawing.Size(152, 22);
+            this.deleteGroupNode.Text = "删除分组";
             this.deleteGroupNode.Click += new System.EventHandler(this.deleteGroupNode_Click);
             // 
             // AddCameraToGroup
             // 
             this.AddCameraToGroup.Name = "AddCameraToGroup";
-            this.AddCameraToGroup.Size = new System.Drawing.Size(136, 22);
-            this.AddCameraToGroup.Text = "添加摄像机";
+            this.AddCameraToGroup.Size = new System.Drawing.Size(152, 22);
+            this.AddCameraToGroup.Text = "编辑摄像机";
             this.AddCameraToGroup.Click += new System.EventHandler(this.AddCameraToGroup_Click);
             // 
             // btnReset
@@ -150,18 +159,20 @@
             // tvCameras
             // 
             this.tvCameras.AllowDrop = true;
+            this.tvCameras.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tvCameras.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvCameras.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tvCameras.FullRowSelect = true;
             this.tvCameras.HideSelection = false;
             this.tvCameras.Indent = 19;
             this.tvCameras.ItemHeight = 22;
-            this.tvCameras.LabelEdit = true;
             this.tvCameras.Location = new System.Drawing.Point(3, 33);
             this.tvCameras.Name = "tvCameras";
             this.tableLayoutPanel1.SetRowSpan(this.tvCameras, 9);
             this.tvCameras.ShowNodeToolTips = true;
             this.tvCameras.Size = new System.Drawing.Size(208, 346);
             this.tvCameras.TabIndex = 12;
+            this.tvCameras.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvCameras_MouseDown);
             // 
             // lblCName
             // 
@@ -353,7 +364,7 @@
             this.txtHelp.Lines = new string[] {
         "1、用户名密码可留空，默认为root/pass",
         "2、摄像机名称和IP地址不可重复；",
-        "3、可在根节点右键自定义分组，并将其他节点拖到该分组用于轮播"};
+        "3、可在根节点右键自定义分组，并通过右键编辑分组来加入摄像机；"};
             this.txtHelp.Location = new System.Drawing.Point(3, 17);
             this.txtHelp.MaxLength = 32767;
             this.txtHelp.Multiline = true;
@@ -367,7 +378,7 @@
             this.txtHelp.ShortcutsEnabled = true;
             this.txtHelp.Size = new System.Drawing.Size(394, 74);
             this.txtHelp.TabIndex = 12;
-            this.txtHelp.Text = "1、用户名密码可留空，默认为root/pass\r\n2、摄像机名称和IP地址不可重复；\r\n3、可在根节点右键自定义分组，并将其他节点拖到该分组用于轮播";
+            this.txtHelp.Text = "1、用户名密码可留空，默认为root/pass\r\n2、摄像机名称和IP地址不可重复；\r\n3、可在根节点右键自定义分组，并通过右键编辑分组来加入摄像机；";
             this.txtHelp.UseSelectable = true;
             this.txtHelp.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtHelp.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -425,12 +436,12 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(714, 382);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
-            // 修改ToolStripMenuItem
+            // 修改名称ToolStripMenuItem
             // 
-            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.修改ToolStripMenuItem.Text = "修改";
-            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.UpdateCameraToolStripMenuItem_Click);
+            this.修改名称ToolStripMenuItem.Name = "修改名称ToolStripMenuItem";
+            this.修改名称ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改名称ToolStripMenuItem.Text = "修改名称";
+            this.修改名称ToolStripMenuItem.Click += new System.EventHandler(this.EditGroupName_Click);
             // 
             // CameraConfig
             // 
@@ -476,5 +487,6 @@
         private System.Windows.Forms.GroupBox gpBHelp;
         private MetroFramework.Controls.MetroTextBox txtHelp;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 修改名称ToolStripMenuItem;
     }
 }
