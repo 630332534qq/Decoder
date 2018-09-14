@@ -45,7 +45,7 @@ namespace Decoder
         }
         private void decoderView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            e.Cancel = !WindowOperation.ConfirmDiag("确认要删除该行数据吗？", "删除确认");
+            e.Cancel = !Basic_WindowOperation.ConfirmDiag("确认要删除该行数据吗？", "删除确认");
         }
 
         private void decoderView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -110,7 +110,7 @@ namespace Decoder
                 drg.ErrorText = "解码器的序列号不得不为空，可通过在浏览器地址栏输入如下命令查询：\n http://DecoderIP/axis-cgi/admin/param.cgi?action=list&group=root.Properties.System.SerialNumber ";
                 return;
             }
-            if (!WindowOperation.IPCheck(drg.Cells[2].FormattedValue.ToString()))
+            if (!Basic_WindowOperation.IPCheck(drg.Cells[2].FormattedValue.ToString()))
             {
                 e.Cancel = true;
                 drg.ErrorText = "IP地址格式错误";

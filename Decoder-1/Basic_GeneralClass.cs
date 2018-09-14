@@ -36,7 +36,7 @@ namespace Decoder
             right = r;
             top = t;
             bottom = b;
-        } 
+        }
     }
 
     public class segments
@@ -46,7 +46,7 @@ namespace Decoder
 
         public segments(panes p, Camera c)
         {
-            stream = BasicOperation.GetStreamID(c.ipaddr);
+            stream = BasicOperation.GetStreamID(c.Ipaddr);
             pane = p.paneId;
         }
     }
@@ -102,6 +102,7 @@ namespace Decoder
     {
         public static int GetStreamID(string ip)
         {
+            if (ip == null) return 0;
             string[] ips = ip.Split('.');
             string s = ips[0].ToString() + ips[1].ToString() + ips[2].ToString() + ips[3].ToString();
             return s.Length < 9 ? int.Parse(s) : int.Parse(s.Substring(s.Length - 9, 9));
@@ -129,44 +130,93 @@ namespace Decoder
 
     public class Camera
     {
-        [JsonProperty]
-        public Guid cameraID=Guid.NewGuid();
         static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        [JsonProperty]
+        private Guid cameraID = Guid.NewGuid();
+        public Guid CameraID
+        {
+            get { return cameraID; }
+            set { cameraID = value; }
+        }
         /// <summary>
         /// Camera's name
         /// </summary> 
         [JsonProperty]
-        public string name;
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
         /// <summary>
         /// Camera's ipAddress
         /// </summary> 
         [JsonProperty]
-        public string ipaddr;
+        private string ipaddr;
+        [JsonIgnore]
+        public string Ipaddr
+        {
+            get { return ipaddr; }
+            set { ipaddr = value; }
+        }
         [JsonProperty]
-        public int streamId;
+        private int streamId;
+        public int StreamId
+        {
+            get
+            {
+                if (Ipaddr != null) return StreamId = BasicOperation.GetStreamID(Ipaddr);
+                else return 0;
+            }
+            set { streamId = value; }
+        }
         [JsonProperty]
-        public string url;
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set { url = value; }
+        }
         [JsonProperty]
-        public string videoCodec = VideoCodec.H264.ToString();
-        public string audioCodec = "";
+        private string videoCodec = global::Decoder.VideoCodec.H264.ToString();
+        public string VideoCodec
+        {
+            get { return videoCodec; }
+            set { videoCodec = value; }
+        }
+        private string audioCodec = "";
+        public string AudioCodec
+        {
+            get { return audioCodec; }
+            set { audioCodec = value; }
+        }
         [JsonProperty]
-        public string username = "root";
+        private string username = "root";
+        public string Username
+        {
+            get { return username; }
+            set { username = value; }
+        }
         [JsonProperty]
-        public string password = "pass";
-       
+        private string password = "pass";
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+
         public string fps = "15";
 
-        public Camera()
-        { }
         public Camera(string cname, string cipaddr, string cusername = "root", string cpassword = "pass", string crtsp = "", string cfps = "15", Resolution cres = Resolution.LOW)
         {
-            name = cname;
-            ipaddr = cipaddr;
-            username = cusername;
-            password = cpassword;
-            if (crtsp == "") url = GetRTSPUrlFromCameraParameter(cres);
-            else url = crtsp; 
-            streamId = BasicOperation.GetStreamID(ipaddr);
+            Name = cname;
+            Ipaddr = cipaddr;
+            Username = cusername;
+            Password = cpassword;
+            if (crtsp == "") Url = GetRTSPUrlFromCameraParameter(cres);
+            else Url = crtsp;
+            StreamId = BasicOperation.GetStreamID(Ipaddr);
         }
 
         public string GetJson()
@@ -176,9 +226,9 @@ namespace Decoder
 
         public static List<Camera> cList = new List<Camera>
             {
-                new Camera("M3045-V","192.168.0.109"),
-                new Camera("P5635-E","192.168.0.8"),
-                new Camera("P1365-MKII","192.168.0.6"),
+                //new Camera("M3045-V","192.168.0.109"),
+                //new Camera("P5635-E","192.168.0.8"),
+                //new Camera("P1365-MKII","192.168.0.6"),
                 //new Camera("M119-3045-V","192.168.0.119"),
                 //new Camera("P185635-E","192.168.0.18"),
                 //new Camera("P161365-MKII","192.168.0.16"),
@@ -213,9 +263,12 @@ namespace Decoder
                 //new Camera("P1185635-E","192.168.0.118"),
                 new Camera("P1161365-MKII","192.168.0.116")
             };
+
+
+
         public string GetRTSPUrlFromCameraParameter(Resolution res)
         {
-            string url = "rtsp://" + ipaddr + "/axis-media/media.amp?resolution=";
+            string url = "rtsp://" + Ipaddr + "/axis-media/media.amp?resolution=";
             switch (res)
             {
                 case Resolution.HIGH:
@@ -238,7 +291,8 @@ namespace Decoder
 
         public override string ToString()
         {
-            return "摄像机名称" + this.name + "  ";
+            return PrintInfo.Print<Camera>(this);
+            //return "摄像机名称" + this.name + " 摄像机IP "+this.Ipaddr+"streamID:"+streamId+"url:"+url+"CameraID"+cameraID+"username"+username+"password:"+password;
         }
     }
 
@@ -249,7 +303,7 @@ namespace Decoder
         public string groupID = "";
         public override string ToString()
         {
-            return "分组名称 "+groupName+"分组ID:"+groupID;
+            return "分组名称 " + groupName + "分组ID:" + groupID;
         }
     }
 
@@ -259,6 +313,21 @@ namespace Decoder
         Group = 1,
         Camera = 2,
         CameraAtGroup = 3
+    }
+
+    public static class PrintInfo
+    {
+        public static string Print<T>(T t)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("该实例所述对象:" + t.GetType().ToString() + "\n");
+            int i = 0;
+            foreach (System.Reflection.PropertyInfo p in t.GetType().GetProperties())
+            {
+                sb.Append("第（" + i++ + "）项属性 :" + p.Name + ",值为:" + p.GetValue(t, null) + "\n");
+            }
+            return sb.ToString();
+        }
     }
 }
 

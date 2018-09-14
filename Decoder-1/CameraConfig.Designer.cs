@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CameraConfig));
             this.CameraNodeStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteCamera = new System.Windows.Forms.ToolStripMenuItem();
-            this.上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSave = new MetroFramework.Controls.MetroButton();
             this.FNodeStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -55,6 +54,7 @@
             this.gpBHelp = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.修改名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeImagesList = new System.Windows.Forms.ImageList(this.components);
             this.CameraNodeStrip.SuspendLayout();
             this.FNodeStrip.SuspendLayout();
             this.GroupNodeStrip.SuspendLayout();
@@ -66,11 +66,9 @@
             // 
             this.CameraNodeStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteCamera,
-            this.上移ToolStripMenuItem,
-            this.下移ToolStripMenuItem,
             this.修改ToolStripMenuItem});
             this.CameraNodeStrip.Name = "CMS";
-            this.CameraNodeStrip.Size = new System.Drawing.Size(101, 92);
+            this.CameraNodeStrip.Size = new System.Drawing.Size(101, 48);
             // 
             // deleteCamera
             // 
@@ -78,18 +76,6 @@
             this.deleteCamera.Size = new System.Drawing.Size(100, 22);
             this.deleteCamera.Text = "删除";
             this.deleteCamera.Click += new System.EventHandler(this.deleteCamera_Click);
-            // 
-            // 上移ToolStripMenuItem
-            // 
-            this.上移ToolStripMenuItem.Name = "上移ToolStripMenuItem";
-            this.上移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.上移ToolStripMenuItem.Text = "上移";
-            // 
-            // 下移ToolStripMenuItem
-            // 
-            this.下移ToolStripMenuItem.Name = "下移ToolStripMenuItem";
-            this.下移ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.下移ToolStripMenuItem.Text = "下移";
             // 
             // 修改ToolStripMenuItem
             // 
@@ -126,15 +112,15 @@
             // 
             this.GroupNodeStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteGroupNode,
-            this.AddCameraToGroup,
-            this.修改名称ToolStripMenuItem});
+            this.修改名称ToolStripMenuItem,
+            this.AddCameraToGroup});
             this.GroupNodeStrip.Name = "GroupNodeStrip";
-            this.GroupNodeStrip.Size = new System.Drawing.Size(137, 70);
+            this.GroupNodeStrip.Size = new System.Drawing.Size(153, 92);
             // 
             // deleteGroupNode
             // 
             this.deleteGroupNode.Name = "deleteGroupNode";
-            this.deleteGroupNode.Size = new System.Drawing.Size(152, 22);
+            this.deleteGroupNode.Size = new System.Drawing.Size(136, 22);
             this.deleteGroupNode.Text = "删除分组";
             this.deleteGroupNode.Click += new System.EventHandler(this.deleteGroupNode_Click);
             // 
@@ -142,7 +128,7 @@
             // 
             this.AddCameraToGroup.Name = "AddCameraToGroup";
             this.AddCameraToGroup.Size = new System.Drawing.Size(152, 22);
-            this.AddCameraToGroup.Text = "编辑摄像机";
+            this.AddCameraToGroup.Text = "分配摄像机";
             this.AddCameraToGroup.Click += new System.EventHandler(this.AddCameraToGroup_Click);
             // 
             // btnReset
@@ -440,8 +426,15 @@
             // 
             this.修改名称ToolStripMenuItem.Name = "修改名称ToolStripMenuItem";
             this.修改名称ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.修改名称ToolStripMenuItem.Text = "修改名称";
+            this.修改名称ToolStripMenuItem.Text = "修改组名";
             this.修改名称ToolStripMenuItem.Click += new System.EventHandler(this.EditGroupName_Click);
+            // 
+            // treeImagesList
+            // 
+            this.treeImagesList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("treeImagesList.ImageStream")));
+            this.treeImagesList.TransparentColor = System.Drawing.Color.Transparent;
+            this.treeImagesList.Images.SetKeyName(0, "Camera.png");
+            this.treeImagesList.Images.SetKeyName(1, "CameraGroup.png");
             // 
             // CameraConfig
             // 
@@ -464,8 +457,6 @@
         #endregion
         private System.Windows.Forms.ContextMenuStrip CameraNodeStrip;
         private System.Windows.Forms.ToolStripMenuItem deleteCamera;
-        private System.Windows.Forms.ToolStripMenuItem 上移ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 下移ToolStripMenuItem;
         private MetroFramework.Controls.MetroButton btnSave;
         private System.Windows.Forms.ContextMenuStrip FNodeStrip;
         private System.Windows.Forms.ToolStripMenuItem tsMUAddGroup;
@@ -488,5 +479,6 @@
         private MetroFramework.Controls.MetroTextBox txtHelp;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改名称ToolStripMenuItem;
+        private System.Windows.Forms.ImageList treeImagesList;
     }
 }

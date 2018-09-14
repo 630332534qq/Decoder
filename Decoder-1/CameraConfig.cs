@@ -21,6 +21,7 @@ namespace Decoder
         //tag代表该对象
         //text代表对象名称
         //tootips代表IP地址等
+
         static ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public Camera beUpdatingCamera = null;
         public CameraConfig()
@@ -45,6 +46,7 @@ namespace Decoder
             tvCameras.TreeViewNodeSorter = new NodeSorter();
             tvCameras.Sort();
         }
+
         private void InitializeCameraTree()
         {
             tvCameras.Nodes.Clear();
@@ -52,46 +54,78 @@ namespace Decoder
             AddAllGroupNodes();
             AddAllCamerasNodes();
         }
+
         private void AddFirstNode()
         {
             TreeNode tn = new TreeNode();
+            tn.ForeColor = Color.Red;
             tn.ToolTipText = "右键增加分组";
             tn.Text = "摄像机树";
             tn.Name = NodeType.Root.ToString();
             tn.ContextMenuStrip = FNodeStrip;
             tvCameras.Nodes.Add(tn);
+            log.Info("初始化-创建摄像机分组根节点");
+
         }
+
         private void AddAllGroupNodes()
         {
-            log.Info("摄像机分组加载完毕");
+            List<CameraGroups> cgsList = FileOperation<CameraGroups>.ReadFile();
+            foreach (CameraGroups cg in cgsList)
+            {
+                TreeNode tn = AddOneGroupNode(cg);
+                foreach (Camera c in cg.list)
+                {
+                    AddOneCameraUnderGroup(tn, c);
+                }
+            }
+            log.Info("初始化-摄像机分组加载完毕");
         }
+
+        private void AddOneCameraUnderGroup(TreeNode tn, Camera c)
+        {
+            TreeNode tnnew = new TreeNode(c.Name);
+            tnnew.ForeColor = Color.Brown;
+            tnnew.ToolTipText = c.Name + "——" + c.Ipaddr;
+            tnnew.Tag = c;
+            tnnew.Name = NodeType.CameraAtGroup.ToString();
+            tnnew.ContextMenuStrip = CameraNodeStrip;
+            tn.Nodes.Add(tnnew);
+            log.Info("初始化-加载一个摄像机," + c.ToString()); 
+        }
+
         private void AddAllCamerasNodes()
         {
-            foreach (Camera c in Camera.cList)
+            List<Camera> cList = FileOperation<Camera>.ReadFile();
+            foreach (Camera c in cList)
             {
-                AddOneCameraNode(c);
+              AddOneCameraNode(c);
             }
-            log.Info("摄像机加载完毕");
+            log.Info("初始化-摄像机加载完毕");
         }
+
         #endregion
 
         #region
 
-        private void AddOneGroupNode()
+        private TreeNode AddOneGroupNode(CameraGroups cg)
         {
             TreeNode tn = new TreeNode();
-            tn.Text = "新建分组";
+            tn.ForeColor = Color.Blue;
+            tn.Text = cg.groupName;
             tn.ContextMenuStrip = GroupNodeStrip;
-            tn.Name = NodeType.Group.ToString();
-            CameraGroups cg = new CameraGroups();
-            cg.groupID = Guid.NewGuid().ToString();
-            cg.groupName = tn.Text;
+            tn.Name = NodeType.Group.ToString();  
             tn.Tag = cg;
             tvCameras.Nodes[0].Nodes.Add(tn);
+            log.Info("新增分组" + cg.ToString());
+            return tn;
         }
         private void AddGroupNode_Click(object sender, EventArgs e)
         {
-            AddOneGroupNode();
+            CameraGroups cg = new CameraGroups();
+            cg.groupID = Guid.NewGuid().ToString();
+            cg.groupName = "新建分组";
+            AddOneGroupNode(cg);
             ReArrangeTree();
         }
 
@@ -113,9 +147,15 @@ namespace Decoder
         {
             TreeNode tn = tvCameras.SelectedNode;
             string str = Interaction.InputBox("请输入分组名称", "编辑分组名称", tn.Text, -1, -1);
+            if (str == null || str.Trim() == "")
+            {
+                MessageBox.Show("分组名称不可为空");
+                return;
+            }
             CameraGroups cg = tn.Tag as CameraGroups;
             cg.groupName = str;
             tn.Text = str;
+            log.Info("更改分组名称成功,变更为" + str);
         }
 
         private void AddCameraToGroup_Click(object sender, EventArgs e)
@@ -133,39 +173,15 @@ namespace Decoder
             //对组内的摄像机右键菜单进行修正
             log.Info("配置摄像机分组窗口关闭并返回");
         }
+
         #endregion
 
         #region 
-        private void btnAddCamera_Click(object sender, EventArgs e)
-        {
-            if (CheckCameraInfo())
-            {
-                Camera c = new Camera(txtCameraName.Text, txtIPAddress.Text, txtUsername.Text.Trim() == "" ? "root" : txtUsername.Text.Trim(), txtPasssword.Text.Trim() == "" ? "pass" : txtPasssword.Text.Trim());
-
-                if (btnAddCamera.Text == "添加")
-                {
-                    AddOneCameraNode(c);
-                    MessageBox.Show("添加成功！");
-                }
-
-                if (btnAddCamera.Text == "更新")
-                {
-                    c.cameraID = beUpdatingCamera.cameraID;//更新时，需首先把目标的CameraID与新的Camera的cameraID统一起来
-                    UpdateOneCameraNode(c);
-                    MessageBox.Show("更新成功!");
-                }
-                tvCameras.Refresh();
-                btnAddCamera.Text = "添加";
-                beUpdatingCamera = null;
-                SetNull();
-            }
-        }
-
-
         private bool AddOneCameraNode(Camera c)
         {
-            TreeNode tn = new TreeNode(c.name);
-            tn.ToolTipText = c.name + "——" + c.ipaddr;
+            TreeNode tn = new TreeNode(c.Name);
+            tn.ForeColor = Color.Green;
+            tn.ToolTipText = c.Name + "——" + c.Ipaddr;
             tn.Tag = c;
             tn.Name = NodeType.Camera.ToString();
             tn.ContextMenuStrip = CameraNodeStrip;
@@ -173,6 +189,7 @@ namespace Decoder
             log.Info("增加一个摄像机," + c.ToString());
             return true;
         }
+
         private void deleteCamera_Click(object sender, EventArgs e)
         {
             TreeNode tn = tvCameras.SelectedNode;
@@ -197,7 +214,7 @@ namespace Decoder
                         {
                             // 删除的依据是判断CameraID是否一致  if (tnCamerainGroup.ToolTipText == tn.ToolTipText)
                             cameraInTree = tnCamerainGroup.Tag as Camera;
-                            if (cameraInTree.cameraID == selectedToDelete.cameraID)
+                            if (cameraInTree.CameraID == selectedToDelete.CameraID)
                             {
                                 tDelete = tnCamerainGroup;
                             }
@@ -214,6 +231,33 @@ namespace Decoder
             tvCameras.Refresh();
         }
 
+        private void btnAddCamera_Click(object sender, EventArgs e)
+        {
+            if (CheckCameraInfo())
+            {
+                Camera c = new Camera(txtCameraName.Text, txtIPAddress.Text, txtUsername.Text.Trim() == "" ? "root" : txtUsername.Text.Trim(), txtPasssword.Text.Trim() == "" ? "pass" : txtPasssword.Text.Trim());
+
+                if (btnAddCamera.Text == "添加")
+                {
+                    AddOneCameraNode(c);
+                    MessageBox.Show("添加成功！");
+                }
+
+                if (btnAddCamera.Text == "更新")
+                {
+                    c.CameraID = beUpdatingCamera.CameraID;//更新时，需首先把目标的CameraID与新的Camera的cameraID统一起来
+                    UpdateOneCameraNode(c);
+                    MessageBox.Show("更新成功!");
+                }
+                tvCameras.Refresh();
+                btnAddCamera.Text = "添加";
+                beUpdatingCamera = null;
+                SetNull();
+            }
+        }
+
+
+
         /// <summary>
         /// 更新摄像机信息触发
         /// </summary>
@@ -228,10 +272,10 @@ namespace Decoder
                 MessageBox.Show("未选中有效更新节点，请重试");
                 return;
             }
-            txtCameraName.Text = beUpdatingCamera.name;
-            txtIPAddress.Text = beUpdatingCamera.ipaddr;
-            txtPasssword.Text = beUpdatingCamera.password;
-            txtUsername.Text = beUpdatingCamera.username;
+            txtCameraName.Text = beUpdatingCamera.Name;
+            txtIPAddress.Text = beUpdatingCamera.Ipaddr;
+            txtPasssword.Text = beUpdatingCamera.Password;
+            txtUsername.Text = beUpdatingCamera.Username;
             btnAddCamera.Text = "更新";
         }
 
@@ -241,12 +285,13 @@ namespace Decoder
         /// <param name="c"></param>
         /// <returns></returns>
         private bool UpdateOneCameraNode(Camera c)
-        { 
+        {
             UpdateAllCameras(c, tvCameras.Nodes[0]);
             tvCameras.Refresh();
             log.Info("更新摄像机信息，原摄像机信息:" + beUpdatingCamera.ToString() + "新信息" + c.ToString());
             return true;
         }
+
         private void UpdateAllCameras(Camera c, TreeNode tn)
         {
             Camera treeNode = null;
@@ -255,10 +300,10 @@ namespace Decoder
                 if (tnn.Name != NodeType.Group.ToString())
                 {
                     treeNode = tnn.Tag as Camera;
-                    if (treeNode.cameraID == c.cameraID)
+                    if (treeNode.CameraID == c.CameraID)
                     {
-                        tnn.Text = c.name;
-                        tnn.ToolTipText = c.name + "——" + c.ipaddr;
+                        tnn.Text = c.Name;
+                        tnn.ToolTipText = c.Name + "——" + c.Ipaddr;
                         tnn.Tag = c;
                     }
                 }
@@ -268,8 +313,6 @@ namespace Decoder
                 }
             }
         }
-
-
         #endregion
 
         #region 
@@ -280,7 +323,7 @@ namespace Decoder
             if (beUpdatingCamera != null)
             {
                 foreach (TreeNode tn in tvCameras.Nodes[0].Nodes)
-                { if (Text == newName && tn.Name == NodeType.Camera.ToString() && newName != beUpdatingCamera.name) return true; }
+                { if (Text == newName && tn.Name == NodeType.Camera.ToString() && newName != beUpdatingCamera.Name) return true; }
             }
             else
             {
@@ -289,13 +332,14 @@ namespace Decoder
             }
             return false;
         }
+
         private bool ExistIPAddress(string newIPAddress)
         {  //tooltips 存储摄像机的IP地址，且节点类型是Camera
             if (beUpdatingCamera != null)
             {
                 foreach (TreeNode tn in tvCameras.Nodes[0].Nodes)
                 {
-                    if (tn.Name == NodeType.Camera.ToString() && tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("——") + 2) == newIPAddress && newIPAddress != beUpdatingCamera.ipaddr) return true;
+                    if (tn.Name == NodeType.Camera.ToString() && tn.ToolTipText.Substring(tn.ToolTipText.LastIndexOf("——") + 2) == newIPAddress && newIPAddress != beUpdatingCamera.Ipaddr) return true;
                 }
             }
             else
@@ -309,6 +353,7 @@ namespace Decoder
             }
             return false;
         }
+
         private bool CheckCameraInfo()
         {
             if (txtCameraName.Text.Trim() == "" || txtIPAddress.Text.Trim() == "")
@@ -317,7 +362,7 @@ namespace Decoder
                 return false;
             }
 
-            if (!WindowOperation.IPCheck(txtIPAddress.Text))
+            if (!Basic_WindowOperation.IPCheck(txtIPAddress.Text))
             {
                 MessageBox.Show("摄像机IP地址格式不正确，请修正");
                 return false;
@@ -336,6 +381,7 @@ namespace Decoder
             }
             return true;
         }
+
         private void SetNull()
         {
             txtCameraName.Text = null;
@@ -343,6 +389,7 @@ namespace Decoder
             txtPasssword.Text = null;
             txtUsername.Text = null;
         }
+
         /// <summary>
         /// 有的时候，右键并未选中节点，会比较容易出错；
         /// </summary>

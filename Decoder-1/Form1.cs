@@ -70,7 +70,7 @@ namespace Decoder
             Camera selected = clist.First();
             if (selected != null)
             {
-                jsonDeocder = "{\"params\": {\"panes\": [{\"paneId\": 1,\"left\": 0.5,\"right\": 1.0,\"top\": 0.5,\"bottom\": 1.0}],\"streams\": [{\"streamId\": 0,\"url\": \"rtsp://" + selected.ipaddr + "/axis-media/media.amp?camera=1&videocodec=h264&resolution=1920x1080&fps=15\",\"videoCodec\": \"H264\",\"audioCodec\": null,\"username\": \"root\",\"password\": \"pass\"}],\"views\": [{\"viewId\": 0,\"duration\": 0,\"segments\": [{\"stream\": 0,\"pane\": 1}]}]},\"apiVersion\": \"1.0\",\"context\": \"Camera\",\"method\": \"setViewConfiguration\"}";
+                jsonDeocder = "{\"params\": {\"panes\": [{\"paneId\": 1,\"left\": 0.5,\"right\": 1.0,\"top\": 0.5,\"bottom\": 1.0}],\"streams\": [{\"streamId\": 0,\"url\": \"rtsp://" + selected.Ipaddr + "/axis-media/media.amp?camera=1&videocodec=h264&resolution=1920x1080&fps=15\",\"videoCodec\": \"H264\",\"audioCodec\": null,\"username\": \"root\",\"password\": \"pass\"}],\"views\": [{\"viewId\": 0,\"duration\": 0,\"segments\": [{\"stream\": 0,\"pane\": 1}]}]},\"apiVersion\": \"1.0\",\"context\": \"Camera\",\"method\": \"setViewConfiguration\"}";
             }
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(strDecoderURL);
             req.Method = "POST";
@@ -94,7 +94,7 @@ namespace Decoder
 
         private void cbxCameras_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Camera finder = Camera.cList.Find(x => x.name == cbxCameras.SelectedItem.ToString());
+            Camera finder = Camera.cList.Find(x => x.Name == cbxCameras.SelectedItem.ToString());
             if (finder == null)
             {
                 MessageBox.Show("没有发现此摄像机");

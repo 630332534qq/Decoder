@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Decoder
 {
-   public static class WindowOperation
+   public static class Basic_WindowOperation
     {
         public static bool ConfirmDiag(string question, string title)
         {

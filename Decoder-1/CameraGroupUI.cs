@@ -47,7 +47,8 @@ namespace Decoder
                         {
                             //将摄像机增加到分组，此时该摄像机类型为CameraAtGroup
                             toBeAddtoGroup = tn.Clone() as TreeNode;
-                            toBeAddtoGroup.Name = NodeType.CameraAtGroup.ToString(); 
+                            toBeAddtoGroup.Name = NodeType.CameraAtGroup.ToString();
+                            toBeAddtoGroup.ForeColor = Color.Brown;
                             tnGroup.Nodes.Add(toBeAddtoGroup);
                         }
                     }

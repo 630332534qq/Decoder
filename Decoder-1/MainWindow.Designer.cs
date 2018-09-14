@@ -47,7 +47,12 @@
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mST = new System.Windows.Forms.MenuStrip();
             this.TVCamera = new System.Windows.Forms.TreeView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblMouseUp = new System.Windows.Forms.Label();
+            this.lblMouseMove = new System.Windows.Forms.Label();
+            this.lblMouseDown = new System.Windows.Forms.Label();
             this.mST.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // 文件ToolStripMenuItem
@@ -63,19 +68,19 @@
             // 登录ToolStripMenuItem
             // 
             this.登录ToolStripMenuItem.Name = "登录ToolStripMenuItem";
-            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.登录ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.登录ToolStripMenuItem.Text = "登录";
             // 
             // 注销ToolStripMenuItem
             // 
             this.注销ToolStripMenuItem.Name = "注销ToolStripMenuItem";
-            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.注销ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.注销ToolStripMenuItem.Text = "注销";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // 配置ToolStripMenuItem
@@ -93,34 +98,34 @@
             // 用户配置ToolStripMenuItem
             // 
             this.用户配置ToolStripMenuItem.Name = "用户配置ToolStripMenuItem";
-            this.用户配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.用户配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.用户配置ToolStripMenuItem.Text = "用户配置";
             // 
             // 摄像机配置ToolStripMenuItem
             // 
             this.摄像机配置ToolStripMenuItem.Name = "摄像机配置ToolStripMenuItem";
-            this.摄像机配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.摄像机配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.摄像机配置ToolStripMenuItem.Text = "摄像机配置";
             this.摄像机配置ToolStripMenuItem.Click += new System.EventHandler(this.摄像机配置ToolStripMenuItem_Click);
             // 
             // 解码器配置ToolStripMenuItem
             // 
             this.解码器配置ToolStripMenuItem.Name = "解码器配置ToolStripMenuItem";
-            this.解码器配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.解码器配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.解码器配置ToolStripMenuItem.Text = "解码器配置";
             this.解码器配置ToolStripMenuItem.Click += new System.EventHandler(this.解码器配置ToolStripMenuItem_Click);
             // 
             // 许可证配置ToolStripMenuItem
             // 
             this.许可证配置ToolStripMenuItem.Name = "许可证配置ToolStripMenuItem";
-            this.许可证配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.许可证配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.许可证配置ToolStripMenuItem.Text = "许可证配置";
             this.许可证配置ToolStripMenuItem.Click += new System.EventHandler(this.许可证配置ToolStripMenuItem_Click);
             // 
             // 电视墙配置ToolStripMenuItem
             // 
             this.电视墙配置ToolStripMenuItem.Name = "电视墙配置ToolStripMenuItem";
-            this.电视墙配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.电视墙配置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.电视墙配置ToolStripMenuItem.Text = "电视墙配置";
             this.电视墙配置ToolStripMenuItem.Click += new System.EventHandler(this.电视墙配置ToolStripMenuItem_Click);
             // 
@@ -137,19 +142,19 @@
             // 创建新布局ToolStripMenuItem
             // 
             this.创建新布局ToolStripMenuItem.Name = "创建新布局ToolStripMenuItem";
-            this.创建新布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.创建新布局ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.创建新布局ToolStripMenuItem.Text = "保存布局";
             // 
             // 加载布局ToolStripMenuItem
             // 
             this.加载布局ToolStripMenuItem.Name = "加载布局ToolStripMenuItem";
-            this.加载布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.加载布局ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.加载布局ToolStripMenuItem.Text = "加载布局";
             // 
             // 删除布局ToolStripMenuItem
             // 
             this.删除布局ToolStripMenuItem.Name = "删除布局ToolStripMenuItem";
-            this.删除布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除布局ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.删除布局ToolStripMenuItem.Text = "删除布局";
             // 
             // 帮助ToolStripMenuItem
@@ -164,13 +169,13 @@
             // 帮助ToolStripMenuItem1
             // 
             this.帮助ToolStripMenuItem1.Name = "帮助ToolStripMenuItem1";
-            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.帮助ToolStripMenuItem1.Text = "帮助";
             // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
             // mST
@@ -188,18 +193,64 @@
             // 
             // TVCamera
             // 
+            this.TVCamera.AllowDrop = true;
             this.TVCamera.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.TVCamera.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.TVCamera.FullRowSelect = true;
             this.TVCamera.Location = new System.Drawing.Point(12, 88);
             this.TVCamera.Name = "TVCamera";
             this.TVCamera.Size = new System.Drawing.Size(211, 582);
             this.TVCamera.TabIndex = 4;
+            this.TVCamera.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TVCamera_ItemDrag);
+            this.TVCamera.DragDrop += new System.Windows.Forms.DragEventHandler(this.TVCamera_DragDrop);
+            this.TVCamera.DragEnter += new System.Windows.Forms.DragEventHandler(this.TVCamera_DragEnter);
+            this.TVCamera.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TVCamera_MouseDown);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(229, 88);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(550, 509);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false; 
+            // 
+            // lblMouseUp
+            // 
+            this.lblMouseUp.AutoSize = true;
+            this.lblMouseUp.Location = new System.Drawing.Point(259, 604);
+            this.lblMouseUp.Name = "lblMouseUp";
+            this.lblMouseUp.Size = new System.Drawing.Size(23, 12);
+            this.lblMouseUp.TabIndex = 6;
+            this.lblMouseUp.Text = "lbl";
+            // 
+            // lblMouseMove
+            // 
+            this.lblMouseMove.AutoSize = true;
+            this.lblMouseMove.Location = new System.Drawing.Point(259, 629);
+            this.lblMouseMove.Name = "lblMouseMove";
+            this.lblMouseMove.Size = new System.Drawing.Size(23, 12);
+            this.lblMouseMove.TabIndex = 7;
+            this.lblMouseMove.Text = "lbl";
+            // 
+            // lblMouseDown
+            // 
+            this.lblMouseDown.AutoSize = true;
+            this.lblMouseDown.Location = new System.Drawing.Point(259, 658);
+            this.lblMouseDown.Name = "lblMouseDown";
+            this.lblMouseDown.Size = new System.Drawing.Size(23, 12);
+            this.lblMouseDown.TabIndex = 8;
+            this.lblMouseDown.Text = "lbl";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 682);
+            this.Controls.Add(this.lblMouseDown);
+            this.Controls.Add(this.lblMouseMove);
+            this.Controls.Add(this.lblMouseUp);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.TVCamera);
             this.Controls.Add(this.mST);
             this.MainMenuStrip = this.mST;
@@ -207,6 +258,7 @@
             this.Text = "电视墙管理程序";
             this.mST.ResumeLayout(false);
             this.mST.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,5 +284,9 @@
         private System.Windows.Forms.MenuStrip mST;
         private System.Windows.Forms.TreeView TVCamera;
         private System.Windows.Forms.ToolStripMenuItem 电视墙配置ToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblMouseUp;
+        private System.Windows.Forms.Label lblMouseMove;
+        private System.Windows.Forms.Label lblMouseDown;
     }
 }
