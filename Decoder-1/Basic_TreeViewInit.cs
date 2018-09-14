@@ -48,10 +48,10 @@ namespace Decoder
         {
             TreeNode tn = new TreeNode();
             tn.ForeColor = System.Drawing.Color.Blue;
-            tn.Text = cg.groupName;
+            tn.Text = cg.GroupName;
             tn.Name = NodeType.Group.ToString();
             tn.Tag = cg;
-            tn.ToolTipText = cg.groupName;
+            tn.ToolTipText = cg.GroupName;
             root.Nodes.Add(tn);
             log.Info("初始化-加载摄像机分组节点:" + cg.ToString());
             return tn;

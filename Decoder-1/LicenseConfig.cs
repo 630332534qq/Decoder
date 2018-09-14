@@ -22,7 +22,7 @@ namespace Decoder
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            DecoderOperation.GetSerialNos();
+            Basic_DecoderOperation.GetSerialNos();
         } 
         private void btnImport_Click(object sender, EventArgs e)
         {

@@ -112,7 +112,7 @@ namespace Decoder
         {
             TreeNode tn = new TreeNode();
             tn.ForeColor = Color.Blue;
-            tn.Text = cg.groupName;
+            tn.Text = cg.GroupName;
             tn.ContextMenuStrip = GroupNodeStrip;
             tn.Name = NodeType.Group.ToString();  
             tn.Tag = cg;
@@ -123,8 +123,8 @@ namespace Decoder
         private void AddGroupNode_Click(object sender, EventArgs e)
         {
             CameraGroups cg = new CameraGroups();
-            cg.groupID = Guid.NewGuid().ToString();
-            cg.groupName = "新建分组";
+            cg.GroupID = Guid.NewGuid().ToString();
+            cg.GroupName = "新建分组";
             AddOneGroupNode(cg);
             ReArrangeTree();
         }
@@ -153,7 +153,7 @@ namespace Decoder
                 return;
             }
             CameraGroups cg = tn.Tag as CameraGroups;
-            cg.groupName = str;
+            cg.GroupName = str;
             tn.Text = str;
             log.Info("更改分组名称成功,变更为" + str);
         }

@@ -64,8 +64,8 @@ namespace Decoder
         private string DecodeVideo(Decoder d, List<Camera> clist)
         {
             string result = "";
-            NetworkCredential networkCredential = new NetworkCredential(d.username, d.password);
-            string strDecoderURL = "http://" + d.ipaddr + "/axis-cgi/decoder.cgi";
+            NetworkCredential networkCredential = new NetworkCredential(d.Username, d.Password);
+            string strDecoderURL = "http://" + d.Ipaddr + "/axis-cgi/decoder.cgi";
             string jsonDeocder = "{\"params\": {\"panes\": [{\"paneId\": 0,\"left\": 1.0,\"right\": 1.0,\"top\": 0.0,\"bottom\": 1.0}],\"streams\": [{\"streamId\": 0,\"url\": \"rtsp://192.168.0.88/axis-media/media.amp?camera=1&videocodec=h264&resolution=640x360&fps=5\",\"videoCodec\": \"H264\",\"audioCodec\": null,\"username\": \"root\",\"password\": \"pass\"}],\"views\": [{\"viewId\": 0,\"duration\": 0,\"segments\": [{\"stream\": 0,\"pane\": 0}]}]},\"apiVersion\": \"1.0\",\"context\": \"Camera\",\"method\": \"setViewConfiguration\"}";
             Camera selected = clist.First();
             if (selected != null)

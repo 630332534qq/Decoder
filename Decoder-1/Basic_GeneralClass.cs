@@ -23,56 +23,139 @@ namespace Decoder
 
     public class panes
     {
-        public int paneId;
-        public float left = 0.0f;
-        public float right = 1.0f;
-        public float top = 0.0f;
-        public float bottom = 1.0f;
+        private int paneId;
+        private float left = 0.0f;
+        private float right = 1.0f;
+        private float top = 0.0f;
+        private float bottom = 1.0f;
 
+        public int PaneId
+        {
+            get { return paneId; }
+            set { paneId = value; }
+        }
+        public float Left
+        {
+            get { return left; }
+            set { left = value; }
+        }
+        public float Right
+        {
+            get { return right; }
+            set { right = value; }
+        }
+        public float Top
+        {
+            get { return top; }
+            set { top = value; }
+        }
+        public float Bottom
+        {
+            get { return bottom; }
+            set { bottom = value; }
+        }
         public panes(int id, float l, float r, float t, float b)
         {
-            paneId = id;
-            left = l;
-            right = r;
-            top = t;
-            bottom = b;
+            PaneId = id;
+            Left = l;
+            Right = r;
+            Top = t;
+            Bottom = b;
         }
     }
 
     public class segments
     {
-        public int stream;
-        public int pane;
+        private int stream;
+        private int pane;
+
+        public int Stream
+        {
+            get { return stream; }
+            set { stream = value; }
+        }
+        public int Pane
+        {
+            get { return pane; }
+            set { pane = value; }
+        }
 
         public segments(panes p, Camera c)
         {
-            stream = BasicOperation.GetStreamID(c.Ipaddr);
-            pane = p.paneId;
+            Stream = BasicOperation.GetStreamID(c.Ipaddr);
+            Pane = p.PaneId;
         }
     }
 
     public class views
     {
-        public int viewId;
-        public int duration = 0;
+        private int viewId;
+        private int duration = 0;
         public List<segments> segments = new List<segments>();
+
+        public int ViewId
+        {
+            get { return viewId; }
+            set { viewId = value; }
+        }
+        public int Duration
+        {
+            get { return duration; }
+            set { duration = value; }
+        }
 
         public views(int dur, segments s)
         {
-            viewId = GetID.ID;
-            duration = dur;
+            ViewId = GetID.ID;
+            Duration = dur;
             segments.Add(s);
         }
     }
 
     public class Decoder
     {
-        public string ipaddr;
-        public string name;
-        public string username;
-        public string password;
-        public string serialNo;
-        public string configuration;
+        private string ipaddr;
+        private string decoderName;
+        private string username;
+        private string password;
+        private string serialNo;
+        private string configuration;
+
+        public string Ipaddr
+        {
+            get { return ipaddr; }
+            set { ipaddr = value; }
+        }
+        public string DecoderName
+        {
+            get { return decoderName; }
+            set { decoderName = value; }
+        }
+        public string Username
+        {
+            get { return username; }
+            set { username = value; }
+        }
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+        public string SerialNo
+        {
+            get { return serialNo; }
+            set { serialNo = value; }
+        }
+        public string Configuration
+        {
+            get { return configuration; }
+            set { configuration = value; }
+        }
+
+        public override string ToString()
+        {
+            return PrintInfo.Print(this);
+        }
     }
 
     public enum Resolution
@@ -132,8 +215,10 @@ namespace Decoder
     {
         static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        [JsonProperty]
+        #region 成员属性
+        [JsonIgnore]
         private Guid cameraID = Guid.NewGuid();
+        [JsonProperty]
         public Guid CameraID
         {
             get { return cameraID; }
@@ -142,8 +227,9 @@ namespace Decoder
         /// <summary>
         /// Camera's name
         /// </summary> 
-        [JsonProperty]
+        [JsonIgnore]
         private string name;
+        [JsonProperty]
         public string Name
         {
             get { return name; }
@@ -152,16 +238,17 @@ namespace Decoder
         /// <summary>
         /// Camera's ipAddress
         /// </summary> 
-        [JsonProperty]
-        private string ipaddr;
         [JsonIgnore]
+        private string ipaddr;
+        [JsonProperty]
         public string Ipaddr
         {
             get { return ipaddr; }
             set { ipaddr = value; }
         }
-        [JsonProperty]
+        [JsonIgnore]
         private int streamId;
+        [JsonProperty]
         public int StreamId
         {
             get
@@ -171,42 +258,55 @@ namespace Decoder
             }
             set { streamId = value; }
         }
-        [JsonProperty]
+        [JsonIgnore]
         private string url;
+        [JsonProperty]
         public string Url
         {
             get { return url; }
             set { url = value; }
         }
-        [JsonProperty]
+        [JsonIgnore]
         private string videoCodec = global::Decoder.VideoCodec.H264.ToString();
+        [JsonProperty]
         public string VideoCodec
         {
             get { return videoCodec; }
             set { videoCodec = value; }
         }
+        [JsonIgnore]
         private string audioCodec = "";
+        [JsonProperty]
         public string AudioCodec
         {
             get { return audioCodec; }
             set { audioCodec = value; }
         }
-        [JsonProperty]
+        [JsonIgnore]
         private string username = "root";
+        [JsonProperty]
         public string Username
         {
             get { return username; }
             set { username = value; }
         }
-        [JsonProperty]
+        [JsonIgnore]
         private string password = "pass";
+        [JsonProperty]
         public string Password
         {
             get { return password; }
             set { password = value; }
         }
-
-        public string fps = "15";
+        [JsonIgnore]
+        private string fps = "15";
+        [JsonProperty]
+        public string Fps
+        {
+            get { return fps; }
+            set { fps = value; }
+        }
+        #endregion
 
         public Camera(string cname, string cipaddr, string cusername = "root", string cpassword = "pass", string crtsp = "", string cfps = "15", Resolution cres = Resolution.LOW)
         {
@@ -284,14 +384,14 @@ namespace Decoder
                     url = url + "704x576";
                     break;
             }
-            url = url + "&fps=" + fps;
+            url = url + "&fps=" + Fps;
             return url;
             //  return "{\"streamId\":" + BasicOperation.GetStreamID(this.ipaddr) + ",\"url\":\"" + url + "\",\"videoCodec\":\"" + videoCodec + "\",\"audioCodec\":" + "\"\"" + ",\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
         }
 
         public override string ToString()
         {
-            return PrintInfo.Print<Camera>(this);
+            return PrintInfo.Print(this);
             //return "摄像机名称" + this.name + " 摄像机IP "+this.Ipaddr+"streamID:"+streamId+"url:"+url+"CameraID"+cameraID+"username"+username+"password:"+password;
         }
     }
@@ -299,11 +399,24 @@ namespace Decoder
     public class CameraGroups
     {
         public List<Camera> list = new List<Camera>();
-        public string groupName = "";
-        public string groupID = "";
+        private string groupName = "";
+        private string groupID = "";
+
+        public string GroupName
+        {
+            get { return groupName; }
+            set { groupName = value; }
+        }
+
+        public string GroupID
+        {
+            get { return groupID; }
+            set { groupID = value; }
+        }
+
         public override string ToString()
         {
-            return "分组名称 " + groupName + "分组ID:" + groupID;
+            return PrintInfo.Print(this);
         }
     }
 
@@ -322,7 +435,7 @@ namespace Decoder
             StringBuilder sb = new StringBuilder();
             sb.Append("该实例所述对象:" + t.GetType().ToString() + "\n");
             int i = 0;
-            foreach (System.Reflection.PropertyInfo p in t.GetType().GetProperties())
+            foreach (PropertyInfo p in t.GetType().GetProperties())
             {
                 sb.Append("第（" + i++ + "）项属性 :" + p.Name + ",值为:" + p.GetValue(t, null) + "\n");
             }

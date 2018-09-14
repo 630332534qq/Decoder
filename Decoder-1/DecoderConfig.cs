@@ -26,11 +26,11 @@ namespace Decoder
                 DataGridViewRow r = new DataGridViewRow();
                 r.CreateCells(decoderView);
                 r.Cells[0].Value = "";
-                r.Cells[1].Value = d.name;
-                r.Cells[2].Value = d.ipaddr;
-                r.Cells[3].Value = d.username;
-                r.Cells[4].Value = d.password;
-                r.Cells[5].Value = d.serialNo;
+                r.Cells[1].Value = d.DecoderName;
+                r.Cells[2].Value = d.Ipaddr;
+                r.Cells[3].Value = d.Username;
+                r.Cells[4].Value = d.Password;
+                r.Cells[5].Value = d.SerialNo;
                 decoderView.Rows.Add(r);
             }
             decoderView.Refresh();
@@ -72,11 +72,11 @@ namespace Decoder
             {
                 if (dr.IsNewRow) break;
                 Decoder d = new Decoder();
-                d.name = dr.Cells[1].Value.ToString();
-                d.ipaddr = dr.Cells[2].Value.ToString();
-                d.username = dr.Cells[3].Value.ToString();
-                d.password = dr.Cells[4].Value.ToString();
-                d.serialNo = dr.Cells[5].Value.ToString();
+                d.DecoderName = dr.Cells[1].Value.ToString();
+                d.Ipaddr = dr.Cells[2].Value.ToString();
+                d.Username = dr.Cells[3].Value.ToString();
+                d.Password = dr.Cells[4].Value.ToString();
+                d.SerialNo = dr.Cells[5].Value.ToString();
                 list.Add(d);
             }
             FileOperation<Decoder>.WriteFile(list);

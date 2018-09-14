@@ -9,7 +9,7 @@ using log4net;
 
 namespace Decoder
 {
-    public class DecoderOperation
+    public class Basic_DecoderOperation
     {
         static ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -18,23 +18,23 @@ namespace Decoder
             bool flag = true;
             try
             {
-                string paramList = "http://" + d.ipaddr + "/axis-cgi/admin/param.cgi?action=list&group=root.Properties.System.SerialNumber";
-                NetworkCredential networkCredential = new NetworkCredential(d.username, d.password);
+                string paramList = "http://" + d.Ipaddr + "/axis-cgi/admin/param.cgi?action=list&group=root.Properties.System.SerialNumber";
+                NetworkCredential networkCredential = new NetworkCredential(d.Username, d.Password);
                 WebRequest request = WebRequest.Create(paramList);
                 request.Credentials = networkCredential;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream streamResponse = response.GetResponseStream();
                 StreamReader streamRead = new StreamReader(streamResponse); 
                string allSerial=  streamRead.ReadLine();
-                d.serialNo = allSerial.Substring(allSerial.IndexOf("=") + 1);
+                d.SerialNo = allSerial.Substring(allSerial.IndexOf("=") + 1);
                 streamRead.Close();
                 streamResponse.Close();
                 response.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("读取解码器序列号出错:" + d.name +":"+d.ipaddr+"___"+ ex.Message.ToString(), "\n");
-                log.Error("读取解码器序列号出错:" + d.name + ":" + d.ipaddr + "___" + ex.Message.ToString()+"\n");
+                MessageBox.Show("读取解码器序列号出错:" + d.DecoderName +":"+d.Ipaddr+"___"+ ex.Message.ToString(), "\n");
+                log.Error("读取解码器序列号出错:" + d.DecoderName + ":" + d.Ipaddr + "___" + ex.Message.ToString()+"\n");
                 flag = false;
             }
             return flag;
@@ -47,7 +47,7 @@ namespace Decoder
             foreach (Decoder d in dlist)
             {
                 GetSerialNoFromDecoder(d);
-                slist.Add(d.serialNo);
+                slist.Add(d.SerialNo);
             }
             FileOperation<Decoder>.WriteFile(dlist);
             slist.Sort();

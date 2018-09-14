@@ -111,7 +111,7 @@
     <Compile Include="DecoderConfig.Designer.cs">
       <DependentUpon>DecoderConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="DecoderOperation.cs" />
+    <Compile Include="Basic_DecoderOperation.cs" />
     <Compile Include="DVWConfig.cs">
       <SubType>Form</SubType>
     </Compile>
