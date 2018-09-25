@@ -48,9 +48,6 @@
             this.mST = new System.Windows.Forms.MenuStrip();
             this.TVCamera = new System.Windows.Forms.TreeView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblMouseUp = new System.Windows.Forms.Label();
-            this.lblMouseMove = new System.Windows.Forms.Label();
-            this.lblMouseDown = new System.Windows.Forms.Label();
             this.mST.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -211,45 +208,15 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(229, 88);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(550, 509);
+            this.pictureBox1.Size = new System.Drawing.Size(550, 582);
             this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false; 
-            // 
-            // lblMouseUp
-            // 
-            this.lblMouseUp.AutoSize = true;
-            this.lblMouseUp.Location = new System.Drawing.Point(259, 604);
-            this.lblMouseUp.Name = "lblMouseUp";
-            this.lblMouseUp.Size = new System.Drawing.Size(23, 12);
-            this.lblMouseUp.TabIndex = 6;
-            this.lblMouseUp.Text = "lbl";
-            // 
-            // lblMouseMove
-            // 
-            this.lblMouseMove.AutoSize = true;
-            this.lblMouseMove.Location = new System.Drawing.Point(259, 629);
-            this.lblMouseMove.Name = "lblMouseMove";
-            this.lblMouseMove.Size = new System.Drawing.Size(23, 12);
-            this.lblMouseMove.TabIndex = 7;
-            this.lblMouseMove.Text = "lbl";
-            // 
-            // lblMouseDown
-            // 
-            this.lblMouseDown.AutoSize = true;
-            this.lblMouseDown.Location = new System.Drawing.Point(259, 658);
-            this.lblMouseDown.Name = "lblMouseDown";
-            this.lblMouseDown.Size = new System.Drawing.Size(23, 12);
-            this.lblMouseDown.TabIndex = 8;
-            this.lblMouseDown.Text = "lbl";
+            this.pictureBox1.TabStop = false;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 682);
-            this.Controls.Add(this.lblMouseDown);
-            this.Controls.Add(this.lblMouseMove);
-            this.Controls.Add(this.lblMouseUp);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.TVCamera);
             this.Controls.Add(this.mST);
@@ -285,8 +252,5 @@
         private System.Windows.Forms.TreeView TVCamera;
         private System.Windows.Forms.ToolStripMenuItem 电视墙配置ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lblMouseUp;
-        private System.Windows.Forms.Label lblMouseMove;
-        private System.Windows.Forms.Label lblMouseDown;
     }
 }

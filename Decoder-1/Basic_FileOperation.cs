@@ -13,11 +13,11 @@ namespace Decoder
     public static class FileOperation<T>
     {
         static ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        static string dataPath = System.IO.Directory.GetCurrentDirectory()+"//data//";
+        static string dataPath = System.IO.Directory.GetCurrentDirectory() + "//data//";
         public static bool WriteFile(List<T> list, string fileNameOption = "")
         {
             bool success = true;
-            string filename = dataPath+ typeof(T).ToString().Substring(typeof(T).ToString().IndexOf(".") + 1) + ".json";
+            string filename = dataPath + typeof(T).ToString().Substring(typeof(T).ToString().IndexOf(".") + 1) + ".json";
             if (fileNameOption != "")
             {
                 filename = fileNameOption;
@@ -55,7 +55,8 @@ namespace Decoder
                     //serializer.Converters.Add(new JavaScriptDateTimeConverter());
                     serializer.NullValueHandling = NullValueHandling.Include;
                     JsonReader reader = new JsonTextReader(sr);
-                    tlist.AddRange(serializer.Deserialize<List<T>>(reader));
+                    //tlist.AddRange(serializer.Deserialize<List<T>>(reader));
+                    tlist.AddRange(JsonConvert.DeserializeObject<List<T>>(sr.ReadToEnd()));//优化加载速度
                 }
                 catch (Exception ex)
                 {
@@ -76,7 +77,7 @@ namespace Decoder
             using (StreamReader sr = new StreamReader(licensePath + "License.lic2", false))
             {
                 return sr.ReadToEnd();
-            }              
+            }
         }
 
         public static string ReadRegFile()
@@ -84,7 +85,7 @@ namespace Decoder
             List<string> tlist = new List<string>();
             try
             {
-                using (StreamReader sr = new StreamReader(licensePath+"DecoderInfo.ini"))
+                using (StreamReader sr = new StreamReader(licensePath + "DecoderInfo.ini"))
                 {
                     try
                     {

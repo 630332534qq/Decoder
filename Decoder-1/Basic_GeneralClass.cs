@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using log4net;
 using System.Reflection;
+using System.Drawing;
 
 namespace Decoder
 {
@@ -324,6 +325,7 @@ namespace Decoder
             return JsonConvert.SerializeObject(this);
         }
 
+        #region basicData
         public static List<Camera> cList = new List<Camera>
             {
                 //new Camera("M3045-V","192.168.0.109"),
@@ -364,7 +366,7 @@ namespace Decoder
                 new Camera("P1161365-MKII","192.168.0.116")
             };
 
-
+        #endregion
 
         public string GetRTSPUrlFromCameraParameter(Resolution res)
         {
@@ -440,6 +442,99 @@ namespace Decoder
                 sb.Append("第（" + i++ + "）项属性 :" + p.Name + ",值为:" + p.GetValue(t, null) + "\n");
             }
             return sb.ToString();
+        }
+    }
+
+    public class RectList
+    {
+        int xsteps = 0;
+        int ysteps = 0;
+        int n = 0;
+
+        private List<RectItem> rlist = new List<RectItem>();
+        [JsonProperty]
+        public int Xsteps
+        {
+            get { return xsteps; }
+            set { xsteps = value; }
+        }
+        [JsonProperty]
+        public int Ysteps
+        {
+            get { return ysteps; }
+
+            set { ysteps = value; }
+        }
+        [JsonProperty]
+        public int N
+        {
+            get { return n; }
+            set { n = value; }
+        }
+        [JsonProperty]
+        public List<RectItem> Rlist
+        {
+            get { return rlist; }
+            set { rlist = value; }
+        }
+
+        public List<Rectangle> GetRectangleList()
+        {
+            List<Rectangle> rlistRec = new List<Rectangle>();
+            foreach (RectItem r in rlist)
+            {
+                Rectangle rt = new Rectangle(r.X, r.Y, r.Height, r.Width);
+                rlistRec.Add(rt);
+            }
+            return rlistRec;
+        }
+
+        public void SaveRectangleList(List<Rectangle> list)
+        {
+            foreach (Rectangle r in list)
+            {
+                Rlist.Add(new RectItem(r.X, r.Y, r.Height, r.Width));
+            }
+        }
+    }
+
+    public class RectItem
+    {
+        int x = 0;
+        int y = 0;
+        int width = 0;
+        int height = 0;
+        [JsonProperty]
+        public int X
+        {
+            get { return x; }
+            set { x = value; }
+        }
+        [JsonProperty]
+        public int Y
+        {
+            get { return y; }
+            set { y = value; }
+        }
+        [JsonProperty]
+        public int Width
+        {
+            get { return width; }
+            set { width = value; }
+        }
+        [JsonProperty]
+        public int Height
+        {
+            get { return height; }
+            set { height = value; }
+        }
+
+        public RectItem(int x, int y, int height, int width)
+        {
+            X = x;
+            Y = y;
+            Height = height;
+            Width = width;
         }
     }
 }

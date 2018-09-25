@@ -17,15 +17,15 @@ namespace Decoder
         bool bDrawStart = false;
         Point pointStart = Point.Empty;
         Point pointContinue = Point.Empty;
-        List<Rectangle> rlist = new List<Rectangle>();
-        int xstep = 0;
-        int ystep = 0;
+        List<Rectangle> Rlist = new List<Rectangle>();
+        int Xstep = 0;
+        int Ystep = 0;
 
         public DVWConfig()
         {
             InitializeComponent();
-            xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
-            ystep = pictureBox1.Height / N;
+            Xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            Ystep = pictureBox1.Height / N;
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -48,10 +48,10 @@ namespace Decoder
                 g.DrawRectangle(penInside, pointStart.X, pointStart.Y, pointContinue.X - pointStart.X, pointContinue.Y - pointStart.Y);
             }
             //实时的画之前已经画好的矩形  
-            foreach (Rectangle rec in rlist)
+            foreach (Rectangle rec in Rlist)
             {
-                g.FillRectangle(penInside.Brush, rec.X * xstep + 1, rec.Y * ystep + 1, rec.Width * xstep - 1, rec.Height * ystep - 1);
-                g.DrawRectangle(penOutside, rec.X * xstep, rec.Y * ystep, rec.Width * xstep, rec.Height * ystep);
+                g.FillRectangle(penInside.Brush, rec.X * Xstep + 1, rec.Y * Ystep + 1, rec.Width * Xstep - 1, rec.Height * Ystep - 1);
+                g.DrawRectangle(penOutside, rec.X * Xstep, rec.Y * Ystep, rec.Width * Xstep, rec.Height * Ystep);
             }
             penInside.Dispose();
             ///渲染到picturebox上；
@@ -64,19 +64,19 @@ namespace Decoder
         {
             Pen pen0 = new Pen(Color.LightBlue, 1);  //设置背景表格画笔颜色和大小
             pen0.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
-            ystep = pictureBox1.Height / N;
+            Xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            Ystep = pictureBox1.Height / N;
             //横向
             for (int x = 0; x <= pictureBox1.Width;)
             {
                 g.DrawLine(pen0, x, 0, x, pictureBox1.Height);
-                x += xstep;
+                x += Xstep;
             }
             //纵向
             for (int y = 0; y <= pictureBox1.Height;)
             {
                 g.DrawLine(pen0, 0, y, pictureBox1.Width, y);
-                y += ystep;
+                y += Ystep;
             }
         }
 
@@ -121,8 +121,8 @@ namespace Decoder
         {
             if (bDrawStart)
             {
-                Rectangle rec = new Rectangle((int)Math.Floor(pointStart.X / (float)xstep), (int)Math.Floor(pointStart.Y / (float)ystep), (int)Math.Ceiling((pointContinue.X - pointStart.X) / (float)xstep), (int)Math.Ceiling((pointContinue.Y - pointStart.Y) / (float)ystep));
-                foreach (Rectangle r in rlist)
+                Rectangle rec = new Rectangle((int)Math.Floor(pointStart.X / (float)Xstep), (int)Math.Floor(pointStart.Y / (float)Ystep), (int)Math.Ceiling((pointContinue.X - pointStart.X) / (float)Xstep), (int)Math.Ceiling((pointContinue.Y - pointStart.Y) / (float)Ystep));
+                foreach (Rectangle r in Rlist)
                 {
                     if (rec.IntersectsWith(r))
                     {
@@ -131,7 +131,7 @@ namespace Decoder
                         return;
                     }
                 }
-                rlist.Add(rec);
+                Rlist.Add(rec);
             }
             InitialMouseForNextDrawing();
         }
@@ -156,16 +156,34 @@ namespace Decoder
             if (dr == DialogResult.OK)
             {
                 Rectangle recDelete = new Rectangle(0, 0, 0, 0);
-                foreach (Rectangle rec in rlist)
+                foreach (Rectangle rec in Rlist)
                 {
-                    if (selectedRec.X >= rec.X * xstep && selectedRec.Y >= rec.Y * ystep && selectedRec.X <= (rec.X + rec.Width) * xstep && selectedRec.Y <= (rec.Y + rec.Height) * ystep)
+                    if (selectedRec.X >= rec.X * Xstep && selectedRec.Y >= rec.Y * Ystep && selectedRec.X <= (rec.X + rec.Width) * Xstep && selectedRec.Y <= (rec.Y + rec.Height) * Ystep)
                     {
                         recDelete = rec;
                     }
                 }
-                rlist.Remove(recDelete);
+                Rlist.Remove(recDelete);
                 Refresh();
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            RectList rli = new RectList();
+            rli.N = N;
+            rli.Xsteps = Xstep;
+            rli.Ysteps = Ystep;
+            rli.SaveRectangleList(Rlist);
+            List<RectList> rliList = new List<RectList>();
+            rliList.Add(rli);
+            FileOperation<RectList>.WriteFile(rliList);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Rlist.Clear(); 
+            pictureBox1.Refresh();
         }
     }
 }
