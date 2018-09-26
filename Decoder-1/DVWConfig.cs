@@ -11,21 +11,22 @@ using MetroFramework.Forms;
 
 namespace Decoder
 {
-    public partial class DVWConfig: MetroForm
+    public partial class DVWConfig : MetroForm
     {
-        public const int N = 20;
+        int N = 20;
         bool bDrawStart = false;
         Point pointStart = Point.Empty;
         Point pointContinue = Point.Empty;
-        List<Rectangle> Rlist = new List<Rectangle>();
-        int Xstep = 0;
-        int Ystep = 0;
+        List<Rectangle> rlist = new List<Rectangle>();
+        int xstep = 0;
+        int ystep = 0;
 
         public DVWConfig()
         {
             InitializeComponent();
-            Xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
-            Ystep = pictureBox1.Height / N;
+            xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            ystep = pictureBox1.Height / N;
+            LoadVideoWall();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -48,10 +49,10 @@ namespace Decoder
                 g.DrawRectangle(penInside, pointStart.X, pointStart.Y, pointContinue.X - pointStart.X, pointContinue.Y - pointStart.Y);
             }
             //实时的画之前已经画好的矩形  
-            foreach (Rectangle rec in Rlist)
+            foreach (Rectangle rec in rlist)
             {
-                g.FillRectangle(penInside.Brush, rec.X * Xstep + 1, rec.Y * Ystep + 1, rec.Width * Xstep - 1, rec.Height * Ystep - 1);
-                g.DrawRectangle(penOutside, rec.X * Xstep, rec.Y * Ystep, rec.Width * Xstep, rec.Height * Ystep);
+                g.FillRectangle(penInside.Brush, rec.X * xstep + 1, rec.Y * ystep + 1, rec.Width * xstep - 1, rec.Height * ystep - 1);
+                g.DrawRectangle(penOutside, rec.X * xstep, rec.Y * ystep, rec.Width * xstep, rec.Height * ystep);
             }
             penInside.Dispose();
             ///渲染到picturebox上；
@@ -64,19 +65,19 @@ namespace Decoder
         {
             Pen pen0 = new Pen(Color.LightBlue, 1);  //设置背景表格画笔颜色和大小
             pen0.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            Xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
-            Ystep = pictureBox1.Height / N;
+            xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            ystep = pictureBox1.Height / N;
             //横向
             for (int x = 0; x <= pictureBox1.Width;)
             {
                 g.DrawLine(pen0, x, 0, x, pictureBox1.Height);
-                x += Xstep;
+                x += xstep;
             }
             //纵向
             for (int y = 0; y <= pictureBox1.Height;)
             {
                 g.DrawLine(pen0, 0, y, pictureBox1.Width, y);
-                y += Ystep;
+                y += ystep;
             }
         }
 
@@ -121,8 +122,8 @@ namespace Decoder
         {
             if (bDrawStart)
             {
-                Rectangle rec = new Rectangle((int)Math.Floor(pointStart.X / (float)Xstep), (int)Math.Floor(pointStart.Y / (float)Ystep), (int)Math.Ceiling((pointContinue.X - pointStart.X) / (float)Xstep), (int)Math.Ceiling((pointContinue.Y - pointStart.Y) / (float)Ystep));
-                foreach (Rectangle r in Rlist)
+                Rectangle rec = new Rectangle((int)Math.Floor(pointStart.X / (float)xstep), (int)Math.Floor(pointStart.Y / (float)ystep), (int)Math.Ceiling((pointContinue.X - pointStart.X) / (float)xstep), (int)Math.Ceiling((pointContinue.Y - pointStart.Y) / (float)ystep));
+                foreach (Rectangle r in rlist)
                 {
                     if (rec.IntersectsWith(r))
                     {
@@ -131,7 +132,7 @@ namespace Decoder
                         return;
                     }
                 }
-                Rlist.Add(rec);
+                rlist.Add(rec);
             }
             InitialMouseForNextDrawing();
         }
@@ -147,7 +148,7 @@ namespace Decoder
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
             Refresh();
-        } 
+        }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -156,33 +157,43 @@ namespace Decoder
             if (dr == DialogResult.OK)
             {
                 Rectangle recDelete = new Rectangle(0, 0, 0, 0);
-                foreach (Rectangle rec in Rlist)
+                foreach (Rectangle rec in rlist)
                 {
-                    if (selectedRec.X >= rec.X * Xstep && selectedRec.Y >= rec.Y * Ystep && selectedRec.X <= (rec.X + rec.Width) * Xstep && selectedRec.Y <= (rec.Y + rec.Height) * Ystep)
+                    if (selectedRec.X >= rec.X * xstep && selectedRec.Y >= rec.Y * ystep && selectedRec.X <= (rec.X + rec.Width) * xstep && selectedRec.Y <= (rec.Y + rec.Height) * ystep)
                     {
                         recDelete = rec;
                     }
                 }
-                Rlist.Remove(recDelete);
+                rlist.Remove(recDelete);
                 Refresh();
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private  void btnSave_Click(object sender, EventArgs e)
         {
-            RectList rli = new RectList();
-            rli.N = N;
-            rli.Xsteps = Xstep;
-            rli.Ysteps = Ystep;
-            rli.SaveRectangleList(Rlist);
+            RectList rli = new RectList(xstep, ystep, N);
+            rli.SaveRectangleList(rlist);
             List<RectList> rliList = new List<RectList>();
             rliList.Add(rli);
             FileOperation<RectList>.WriteFile(rliList);
         }
 
+        private  void LoadVideoWall()
+        {
+            RectList rli = FileOperation<RectList>.ReadFile().First();
+            if (rli != null && rli.Rlist.Count != 0)
+            {
+                xstep = rli.Xsteps;
+                ystep = rli.Ysteps;
+                N = rli.N;
+                rlist = rli.GetRectangleList();
+            }
+
+        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
-            Rlist.Clear(); 
+            rlist.Clear();
             pictureBox1.Refresh();
         }
     }

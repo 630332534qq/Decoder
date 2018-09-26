@@ -211,7 +211,6 @@ namespace Decoder
         }
     }
 
-
     public class Camera
     {
         static ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -478,12 +477,22 @@ namespace Decoder
             set { rlist = value; }
         }
 
+        public RectList()
+        { }
+
+        public RectList(int xstep, int ystep, int n)
+        {
+            Xsteps = xstep;
+            Ysteps = ystep;
+            N = n;
+        }
+
         public List<Rectangle> GetRectangleList()
         {
             List<Rectangle> rlistRec = new List<Rectangle>();
             foreach (RectItem r in rlist)
             {
-                Rectangle rt = new Rectangle(r.X, r.Y, r.Height, r.Width);
+                Rectangle rt = new Rectangle(r.X, r.Y, r.Width, r.Height);
                 rlistRec.Add(rt);
             }
             return rlistRec;
@@ -493,7 +502,7 @@ namespace Decoder
         {
             foreach (Rectangle r in list)
             {
-                Rlist.Add(new RectItem(r.X, r.Y, r.Height, r.Width));
+                Rlist.Add(new RectItem(r.X, r.Y, r.Width, r.Height));
             }
         }
     }
@@ -529,7 +538,7 @@ namespace Decoder
             set { height = value; }
         }
 
-        public RectItem(int x, int y, int height, int width)
+        public RectItem(int x, int y, int width, int height )
         {
             X = x;
             Y = y;

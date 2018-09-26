@@ -65,7 +65,6 @@ namespace Decoder
             tn.ContextMenuStrip = FNodeStrip;
             tvCameras.Nodes.Add(tn);
             log.Info("初始化-创建摄像机分组根节点");
-
         }
 
         private void AddAllGroupNodes()
@@ -91,7 +90,7 @@ namespace Decoder
             tnnew.Name = NodeType.CameraAtGroup.ToString();
             tnnew.ContextMenuStrip = CameraNodeStrip;
             tn.Nodes.Add(tnnew);
-            log.Info("初始化-加载一个摄像机," + c.ToString()); 
+            // log.Info("初始化-加载一个摄像机," + c.ToString()); 
         }
 
         private void AddAllCamerasNodes()
@@ -99,7 +98,7 @@ namespace Decoder
             List<Camera> cList = FileOperation<Camera>.ReadFile();
             foreach (Camera c in cList)
             {
-              AddOneCameraNode(c);
+                AddOneCameraNode(c);
             }
             log.Info("初始化-摄像机加载完毕");
         }
@@ -114,7 +113,7 @@ namespace Decoder
             tn.ForeColor = Color.Blue;
             tn.Text = cg.GroupName;
             tn.ContextMenuStrip = GroupNodeStrip;
-            tn.Name = NodeType.Group.ToString();  
+            tn.Name = NodeType.Group.ToString();
             tn.Tag = cg;
             tvCameras.Nodes[0].Nodes.Add(tn);
             log.Info("新增分组" + cg.ToString());
@@ -186,7 +185,7 @@ namespace Decoder
             tn.Name = NodeType.Camera.ToString();
             tn.ContextMenuStrip = CameraNodeStrip;
             tvCameras.Nodes[0].Nodes.Add(tn);
-            log.Info("增加一个摄像机," + c.ToString());
+            //log.Info("增加一个摄像机," + c.ToString());
             return true;
         }
 

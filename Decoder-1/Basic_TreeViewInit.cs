@@ -16,6 +16,7 @@ namespace Decoder
             AddFirstNode(tv);
             AddAllGroupNodes();
             AddAllCamerasNodes();
+            root.ExpandAll();
             return root;
         }
 
@@ -65,7 +66,7 @@ namespace Decoder
             tnnew.Tag = c;
             tnnew.Name = NodeType.CameraAtGroup.ToString();
             tn.Nodes.Add(tnnew);
-            log.Info("初始化-加载分组下的一个摄像机," + c.ToString());
+           // log.Info("初始化-加载分组下的一个摄像机," + c.ToString());
         }
 
         public static void AddAllCamerasNodes()
@@ -86,7 +87,7 @@ namespace Decoder
             tn.Tag = c;
             tn.Name = NodeType.Camera.ToString();
             root.Nodes.Add(tn);
-            log.Info("初始化-加载一个摄像机," + c.ToString());
+          //  log.Info("初始化-加载一个摄像机," + c.ToString());
         }
     }
 }
