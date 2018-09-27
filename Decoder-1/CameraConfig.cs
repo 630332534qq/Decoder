@@ -95,7 +95,7 @@ namespace Decoder
 
         private void AddAllCamerasNodes()
         {
-            List<Camera> cList = FileOperation<Camera>.ReadFile();
+            List<Camera> cList =  FileOperation<Camera>.ReadFile();//Camera.cList;//
             foreach (Camera c in cList)
             {
                 AddOneCameraNode(c);
@@ -254,9 +254,7 @@ namespace Decoder
                 SetNull();
             }
         }
-
-
-
+        
         /// <summary>
         /// 更新摄像机信息触发
         /// </summary>

@@ -14,9 +14,10 @@ namespace Decoder
         static void Main()
         {
             log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(("App.config")));
-            Application.EnableVisualStyles(); 
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+             Application.Run(new MainWindow());
+          //  Application.Run(new Form3());
         }
     }
 }

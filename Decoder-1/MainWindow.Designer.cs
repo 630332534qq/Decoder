@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.注销ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +49,14 @@
             this.mST = new System.Windows.Forms.MenuStrip();
             this.TVCamera = new System.Windows.Forms.TreeView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SubMenuOne = new System.Windows.Forms.ToolStripMenuItem();
+            this.SubMenuFour = new System.Windows.Forms.ToolStripMenuItem();
+            this.SubMenuNine = new System.Windows.Forms.ToolStripMenuItem();
+            this.SubMenuSixteen = new System.Windows.Forms.ToolStripMenuItem();
             this.mST.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.btnMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // 文件ToolStripMenuItem
@@ -218,6 +225,40 @@
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SubMenuOne,
+            this.SubMenuFour,
+            this.SubMenuNine,
+            this.SubMenuSixteen});
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(153, 114); 
+            // 
+            // SubMenuOne
+            // 
+            this.SubMenuOne.Name = "SubMenuOne";
+            this.SubMenuOne.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuOne.Text = "单画面";
+            // 
+            // SubMenuFour
+            // 
+            this.SubMenuFour.Name = "SubMenuFour";
+            this.SubMenuFour.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuFour.Text = "4画面";
+            // 
+            // SubMenuNine
+            // 
+            this.SubMenuNine.Name = "SubMenuNine";
+            this.SubMenuNine.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuNine.Text = "9画面";
+            // 
+            // SubMenuSixteen
+            // 
+            this.SubMenuSixteen.Name = "SubMenuSixteen";
+            this.SubMenuSixteen.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuSixteen.Text = "16画面";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -232,6 +273,7 @@
             this.mST.ResumeLayout(false);
             this.mST.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.btnMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,5 +300,10 @@
         private System.Windows.Forms.TreeView TVCamera;
         private System.Windows.Forms.ToolStripMenuItem 电视墙配置ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ContextMenuStrip btnMenu;
+        private System.Windows.Forms.ToolStripMenuItem SubMenuOne;
+        private System.Windows.Forms.ToolStripMenuItem SubMenuFour;
+        private System.Windows.Forms.ToolStripMenuItem SubMenuNine;
+        private System.Windows.Forms.ToolStripMenuItem SubMenuSixteen;
     }
 }

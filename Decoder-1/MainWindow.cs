@@ -64,6 +64,7 @@ namespace Decoder
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            // AddCamerasLabels();
             BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
             BufferedGraphics myBuffer = currentContext.Allocate(e.Graphics, e.ClipRectangle);
             Graphics g = myBuffer.Graphics;
@@ -75,6 +76,33 @@ namespace Decoder
             myBuffer.Render(e.Graphics);
             myBuffer.Dispose();
             g.Dispose();
+        }
+
+        private void AddCamerasLabels()
+        {
+            foreach (Control c in pictureBox1.Controls)
+            {
+                Panel pnl = c as Panel;
+                if (pnl != null)
+                {
+                    Point p = (Point)pnl.Tag;
+                    pnl.Location = new Point(p.X * xstep, p.Y * ystep);
+                    pnl.SendToBack();
+                    foreach (Control cc in pnl.Controls) // pnl.Controls
+                    {
+                        Button btn = cc as Button;
+                        if (btn != null)
+                        {
+                            Point pp = (Point)btn.Tag;
+                            if (pp != null)
+                            {
+                                btn.Location = new Point(pp.X * xstep, pp.Y * ystep);
+                                btn.BringToFront(); 
+                            }
+                        }
+                    }                    
+                }
+            }
         }
 
         private void DrawRects(Graphics g)
@@ -89,13 +117,6 @@ namespace Decoder
             {
                 g.FillRectangle(penInside.Brush, rec.X * xstep + 1, rec.Y * ystep + 1, rec.Width * xstep - 1, rec.Height * ystep - 1);
                 g.DrawRectangle(penOutside, rec.X * xstep, rec.Y * ystep, rec.Width * xstep, rec.Height * ystep);
-            }
-
-            pictureBox1.Controls.Clear();
-            foreach (Button btn in blist)
-            {
-                pictureBox1.Controls.Add(btn);
-                btn.Show();
             }
             penInside.Dispose();
             penOutside.Dispose();
@@ -124,6 +145,7 @@ namespace Decoder
         {
             xstep = (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / rli.N;
+           // AddCamerasLabels();
             pictureBox1.Refresh();
         }
         #endregion
@@ -146,6 +168,11 @@ namespace Decoder
             }
         }
 
+        /// <summary>
+        /// 还存在bug，特别是拖动分组时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TVCamera_ItemDrag(object sender, ItemDragEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -208,7 +235,7 @@ namespace Decoder
                 // MessageBox.Show(c.ToString());
                 // Invalidate();
             }
-            
+
             Point pt = pictureBox1.PointToClient(new Point(e.X, e.Y));
             // Rectangle rec = new Rectangle((int)Math.Floor(e.X / (float)xstep), (int)Math.Floor(e.Y / (float)ystep), 1, 1);
             Rectangle rec = new Rectangle((int)Math.Floor(pt.X / (float)xstep), (int)Math.Floor(pt.Y / (float)ystep), 1, 1);
@@ -216,14 +243,52 @@ namespace Decoder
             {
                 if (rec.IntersectsWith(r))
                 {
-                    Button btn = new Button();
-                    btn.Text = c.Name.ToString();
-                    btn.Location = new Point((r.X+r.Width/4)*xstep,(r.Y+r.Height/2)*ystep);
-                    blist.Add(btn);
+                    //重合区域，需做两个操作，一先检查该区域是否已经有按钮占据该位置，有则删除；二保存该区域内的按钮坐标，用于更新；
+                    //另外，还需调用相应的编码器以更新播放视频的要求；
+                    //每个画面还能多分屏
+                    //  Panel pnl = new Panel();
+                    //  pnl.Location = new Point(r.X * xstep, r.Y * ystep);
+                    //  pnl.Height = r.Height * xstep;
+                    //  pnl.Width = r.Width * ystep;
+                    //  pnl.Tag = new Point(r.X, r.Y);
+                    //  pnl.BackColor = Color.Green;
+                    //  pnl.ForeColor = Color.Yellow;
+                    ////  pnl.AutoSize = true;
+
+                    //  Button btn = new Button();
+                    //  btn.Text = c.Name.ToString();
+                    //  btn.Location = new Point(r.X * xstep, r.Y * ystep);
+                    //  btn.Height = r.Height * xstep;
+                    //  btn.Width = r.Width * ystep;
+                    //  //将该按钮的坐标保存到tag内，size的变更会导致step变化，因此在picturebox的size变化时需刷新button的位置
+                    //  btn.Tag = new Point(r.X, r.Y);
+                    //  btn.BackColor = Color.Gray;
+                    //  btn.ForeColor = Color.White;
+                    //  btn.ContextMenuStrip = btnMenu;
+                    //  btn.Margin = new Padding(2);
+                    //  btn.AutoEllipsis = true;
+                    // // btn.AutoSize = true;
+                    //  btn.FlatAppearance.BorderSize = 2;
+                    //  btn.FlatAppearance.MouseOverBackColor = Color.Yellow;
+                    //  btn.FlatAppearance.BorderColor = Color.Red;
+                    //  btn.Visible = true;
+                    //  btn.Dock = DockStyle.Fill; 
+                    //  blist.Add(btn);
+
+                    //  pnl.Controls.Add(btn); 
+                    //  pictureBox1.Controls.Add(pnl);
+                    // Basic_4PannelButtons pb4 = new Basic_4PannelButtons();
+                    UserControl pb4 = new Basic_4Panels();
+                    pb4.Location = new Point(r.X * xstep+1, r.Y * ystep+1);
+                    pb4.Size = new Size(r.Width * ystep-1,r.Height*xstep-1);
+                    pictureBox1.Controls.Add(pb4);
+                    Invalidate();
                     return;
                 }
             }
-        } 
-        #endregion 
+        }
+        #endregion
+
+
     }
 }
