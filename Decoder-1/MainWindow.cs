@@ -150,13 +150,7 @@ namespace Decoder
         }
         #endregion
 
-        private void InitializePictureBoxClickAction()
-        {
-            this.pictureBox1.AllowDrop = true;
-            this.pictureBox1.DragOver += new DragEventHandler(pictureBox1_DragOver);
-            this.pictureBox1.DragDrop += new DragEventHandler(pictureBox1_DragDrop);
-            this.pictureBox1.DragEnter += new DragEventHandler(pictureBox1_DragEnter);
-        }
+     
 
         #region 拖放树节点
         private void TVCamera_MouseDown(object sender, MouseEventArgs e)
@@ -211,6 +205,13 @@ namespace Decoder
 
         #region 拖放pictureBox节点
 
+        private void InitializePictureBoxClickAction()
+        {
+            this.pictureBox1.AllowDrop = true;
+            this.pictureBox1.DragOver += new DragEventHandler(pictureBox1_DragOver);
+            this.pictureBox1.DragDrop += new DragEventHandler(pictureBox1_DragDrop);
+            this.pictureBox1.DragEnter += new DragEventHandler(pictureBox1_DragEnter);
+        }
         //这个基本上没用到
         private void pictureBox1_DragOver(object sender, DragEventArgs e)
         {
