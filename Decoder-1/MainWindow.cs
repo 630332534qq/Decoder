@@ -51,14 +51,14 @@ namespace Decoder
 
         public RectList rli = null;
         public List<Rectangle> rlist = null;
-        public List<Button> blist = new List<Button>();
+        public List<UserControl> blist = new List<UserControl>();
         int xstep = 0;
         int ystep = 0;
         private void InitializePictureBoxImage()
         {
             rli = FileOperation<RectList>.ReadFile().First();
             rlist = rli.GetRectangleList();
-            xstep = (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            xstep = pictureBox1.Width / rli.N;//(int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / rli.N;
         }
 
@@ -97,10 +97,10 @@ namespace Decoder
                             if (pp != null)
                             {
                                 btn.Location = new Point(pp.X * xstep, pp.Y * ystep);
-                                btn.BringToFront(); 
+                                btn.BringToFront();
                             }
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -143,14 +143,16 @@ namespace Decoder
 
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
-            xstep = (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            xstep = pictureBox1.Width / rli.N;// (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / rli.N;
-           // AddCamerasLabels();
-            pictureBox1.Refresh();
+            // AddCamerasLabels();
+            foreach (UserControl uc in blist)
+            {
+                uc.Refresh();
+            }
+            pictureBox1.Refresh(); 
         }
-        #endregion
-
-     
+        #endregion     
 
         #region 拖放树节点
         private void TVCamera_MouseDown(object sender, MouseEventArgs e)
@@ -236,52 +238,17 @@ namespace Decoder
                 // MessageBox.Show(c.ToString());
                 // Invalidate();
             }
-
             Point pt = pictureBox1.PointToClient(new Point(e.X, e.Y));
-            // Rectangle rec = new Rectangle((int)Math.Floor(e.X / (float)xstep), (int)Math.Floor(e.Y / (float)ystep), 1, 1);
             Rectangle rec = new Rectangle((int)Math.Floor(pt.X / (float)xstep), (int)Math.Floor(pt.Y / (float)ystep), 1, 1);
             foreach (Rectangle r in rlist)
             {
                 if (rec.IntersectsWith(r))
                 {
-                    //重合区域，需做两个操作，一先检查该区域是否已经有按钮占据该位置，有则删除；二保存该区域内的按钮坐标，用于更新；
-                    //另外，还需调用相应的编码器以更新播放视频的要求；
-                    //每个画面还能多分屏
-                    //  Panel pnl = new Panel();
-                    //  pnl.Location = new Point(r.X * xstep, r.Y * ystep);
-                    //  pnl.Height = r.Height * xstep;
-                    //  pnl.Width = r.Width * ystep;
-                    //  pnl.Tag = new Point(r.X, r.Y);
-                    //  pnl.BackColor = Color.Green;
-                    //  pnl.ForeColor = Color.Yellow;
-                    ////  pnl.AutoSize = true;
-
-                    //  Button btn = new Button();
-                    //  btn.Text = c.Name.ToString();
-                    //  btn.Location = new Point(r.X * xstep, r.Y * ystep);
-                    //  btn.Height = r.Height * xstep;
-                    //  btn.Width = r.Width * ystep;
-                    //  //将该按钮的坐标保存到tag内，size的变更会导致step变化，因此在picturebox的size变化时需刷新button的位置
-                    //  btn.Tag = new Point(r.X, r.Y);
-                    //  btn.BackColor = Color.Gray;
-                    //  btn.ForeColor = Color.White;
-                    //  btn.ContextMenuStrip = btnMenu;
-                    //  btn.Margin = new Padding(2);
-                    //  btn.AutoEllipsis = true;
-                    // // btn.AutoSize = true;
-                    //  btn.FlatAppearance.BorderSize = 2;
-                    //  btn.FlatAppearance.MouseOverBackColor = Color.Yellow;
-                    //  btn.FlatAppearance.BorderColor = Color.Red;
-                    //  btn.Visible = true;
-                    //  btn.Dock = DockStyle.Fill; 
-                    //  blist.Add(btn);
-
-                    //  pnl.Controls.Add(btn); 
-                    //  pictureBox1.Controls.Add(pnl);
-                    // Basic_4PannelButtons pb4 = new Basic_4PannelButtons();
-                    UserControl pb4 = new Basic_4Panels();
-                    pb4.Location = new Point(r.X * xstep+1, r.Y * ystep+1);
-                    pb4.Size = new Size(r.Width * ystep-1,r.Height*xstep-1);
+                    UserControl pb4 = new Basic_UIPanels();
+                    pb4.Name = Guid.NewGuid().ToString();
+                    pb4.Location = new Point(r.X * xstep + 1, r.Y * ystep + 1);
+                    pb4.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1);
+                    blist.Add(pb4);
                     pictureBox1.Controls.Add(pb4);
                     Invalidate();
                     return;

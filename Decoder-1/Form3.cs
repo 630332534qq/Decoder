@@ -29,7 +29,7 @@ namespace Decoder
             //p.Controls.Add(b2); 
             //p.PerformLayout();
             //p.Show();
-            Basic_4Panels pb4 = new Basic_4Panels();
+            Basic_UIPanels pb4 = new Basic_UIPanels();
             pb4.Location = new Point(100, 100);
             pb4.Size = new Size(400, 300); 
             //Basic_9PannelButtons pb9 = new Basic_9PannelButtons();

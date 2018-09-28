@@ -86,17 +86,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Basic_4Panels.cs">
+    <Compile Include="Basic_UIPanels.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Basic_4Panels.Designer.cs">
-      <DependentUpon>Basic_4Panels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Basic_9PannelButtons.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Basic_9PannelButtons.Designer.cs">
-      <DependentUpon>Basic_9PannelButtons.cs</DependentUpon>
     </Compile>
     <Compile Include="Basic_GeneralClass.cs" />
     <Compile Include="CameraConfig.cs">
@@ -164,12 +155,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Basic_TreeViewInit.cs" />
-    <Compile Include="Basic_4PannelButtons.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Basic_4PannelButtons.Designer.cs">
-      <DependentUpon>Basic_4PannelButtons.cs</DependentUpon>
-    </Compile>
     <Compile Include="VideoWallConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,12 +162,6 @@
       <DependentUpon>VideoWallConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Basic_WindowOperation.cs" />
-    <EmbeddedResource Include="Basic_4Panels.resx">
-      <DependentUpon>Basic_4Panels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Basic_9PannelButtons.resx">
-      <DependentUpon>Basic_9PannelButtons.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CameraConfig.resx">
       <DependentUpon>CameraConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -212,9 +191,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Basic_4PannelButtons.resx">
-      <DependentUpon>Basic_4PannelButtons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
