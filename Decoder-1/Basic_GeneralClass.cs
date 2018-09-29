@@ -546,5 +546,15 @@ namespace Decoder
             Width = width;
         }
     }
+
+    public class PackageOfPB
+    {
+        public RectItem rectitem = null;
+        public Camera c = null;
+        public CameraGroups cg = null;
+        public NodeType current;
+        public System.Windows.Forms.UserControl uc;
+        public System.Windows.Forms.TreeNode treenode;
+    }
 }
 

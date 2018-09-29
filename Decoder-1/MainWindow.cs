@@ -51,6 +51,7 @@ namespace Decoder
 
         public RectList rli = null;
         public List<Rectangle> rlist = null;
+        public List<PackageOfPB> packPB = new List<PackageOfPB>();
         public List<UserControl> blist = new List<UserControl>();
         int xstep = 0;
         int ystep = 0;
@@ -58,7 +59,7 @@ namespace Decoder
         {
             rli = FileOperation<RectList>.ReadFile().First();
             rlist = rli.GetRectangleList();
-            xstep = pictureBox1.Width / rli.N;//(int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            xstep = (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / rli.N;
         }
 
@@ -143,14 +144,17 @@ namespace Decoder
 
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
-            xstep = pictureBox1.Width / rli.N;// (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
+            xstep = (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / rli.N;
             // AddCamerasLabels();
             foreach (UserControl uc in blist)
             {
-                uc.Refresh();
+                PackageOfPB ppb = uc.Tag as PackageOfPB;
+                uc.Location = new Point(ppb.rectitem.X * xstep + 1, ppb.rectitem.Y * ystep + 1);
+                uc.Size = new Size(ppb.rectitem.Width * xstep - 1, ppb.rectitem.Height * ystep - 1);
+                uc.Invalidate();
             }
-            pictureBox1.Refresh(); 
+            pictureBox1.Refresh();
         }
         #endregion     
 
@@ -176,8 +180,8 @@ namespace Decoder
                 TreeNode node = TVCamera.SelectedNode;
                 if (node != null)
                 {
-                    Camera c = (node.Tag as Camera);
-                    DoDragDrop(c, DragDropEffects.All);
+                    //Camera c = (node.Tag as Camera);
+                    DoDragDrop(node, DragDropEffects.All);
                 }
             }
         }
@@ -221,7 +225,7 @@ namespace Decoder
         }
         private void pictureBox1_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(Camera)) == true)
+            if (e.Data.GetDataPresent(typeof(TreeNode)) == true)
             {
                 e.Effect = DragDropEffects.All;
             }
@@ -232,8 +236,8 @@ namespace Decoder
         }
         private void pictureBox1_DragDrop(object sender, DragEventArgs e)
         {
-            Camera c = (Camera)(e.Data.GetData(typeof(Camera)));
-            if (c != null)
+            TreeNode tn = (TreeNode)(e.Data.GetData(typeof(TreeNode)));
+            if (tn != null)
             {
                 // MessageBox.Show(c.ToString());
                 // Invalidate();
@@ -247,7 +251,12 @@ namespace Decoder
                     UserControl pb4 = new Basic_UIPanels();
                     pb4.Name = Guid.NewGuid().ToString();
                     pb4.Location = new Point(r.X * xstep + 1, r.Y * ystep + 1);
-                    pb4.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1);
+                    pb4.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1); 
+                    PackageOfPB ppb = new PackageOfPB();
+                    ppb.treenode = tn; 
+                    ppb.rectitem = new RectItem(r.X, r.Y, r.Width, r.Height);
+                    ppb.uc = pb4;
+                    pb4.Tag = ppb;//记下来该控件所需一些参数，包括摄像机、点位、宽与高、隶属的Usercontrol等等； 
                     blist.Add(pb4);
                     pictureBox1.Controls.Add(pb4);
                     Invalidate();
@@ -256,7 +265,6 @@ namespace Decoder
             }
         }
         #endregion
-
 
     }
 }

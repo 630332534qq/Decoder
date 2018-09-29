@@ -37,18 +37,21 @@ namespace Decoder
             InitTableLayoutPanel(panelNo);
         }
 
+       
+
         /// <summary>
         /// 初始化界面
         /// </summary>
         /// <param name="panelNo"></param>
         public void InitTableLayoutPanel(int panelNo)
         {
+            this.DoubleBuffered = true;
             components = new Container();
             cms = InitCMS();
             tlp = new TableLayoutPanel();
             tlp.Name = Guid.NewGuid().ToString();
             tlp.AutoSize = true;
-            tlp.BackColor = Color.Gray; 
+            tlp.BackColor = Color.Gray;
             tlp.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             tlp.Dock = DockStyle.Fill;
             InitializeComponentsByme(panelNo);
@@ -56,7 +59,7 @@ namespace Decoder
 
         public void InitializeComponentsByme(int panelNo)
         {
-            tlp.Controls.Clear(); 
+            tlp.Controls.Clear();
             DynamicLayout(panelNo);
             for (int i = 0; i < tlp.ColumnCount; i++)
             {
@@ -83,7 +86,7 @@ namespace Decoder
         /// <param name="rowcolcountl"></param>
         private void DynamicLayout(int rowcolcountl)
         {
-            tlp.RowCount =(int)Math.Sqrt(rowcolcountl);    //设置分成几行  
+            tlp.RowCount = (int)Math.Sqrt(rowcolcountl);    //设置分成几行  
             for (int i = 0; i < tlp.RowCount; i++)
             {
                 tlp.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -161,7 +164,7 @@ namespace Decoder
         {
             //Controls.Clear(); 
             InitializeComponentsByme(panelNo);
-          //  tlp.Invalidate(); --强制引发重绘，会导致闪屏一次；
+            //  tlp.Invalidate(); --强制引发重绘，会导致闪屏一次；
         }
 
         private string GetPictureboxName(object sender)
@@ -193,6 +196,12 @@ namespace Decoder
             pb.DragOver += new DragEventHandler(PB_DragOver);
             pb.DragDrop += new DragEventHandler(PB_DragDrop);
             pb.DragEnter += new DragEventHandler(PB_DragEnter);
+            pb.SizeChanged += Pb_SizeChanged;
+        }
+
+        private void Pb_SizeChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void PB_DragEnter(object sender, DragEventArgs e)
