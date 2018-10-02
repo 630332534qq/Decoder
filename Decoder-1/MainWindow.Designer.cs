@@ -40,7 +40,7 @@
             this.许可证配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.电视墙配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.创建新布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.加载布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除布局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,30 +136,32 @@
             // 布局ToolStripMenuItem
             // 
             this.布局ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.创建新布局ToolStripMenuItem,
+            this.保存ToolStripMenuItem,
             this.加载布局ToolStripMenuItem,
             this.删除布局ToolStripMenuItem});
             this.布局ToolStripMenuItem.Name = "布局ToolStripMenuItem";
             this.布局ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.布局ToolStripMenuItem.Text = "布局";
             // 
-            // 创建新布局ToolStripMenuItem
+            // 保存ToolStripMenuItem
             // 
-            this.创建新布局ToolStripMenuItem.Name = "创建新布局ToolStripMenuItem";
-            this.创建新布局ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.创建新布局ToolStripMenuItem.Text = "保存布局";
+            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.保存ToolStripMenuItem.Text = "保存布局";
+            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存布局ToolStripMenuItem_Click);
             // 
             // 加载布局ToolStripMenuItem
             // 
             this.加载布局ToolStripMenuItem.Name = "加载布局ToolStripMenuItem";
-            this.加载布局ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.加载布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.加载布局ToolStripMenuItem.Text = "加载布局";
             // 
             // 删除布局ToolStripMenuItem
             // 
             this.删除布局ToolStripMenuItem.Name = "删除布局ToolStripMenuItem";
-            this.删除布局ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.删除布局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.删除布局ToolStripMenuItem.Text = "删除布局";
+            this.删除布局ToolStripMenuItem.Click += new System.EventHandler(this.删除布局ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -233,30 +235,30 @@
             this.SubMenuNine,
             this.SubMenuSixteen});
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(153, 114); 
+            this.btnMenu.Size = new System.Drawing.Size(115, 92);
             // 
             // SubMenuOne
             // 
             this.SubMenuOne.Name = "SubMenuOne";
-            this.SubMenuOne.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuOne.Size = new System.Drawing.Size(114, 22);
             this.SubMenuOne.Text = "单画面";
             // 
             // SubMenuFour
             // 
             this.SubMenuFour.Name = "SubMenuFour";
-            this.SubMenuFour.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuFour.Size = new System.Drawing.Size(114, 22);
             this.SubMenuFour.Text = "4画面";
             // 
             // SubMenuNine
             // 
             this.SubMenuNine.Name = "SubMenuNine";
-            this.SubMenuNine.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuNine.Size = new System.Drawing.Size(114, 22);
             this.SubMenuNine.Text = "9画面";
             // 
             // SubMenuSixteen
             // 
             this.SubMenuSixteen.Name = "SubMenuSixteen";
-            this.SubMenuSixteen.Size = new System.Drawing.Size(152, 22);
+            this.SubMenuSixteen.Size = new System.Drawing.Size(114, 22);
             this.SubMenuSixteen.Text = "16画面";
             // 
             // MainWindow
@@ -292,7 +294,7 @@
         private System.Windows.Forms.ToolStripMenuItem 布局ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 加载布局ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除布局ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 创建新布局ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 保存ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;

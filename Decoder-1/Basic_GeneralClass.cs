@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using log4net;
 using System.Reflection;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Decoder
 {
@@ -397,9 +398,12 @@ namespace Decoder
         }
     }
 
+    /// <summary>
+    /// 摄像机分组
+    /// </summary>
     public class CameraGroups
     {
-        public List<Camera> list = new List<Camera>();
+        private List<Camera> list = new List<Camera>();
         private string groupName = "";
         private string groupID = "";
 
@@ -413,6 +417,19 @@ namespace Decoder
         {
             get { return groupID; }
             set { groupID = value; }
+        }
+
+        public List<Camera> List
+        {
+            get
+            {
+                return list;
+            }
+
+            set
+            {
+                list = value;
+            }
         }
 
         public override string ToString()
@@ -538,7 +555,7 @@ namespace Decoder
             set { height = value; }
         }
 
-        public RectItem(int x, int y, int width, int height )
+        public RectItem(int x, int y, int width, int height)
         {
             X = x;
             Y = y;
@@ -549,12 +566,54 @@ namespace Decoder
 
     public class PackageOfPB
     {
-        public RectItem rectitem = null;
-        public Camera c = null;
-        public CameraGroups cg = null;
-        public NodeType current;
-        public System.Windows.Forms.UserControl uc;
-        public System.Windows.Forms.TreeNode treenode;
+        private RectItem rectitem = null;
+        private Camera cam = null;
+        private CameraGroups cg = null;
+        private NodeType current;
+        private Basic_UIPanels bui;
+        private TreeNode treenode;
+        private PictureBox pbx;
+        public RectItem Rectitem
+        {
+            get { return rectitem; }
+            set { rectitem = value; }
+        }
+
+        public Camera Cam
+        {
+            get { return cam; }
+            set { cam = value; }
+        }
+
+        public CameraGroups Cg
+        {
+            get { return cg; }
+            set { cg = value; }
+        }
+
+        public NodeType Current
+        {
+            get { return current; }
+            set { current = value; }
+        }
+
+        public Basic_UIPanels Bui
+        {
+            get { return bui; }
+            set { bui = value; }
+        }
+
+        public TreeNode Treenode
+        {
+            get { return treenode; }
+            set { treenode = value; }
+        }
+
+        public PictureBox Pbx
+        {
+            get { return pbx; }
+            set { pbx = value; }
+        }
     }
 }
 

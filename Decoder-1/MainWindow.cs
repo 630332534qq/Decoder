@@ -41,18 +41,20 @@ namespace Decoder
         public MainWindow()
         {
             InitializeComponent();
-            Basic_TreeViewInit.InitializeCameraTree(TVCamera);
-            // InitializeTreeview();
+            Basic_TreeViewInit.InitializeCameraTree(TVCamera); 
             InitializePictureBoxClickAction();
             InitializePictureBoxImage();
+            InitializeUserControls();
         }
+
+     
 
         #region 初始化电视墙内容窗口
 
         public RectList rli = null;
         public List<Rectangle> rlist = null;
         public List<PackageOfPB> packPB = new List<PackageOfPB>();
-        public List<UserControl> blist = new List<UserControl>();
+        public List<UserControl> uclist = new List<UserControl>();
         int xstep = 0;
         int ystep = 0;
         private void InitializePictureBoxImage()
@@ -62,7 +64,27 @@ namespace Decoder
             xstep = (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / rli.N;
         }
-
+        private void InitializeUserControls()
+        {
+            foreach (Rectangle r in rlist)
+            {
+                if (rec.IntersectsWith(r))
+                {
+                    Basic_UIPanels pb4 = new Basic_UIPanels();
+                    pb4.Name = Guid.NewGuid().ToString();
+                    pb4.Location = new Point(r.X * xstep + 1, r.Y * ystep + 1);
+                    pb4.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1);
+                    PackageOfPB ppb = new PackageOfPB();
+                    ppb.Treenode = tn;
+                    ppb.Rectitem = new RectItem(r.X, r.Y, r.Width, r.Height);
+                    ppb.Bui = pb4;
+                    pb4.Tag = ppb;//记下来该控件所需一些参数，包括摄像机、点位、宽与高、隶属的Usercontrol等等； 
+                    uclist.Add(pb4);
+                    pictureBox1.Controls.Add(pb4);
+                    Invalidate();
+                    return;
+                }
+            }
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             // AddCamerasLabels();
@@ -79,32 +101,32 @@ namespace Decoder
             g.Dispose();
         }
 
-        private void AddCamerasLabels()
-        {
-            foreach (Control c in pictureBox1.Controls)
-            {
-                Panel pnl = c as Panel;
-                if (pnl != null)
-                {
-                    Point p = (Point)pnl.Tag;
-                    pnl.Location = new Point(p.X * xstep, p.Y * ystep);
-                    pnl.SendToBack();
-                    foreach (Control cc in pnl.Controls) // pnl.Controls
-                    {
-                        Button btn = cc as Button;
-                        if (btn != null)
-                        {
-                            Point pp = (Point)btn.Tag;
-                            if (pp != null)
-                            {
-                                btn.Location = new Point(pp.X * xstep, pp.Y * ystep);
-                                btn.BringToFront();
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //private void AddCamerasLabels()
+        //{
+        //    foreach (Control c in pictureBox1.Controls)
+        //    {
+        //        Panel pnl = c as Panel;
+        //        if (pnl != null)
+        //        {
+        //            Point p = (Point)pnl.Tag;
+        //            pnl.Location = new Point(p.X * xstep, p.Y * ystep);
+        //            pnl.SendToBack();
+        //            foreach (Control cc in pnl.Controls) // pnl.Controls
+        //            {
+        //                Button btn = cc as Button;
+        //                if (btn != null)
+        //                {
+        //                    Point pp = (Point)btn.Tag;
+        //                    if (pp != null)
+        //                    {
+        //                        btn.Location = new Point(pp.X * xstep, pp.Y * ystep);
+        //                        btn.BringToFront();
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         private void DrawRects(Graphics g)
         {
@@ -147,11 +169,11 @@ namespace Decoder
             xstep = (int)((pictureBox1.Width / rli.N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / rli.N;
             // AddCamerasLabels();
-            foreach (UserControl uc in blist)
+            foreach (UserControl uc in uclist)
             {
                 PackageOfPB ppb = uc.Tag as PackageOfPB;
-                uc.Location = new Point(ppb.rectitem.X * xstep + 1, ppb.rectitem.Y * ystep + 1);
-                uc.Size = new Size(ppb.rectitem.Width * xstep - 1, ppb.rectitem.Height * ystep - 1);
+                uc.Location = new Point(ppb.Rectitem.X * xstep + 1, ppb.Rectitem.Y * ystep + 1);
+                uc.Size = new Size(ppb.Rectitem.Width * xstep - 1, ppb.Rectitem.Height * ystep - 1);
                 uc.Invalidate();
             }
             pictureBox1.Refresh();
@@ -203,9 +225,9 @@ namespace Decoder
             TreeNode moveNode = (TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode");
             //根据鼠标坐标确定要移动到的目标节点
             Point pt;
-            TreeNode targeNode;
+            TreeNode targetNode;
             pt = ((TreeView)(sender)).PointToClient(new Point(e.X, e.Y));
-            targeNode = this.TVCamera.GetNodeAt(pt);
+            targetNode = TVCamera.GetNodeAt(pt);
         }
         #endregion
 
@@ -236,35 +258,48 @@ namespace Decoder
         }
         private void pictureBox1_DragDrop(object sender, DragEventArgs e)
         {
-            TreeNode tn = (TreeNode)(e.Data.GetData(typeof(TreeNode)));
-            if (tn != null)
-            {
-                // MessageBox.Show(c.ToString());
-                // Invalidate();
-            }
-            Point pt = pictureBox1.PointToClient(new Point(e.X, e.Y));
-            Rectangle rec = new Rectangle((int)Math.Floor(pt.X / (float)xstep), (int)Math.Floor(pt.Y / (float)ystep), 1, 1);
-            foreach (Rectangle r in rlist)
-            {
-                if (rec.IntersectsWith(r))
-                {
-                    UserControl pb4 = new Basic_UIPanels();
-                    pb4.Name = Guid.NewGuid().ToString();
-                    pb4.Location = new Point(r.X * xstep + 1, r.Y * ystep + 1);
-                    pb4.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1); 
-                    PackageOfPB ppb = new PackageOfPB();
-                    ppb.treenode = tn; 
-                    ppb.rectitem = new RectItem(r.X, r.Y, r.Width, r.Height);
-                    ppb.uc = pb4;
-                    pb4.Tag = ppb;//记下来该控件所需一些参数，包括摄像机、点位、宽与高、隶属的Usercontrol等等； 
-                    blist.Add(pb4);
-                    pictureBox1.Controls.Add(pb4);
-                    Invalidate();
-                    return;
-                }
-            }
+            //TreeNode tn = (TreeNode)(e.Data.GetData(typeof(TreeNode)));
+            //if (tn != null)
+            //{
+            //    // MessageBox.Show(c.ToString());
+            //    // Invalidate();
+            //}
+            //Point pt = pictureBox1.PointToClient(new Point(e.X, e.Y));
+            //Rectangle rec = new Rectangle((int)Math.Floor(pt.X / (float)xstep), (int)Math.Floor(pt.Y / (float)ystep), 1, 1);
+            /////此处处理几件事情：
+            /////1、传递参数给解码器，并给出答复；——界面采用异步显示的办法
+            /////2、判断窗口内容是否重叠；
+            /////3、做界面保持、二次加载等；
+            //foreach (Rectangle r in rlist)
+            //{
+            //    if (rec.IntersectsWith(r))
+            //    {
+            //        Basic_UIPanels pb4 = new Basic_UIPanels();
+            //        pb4.Name = Guid.NewGuid().ToString();
+            //        pb4.Location = new Point(r.X * xstep + 1, r.Y * ystep + 1);
+            //        pb4.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1);
+            //        PackageOfPB ppb = new PackageOfPB();
+            //        ppb.Treenode = tn;
+            //        ppb.Rectitem = new RectItem(r.X, r.Y, r.Width, r.Height);
+            //        ppb.Bui = pb4;
+            //        pb4.Tag = ppb;//记下来该控件所需一些参数，包括摄像机、点位、宽与高、隶属的Usercontrol等等； 
+            //        uclist.Add(pb4);
+            //        pictureBox1.Controls.Add(pb4);
+            //        Invalidate();
+            //        return;
+            //    }
+            //}
         }
         #endregion
 
+        private void 保存布局ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 删除布局ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

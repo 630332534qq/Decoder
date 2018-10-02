@@ -32,9 +32,9 @@ namespace Decoder
             InitTableLayoutPanel(1);
         }
 
-        public Basic_UIPanels(int panelNo)
+        public Basic_UIPanels(int panelCount)
         {
-            InitTableLayoutPanel(panelNo);
+            InitTableLayoutPanel(panelCount);
         }
 
        
@@ -43,7 +43,7 @@ namespace Decoder
         /// 初始化界面
         /// </summary>
         /// <param name="panelNo"></param>
-        public void InitTableLayoutPanel(int panelNo)
+        public void InitTableLayoutPanel(int panelCount)
         {
             this.DoubleBuffered = true;
             components = new Container();
@@ -54,13 +54,13 @@ namespace Decoder
             tlp.BackColor = Color.Gray;
             tlp.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             tlp.Dock = DockStyle.Fill;
-            InitializeComponentsByme(panelNo);
+            InitializeComponentsByme(panelCount);
         }
 
-        public void InitializeComponentsByme(int panelNo)
+        public void InitializeComponentsByme(int panelCount)
         {
             tlp.Controls.Clear();
-            DynamicLayout(panelNo);
+            DynamicLayout(panelCount);
             for (int i = 0; i < tlp.ColumnCount; i++)
             {
                 for (int j = 0; j < tlp.RowCount; j++)
@@ -196,7 +196,7 @@ namespace Decoder
             pb.DragOver += new DragEventHandler(PB_DragOver);
             pb.DragDrop += new DragEventHandler(PB_DragDrop);
             pb.DragEnter += new DragEventHandler(PB_DragEnter);
-            pb.SizeChanged += Pb_SizeChanged;
+           // pb.SizeChanged += Pb_SizeChanged;
         }
 
         private void Pb_SizeChanged(object sender, EventArgs e)
@@ -206,7 +206,7 @@ namespace Decoder
 
         private void PB_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(Camera)) == true)
+            if (e.Data.GetDataPresent(typeof(TreeNode)) == true)
             {
                 e.Effect = DragDropEffects.All;
             }
@@ -218,10 +218,36 @@ namespace Decoder
 
         private void PB_DragDrop(object sender, DragEventArgs e)
         {
-            Camera c = (Camera)(e.Data.GetData(typeof(Camera)));
+            TreeNode c = (TreeNode)(e.Data.GetData(typeof(TreeNode)));
+            ProcessPbData(sender,c); 
+        }
+        
+        private void ProcessPbData(object sender,TreeNode c)
+        {
+            PictureBox pbx = sender as PictureBox;
             if (c != null)
             {
-                MessageBox.Show(c.ToString());
+                PackageOfPB ppb = new PackageOfPB();
+                ppb.Current = (NodeType)Enum.Parse(typeof(NodeType), c.Name);
+                ppb.Pbx = pbx;
+                switch (ppb.Current)
+                {
+                    case NodeType.Camera:
+                        ppb.Cam = c.Tag as Camera;
+                        ppb.Cg = null;
+                        break;
+                    case NodeType.Group:
+                        ppb.Cg = c.Tag as CameraGroups;
+                        ppb.Cam = null;
+                        break;
+                    case NodeType.CameraAtGroup:
+                        ppb.Cam = c.Tag as Camera;
+                        ppb.Cg = null;
+                        break;
+                }
+                if (ppb.Current == NodeType.Camera)
+
+                    MessageBox.Show(c.ToString());
                 Invalidate();
             }
         }

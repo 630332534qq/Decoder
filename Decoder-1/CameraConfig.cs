@@ -73,7 +73,7 @@ namespace Decoder
             foreach (CameraGroups cg in cgsList)
             {
                 TreeNode tn = AddOneGroupNode(cg);
-                foreach (Camera c in cg.list)
+                foreach (Camera c in cg.List)
                 {
                     AddOneCameraUnderGroup(tn, c);
                 }
@@ -433,10 +433,10 @@ namespace Decoder
                         if (tnCameraInGroup.Name == NodeType.CameraAtGroup.ToString())
                         {
                             Camera cameraInG = tnCameraInGroup.Tag as Camera;
-                            if (cameraInG != null) cg.list.Add(cameraInG);
+                            if (cameraInG != null) cg.List.Add(cameraInG);
                         }
                     }
-                    if (cg != null) cgsList.Add(cg);
+                   if (cg != null) cgsList.Add(cg);
                 }
             }
             log.Info("摄像机树写入到文件");
