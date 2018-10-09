@@ -41,13 +41,11 @@ namespace Decoder
         public MainWindow()
         {
             InitializeComponent();
-            Basic_TreeViewInit.InitializeCameraTree(TVCamera); 
+            Basic_TreeViewInit.InitializeCameraTree(TVCamera);
             InitializePictureBoxClickAction();
             InitializePictureBoxImage();
             InitializeUserControls();
         }
-
-     
 
         #region 初始化电视墙内容窗口
 
@@ -66,25 +64,22 @@ namespace Decoder
         }
         private void InitializeUserControls()
         {
-            foreach (Rectangle r in rlist)
+            foreach (Rectangle r in rli.GetRectangleList())
             {
-                if (rec.IntersectsWith(r))
-                {
-                    Basic_UIPanels pb4 = new Basic_UIPanels();
-                    pb4.Name = Guid.NewGuid().ToString();
-                    pb4.Location = new Point(r.X * xstep + 1, r.Y * ystep + 1);
-                    pb4.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1);
-                    PackageOfPB ppb = new PackageOfPB();
-                    ppb.Treenode = tn;
-                    ppb.Rectitem = new RectItem(r.X, r.Y, r.Width, r.Height);
-                    ppb.Bui = pb4;
-                    pb4.Tag = ppb;//记下来该控件所需一些参数，包括摄像机、点位、宽与高、隶属的Usercontrol等等； 
-                    uclist.Add(pb4);
-                    pictureBox1.Controls.Add(pb4);
-                    Invalidate();
-                    return;
-                }
+                Basic_UIPanels customerContrl = new Basic_UIPanels(1);
+                customerContrl.Name = Guid.NewGuid().ToString();
+                customerContrl.Location = new Point(r.X * xstep + 1, r.Y * ystep + 1);
+                customerContrl.Size = new Size(r.Width * xstep - 1, r.Height * ystep - 1);
+                PackageOfPB ppb = new PackageOfPB(); 
+                ppb.Rectitem = new RectItem(r.X, r.Y, r.Width, r.Height);
+                ppb.Bui = customerContrl;
+                customerContrl.Tag = ppb;//记下来该控件所需一些参数，包括摄像机、点位、宽与高、隶属的Usercontrol等等； 
+                uclist.Add(customerContrl);
+                packPB.Add(ppb);
+                pictureBox1.Controls.Add(customerContrl); 
             }
+            Invalidate();
+        }
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             // AddCamerasLabels();
@@ -99,34 +94,7 @@ namespace Decoder
             myBuffer.Render(e.Graphics);
             myBuffer.Dispose();
             g.Dispose();
-        }
-
-        //private void AddCamerasLabels()
-        //{
-        //    foreach (Control c in pictureBox1.Controls)
-        //    {
-        //        Panel pnl = c as Panel;
-        //        if (pnl != null)
-        //        {
-        //            Point p = (Point)pnl.Tag;
-        //            pnl.Location = new Point(p.X * xstep, p.Y * ystep);
-        //            pnl.SendToBack();
-        //            foreach (Control cc in pnl.Controls) // pnl.Controls
-        //            {
-        //                Button btn = cc as Button;
-        //                if (btn != null)
-        //                {
-        //                    Point pp = (Point)btn.Tag;
-        //                    if (pp != null)
-        //                    {
-        //                        btn.Location = new Point(pp.X * xstep, pp.Y * ystep);
-        //                        btn.BringToFront();
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        } 
 
         private void DrawRects(Graphics g)
         {
@@ -135,7 +103,7 @@ namespace Decoder
             penInside.Width = 1;
             penOutside = new Pen(Color.White);
             penOutside.Width = 2;
-            //实时的画之前已经画好的矩形  
+            //画之前已经画好的矩形  
             foreach (Rectangle rec in rlist)
             {
                 g.FillRectangle(penInside.Brush, rec.X * xstep + 1, rec.Y * ystep + 1, rec.Width * xstep - 1, rec.Height * ystep - 1);

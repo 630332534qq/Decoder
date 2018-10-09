@@ -36,9 +36,7 @@ namespace Decoder
         {
             InitTableLayoutPanel(panelCount);
         }
-
-       
-
+         
         /// <summary>
         /// 初始化界面
         /// </summary>

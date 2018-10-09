@@ -428,6 +428,7 @@ namespace Decoder
                 if (tn.Name == NodeType.Group.ToString())
                 {
                     CameraGroups cg = tn.Tag as CameraGroups;
+                    cg.List.Clear();
                     foreach (TreeNode tnCameraInGroup in tn.Nodes)
                     {
                         if (tnCameraInGroup.Name == NodeType.CameraAtGroup.ToString())
