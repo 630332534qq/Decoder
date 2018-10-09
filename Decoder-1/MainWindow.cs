@@ -149,6 +149,11 @@ namespace Decoder
         #endregion     
 
         #region 拖放树节点
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TVCamera_MouseDown(object sender, MouseEventArgs e)
         {
             TreeNode node = TVCamera.GetNodeAt(e.X, e.Y);
