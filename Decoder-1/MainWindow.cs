@@ -164,7 +164,7 @@ namespace Decoder
         }
 
         /// <summary>
-        /// 还存在bug，特别是拖动分组时
+        ///  拖动操作
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -183,7 +183,7 @@ namespace Decoder
 
         private void TVCamera_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(Camera)) == true)
+            if (e.Data.GetDataPresent(typeof(TreeNode)) == true)
             {
                 e.Effect = DragDropEffects.All;
             }

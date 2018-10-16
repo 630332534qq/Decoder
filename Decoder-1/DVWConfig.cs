@@ -27,6 +27,35 @@ namespace Decoder
             xstep = (int)((pictureBox1.Width / N) * ((float)pictureBox1.Height / (float)pictureBox1.Width));
             ystep = pictureBox1.Height / N;
             LoadVideoWall();
+            LoadDecoderTree();
+            InitializePictureBoxClickAction();
+            skinTreeView1.Focus();
+        }
+
+        private void LoadDecoderTree()
+        {
+            skinTreeView1.AllowDrop = true;
+            List<Decoder> dlist = FileOperation<Decoder>.ReadFile().ToList();
+            skinTreeView1.Nodes.Add(new TreeNode("解码器列表"));
+            foreach (Decoder d in dlist)
+            {
+                TreeNode tn = new TreeNode(d.DecoderName);
+                tn.ToolTipText = d.Ipaddr;
+                skinTreeView1.Nodes[0].Nodes.Add(tn);
+            }
+            skinTreeView1.ExpandAll();
+        }
+
+        private void LoadVideoWall()
+        {
+            RectList rli = FileOperation<RectList>.ReadFile().First();
+            if (rli != null && rli.Rlist.Count != 0)
+            {
+                xstep = rli.Xsteps;
+                ystep = rli.Ysteps;
+                N = rli.N;
+                rlist = rli.GetRectangleList();
+            }
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -109,6 +138,13 @@ namespace Decoder
             }
         }
 
+        private void InitializePictureBoxClickAction()
+        {
+            this.pictureBox1.AllowDrop = true;
+            //this.pictureBox1.DragDrop += new DragEventHandler(pictureBox1_DragDrop);
+            //this.pictureBox1.DragEnter += new DragEventHandler(pictureBox1_DragEnter);
+        }
+
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (bDrawStart)
@@ -147,7 +183,7 @@ namespace Decoder
 
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
-            Refresh();
+            //Refresh();
         }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,7 +205,7 @@ namespace Decoder
             }
         }
 
-        private  void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             RectList rli = new RectList(xstep, ystep, N);
             rli.SaveRectangleList(rlist);
@@ -178,24 +214,85 @@ namespace Decoder
             FileOperation<RectList>.WriteFile(rliList);
         }
 
-        private  void LoadVideoWall()
-        {
-            RectList rli = FileOperation<RectList>.ReadFile().First();
-            if (rli != null && rli.Rlist.Count != 0)
-            {
-                xstep = rli.Xsteps;
-                ystep = rli.Ysteps;
-                N = rli.N;
-                rlist = rli.GetRectangleList();
-            }
-
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             rlist.Clear();
             pictureBox1.Refresh();
         }
+
+
+        #region 初始化picturebox和treeview的拖放
+        private void pictureBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            TreeNode tn = (TreeNode)(e.Data.GetData(typeof(TreeNode)));
+            Point p = pictureBox1.PointToClient(new Point(e.X, e.Y));
+            if (tn != null)
+            {
+                MessageBox.Show(tn.Text.ToString() + "@" + p.X.ToString() + "..." + p.Y.ToString());
+                foreach (Rectangle rec in rlist)
+                {
+                    Rectangle rect = new Rectangle(rec.X * xstep + 1, rec.Y * ystep + 1, rec.Width * xstep - 1, rec.Height * ystep - 1);
+                    if (rect.Contains(p))
+                    {
+                        MessageBox.Show("矩形r含有该节点:" + "r.x--" + rect.X + "r.y--" + rect.Y + "r.Width--" + rect.Width + "r.Height-" + rect.Height); 
+                        using (Graphics g = pictureBox1.CreateGraphics())
+                        {
+                            Brush brush = Brushes.Black;
+                            Font font = new Font("Arial", 12);
+                            g.DrawString("矩形r含有该节点: " + "r.x--" + rect.X + "r.y--" + rect.Y + "r.Width--" + rect.Width + "r.Height - " + rect.Height, font, brush, p);
+                            g.Dispose();
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void skinTreeView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            TreeNode node = skinTreeView1.GetNodeAt(e.X, e.Y);
+            if (node != null)
+            {
+                skinTreeView1.SelectedNode = node;
+            }
+        }
+
+        private void skinTreeView1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                TreeNode node = skinTreeView1.SelectedNode;
+                if (node != null)
+                {
+                    DoDragDrop(node, DragDropEffects.All);
+                }
+            }
+        }
+
+        private void skinTreeView1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(TreeNode)) == true)
+            {
+                e.Effect = DragDropEffects.All;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void pictureBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(TreeNode)) == true)
+            {
+                e.Effect = DragDropEffects.All;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+        #endregion
     }
 }
 

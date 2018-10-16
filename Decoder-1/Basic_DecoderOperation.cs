@@ -70,19 +70,19 @@ namespace Decoder
                 HttpResponseMessage response = await client.GetAsync(paramList);
                 Task<string> t = response.Content.ReadAsStringAsync();
                 Console.WriteLine(t.Result);
-                return; 
+                return;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString(), "\nError Message");
-                return ;
+                return;
             }
         }
 
         public async static void SendPanelLayout(Decoder d, PackageOfPB pb)
         {
             Uri paramList = new Uri("http://192.168.0.8/axis-cgi/admin/param.cgi?action=list");
-            var client = new WebClient();
+            WebClient client = new WebClient();
             client.Credentials = new NetworkCredential("root", "pass");
             var content = await client.DownloadDataTaskAsync(paramList);
             Console.WriteLine(Encoding.Default.GetString(content));
