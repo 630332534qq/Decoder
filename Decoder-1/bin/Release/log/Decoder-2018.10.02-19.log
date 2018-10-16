@@ -1,0 +1,22 @@
+2018-10-02 19:56:45,618 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-创建根节点
+2018-10-02 19:56:45,852 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组AAACCC
+第（1）项属性 :GroupID,值为:554d4a4f-3bd1-4fb0-8375-531032ad3aed
+
+2018-10-02 19:56:45,852 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组BBDDDD
+第（1）项属性 :GroupID,值为:71d54c68-65fb-47c6-951d-ba8ef597f2f2
+
+2018-10-02 19:56:45,852 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-摄像机分组加载完毕
+2018-10-02 19:56:45,868 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-所有摄像机加载完毕
+2018-10-02 19:57:13,168 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-创建根节点
+2018-10-02 19:57:13,402 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组AAACCC
+第（1）项属性 :GroupID,值为:554d4a4f-3bd1-4fb0-8375-531032ad3aed
+
+2018-10-02 19:57:13,402 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组BBDDDD
+第（1）项属性 :GroupID,值为:71d54c68-65fb-47c6-951d-ba8ef597f2f2
+
+2018-10-02 19:57:13,402 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-摄像机分组加载完毕
+2018-10-02 19:57:13,402 [1] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-所有摄像机加载完毕

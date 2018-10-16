@@ -1,0 +1,11 @@
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\bin\Debug\Decoder-1.exe
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\bin\Debug\Decoder-1.pdb
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder_1.Properties.Resources.resources
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder-1.csproj.GenerateResource.Cache
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder-1.exe
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder-1.pdb
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\bin\Debug\Decoder-1.exe.config
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder.CameraConfig.resources
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder.DecoderConfig.resources
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder.Form1.resources
+C:\Users\Reno\Documents\Visual Studio 2015\Projects\AXISDecoder\Decoder-1\Decoder-1\obj\Debug\Decoder.MainWindow.resources

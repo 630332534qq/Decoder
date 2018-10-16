@@ -1,0 +1,63 @@
+2018-10-16 20:28:16,271 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-创建根节点
+2018-10-16 20:28:16,553 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组2222222222222
+第（1）项属性 :GroupID,值为:feeb6b17-7c0b-49a5-887e-85fc01937bc6
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:28:16,555 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-摄像机分组加载完毕
+2018-10-16 20:28:16,558 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-所有摄像机加载完毕
+2018-10-16 20:32:52,667 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-创建根节点
+2018-10-16 20:32:52,966 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组2222222222222
+第（1）项属性 :GroupID,值为:feeb6b17-7c0b-49a5-887e-85fc01937bc6
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:32:52,967 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-摄像机分组加载完毕
+2018-10-16 20:32:52,970 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-所有摄像机加载完毕
+2018-10-16 20:34:36,238 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-创建根节点
+2018-10-16 20:34:36,539 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组2222222222222
+第（1）项属性 :GroupID,值为:feeb6b17-7c0b-49a5-887e-85fc01937bc6
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:34:36,541 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-摄像机分组加载完毕
+2018-10-16 20:34:36,549 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-所有摄像机加载完毕
+2018-10-16 20:35:16,541 [7] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-创建根节点
+2018-10-16 20:35:16,851 [7] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组2222222222222
+第（1）项属性 :GroupID,值为:feeb6b17-7c0b-49a5-887e-85fc01937bc6
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:35:16,852 [7] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-摄像机分组加载完毕
+2018-10-16 20:35:16,854 [7] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-所有摄像机加载完毕
+2018-10-16 20:40:37,488 [7] INFO  Decoder.CameraConfig [(null)] - 初始化-创建摄像机分组根节点
+2018-10-16 20:40:37,490 [7] INFO  Decoder.CameraConfig [(null)] - 新增分组该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组2222222222222
+第（1）项属性 :GroupID,值为:feeb6b17-7c0b-49a5-887e-85fc01937bc6
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:40:37,492 [7] INFO  Decoder.CameraConfig [(null)] - 初始化-摄像机分组加载完毕
+2018-10-16 20:40:37,495 [7] INFO  Decoder.CameraConfig [(null)] - 初始化-摄像机加载完毕
+2018-10-16 20:40:45,615 [7] INFO  Decoder.CameraConfig [(null)] - 新增分组该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组
+第（1）项属性 :GroupID,值为:5f70d515-3729-4874-94d8-b2c30539806d
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:40:50,471 [7] INFO  Decoder.CameraConfig [(null)] - 跳转到摄像机分组编辑界面
+2018-10-16 20:40:55,250 [7] INFO  Decoder.CameraConfig [(null)] - 更改分组名称成功,变更为新建分组222222222
+2018-10-16 20:40:58,620 [7] INFO  Decoder.CameraConfig [(null)] - 摄像机树写入到文件
+2018-10-16 20:40:58,627 [7] INFO  Decoder.CameraConfig [(null)] - 摄像机写入完成
+2018-10-16 20:40:58,631 [7] INFO  Decoder.CameraConfig [(null)] - 摄像机分组写入完成
+2018-10-16 20:42:51,327 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-创建根节点
+2018-10-16 20:42:51,597 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组2222222222222
+第（1）项属性 :GroupID,值为:feeb6b17-7c0b-49a5-887e-85fc01937bc6
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:42:51,598 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-加载摄像机分组节点:该实例所述对象:Decoder.CameraGroups
+第（0）项属性 :GroupName,值为:新建分组222222222
+第（1）项属性 :GroupID,值为:5f70d515-3729-4874-94d8-b2c30539806d
+第（2）项属性 :List,值为:System.Collections.Generic.List`1[Decoder.Camera]
+
+2018-10-16 20:42:51,599 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-摄像机分组加载完毕
+2018-10-16 20:42:51,602 [8] INFO  Decoder.Basic_TreeViewInit [(null)] - 初始化-所有摄像机加载完毕
