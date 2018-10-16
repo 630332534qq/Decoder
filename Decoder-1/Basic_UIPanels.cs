@@ -243,9 +243,8 @@ namespace Decoder
                         ppb.Cg = null;
                         break;
                 }
-                if (ppb.Current == NodeType.Camera)
-
-                    MessageBox.Show(c.ToString());
+                if (ppb.Current == NodeType.Camera) 
+                    //MessageBox.Show(c.ToString());
                 Invalidate();
             }
         }

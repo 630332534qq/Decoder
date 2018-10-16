@@ -12,6 +12,7 @@ using System.Web;
 using Newtonsoft.Json;
 using System.Xml;
 using System.Collections;
+using System.Net.Http;
 
 namespace Decoder
 {
@@ -28,9 +29,9 @@ namespace Decoder
             string ParamList = "http://192.168.0.220/axis-cgi/admin/param.cgi?action=list";
             try
             {
-                NetworkCredential networkCredential = new NetworkCredential("root", "passpass");
-                WebRequest request = WebRequest.Create(ParamList);
-                request.Credentials = networkCredential;
+                NetworkCredential networkCredential = new NetworkCredential("root", "passpass"); 
+                WebRequest request = WebRequest.Create(ParamList);  
+                request.Credentials = networkCredential; 
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream streamResponse = response.GetResponseStream();
                 StreamReader streamRead = new StreamReader(streamResponse);

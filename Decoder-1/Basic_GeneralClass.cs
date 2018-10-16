@@ -399,7 +399,7 @@ namespace Decoder
     }
 
     /// <summary>
-    /// 摄像机分组
+    /// 摄像机分组，包括分组内的摄像机列表、组名、组ID
     /// </summary>
     public class CameraGroups
     {
@@ -421,15 +421,8 @@ namespace Decoder
 
         public List<Camera> List
         {
-            get
-            {
-                return list;
-            }
-
-            set
-            {
-                list = value;
-            }
+            get { return list; }
+            set { list = value; }
         }
 
         public override string ToString()
@@ -438,6 +431,9 @@ namespace Decoder
         }
     }
 
+    /// <summary>
+    /// 树节点类型，包括摄像机、分组节点、分组内的摄像机及根节点等
+    /// </summary>
     public enum NodeType
     {
         Root = 0,
@@ -461,6 +457,10 @@ namespace Decoder
         }
     }
 
+    /// <summary>
+    /// 每个电视墙窗口参数，包括步进X，步进Y，窗格数N，所占矩形的位置和大小
+    /// 之所以设置此类，是因为每个解码器对应的界面的视频
+    /// </summary>
     public class RectList
     {
         int xsteps = 0;
@@ -504,6 +504,10 @@ namespace Decoder
             N = n;
         }
 
+        /// <summary>
+        /// 将存储的矩形大小换算成实际的大小用于绘制
+        /// </summary>
+        /// <returns></returns>
         public List<Rectangle> GetRectangleList()
         {
             List<Rectangle> rlistRec = new List<Rectangle>();
@@ -515,8 +519,13 @@ namespace Decoder
             return rlistRec;
         }
 
+        /// <summary>
+        /// 将实际矩形参数列表转换成存储的窗格数据存储至rectitem组成的rlist中
+        /// </summary>
+        /// <param name="list"></param>
         public void SaveRectangleList(List<Rectangle> list)
         {
+            Rlist.Clear();
             foreach (Rectangle r in list)
             {
                 Rlist.Add(new RectItem(r.X, r.Y, r.Width, r.Height));
@@ -524,6 +533,9 @@ namespace Decoder
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class RectItem
     {
         int x = 0;
@@ -564,6 +576,9 @@ namespace Decoder
         }
     }
 
+    /// <summary>
+    /// 混合数据，主要是树节点拖放过去后，相关界面的空间和拖放数据，用于向解码器发出指令
+    /// </summary>
     public class PackageOfPB
     {
         private RectItem rectitem = null;

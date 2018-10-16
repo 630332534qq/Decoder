@@ -16,6 +16,8 @@ namespace Decoder
             log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(("App.config")));
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Basic_DecoderOperation.SendCameraInfo(new Decoder(), new PackageOfPB());
+            //Console.Read();
              Application.Run(new MainWindow());
           //  Application.Run(new Form3());
         }
